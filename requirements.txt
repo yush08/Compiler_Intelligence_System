@@ -1,0 +1,15 @@
+# Automated Optimization Strategy Selection System - Requirements
+
+# Core dependencies
+streamlit
+plotly
+
+# REST API adapter (does not replace Streamlit)
+fastapi
+uvicorn
+pydantic
+
+# Optional: for running tests
+pytest
+pytest-cov
+httpx

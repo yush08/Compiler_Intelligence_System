@@ -1,0 +1,7184 @@
+{
+  "summary": {
+    "n_programs": 93,
+    "reduction": {
+      "adaptive_mean_pct": 6.022,
+      "adaptive_mean_abs": 0.774,
+      "selected_single_mean_abs": 0.774,
+      "best_single_mean_abs": 0.871,
+      "programs_with_any_reduction": 12,
+      "pct_programs_reduced": 12.9,
+      "pct_programs_any_pass_reduces": 22.58
+    },
+    "selection": {
+      "achieved_best_rate": 12.9,
+      "accuracy_vs_oracle": 77.42,
+      "confusion": {
+        "constant_folding": {
+          "constant_folding": 60,
+          "constant_propagation": 0,
+          "common_subexpression": 0,
+          "dead_code_elimination": 9,
+          "algebraic_simplification": 0,
+          "strength_reduction": 0
+        },
+        "constant_propagation": {
+          "constant_folding": 0,
+          "constant_propagation": 0,
+          "common_subexpression": 0,
+          "dead_code_elimination": 0,
+          "algebraic_simplification": 0,
+          "strength_reduction": 0
+        },
+        "common_subexpression": {
+          "constant_folding": 12,
+          "constant_propagation": 0,
+          "common_subexpression": 0,
+          "dead_code_elimination": 0,
+          "algebraic_simplification": 0,
+          "strength_reduction": 0
+        },
+        "dead_code_elimination": {
+          "constant_folding": 0,
+          "constant_propagation": 0,
+          "common_subexpression": 0,
+          "dead_code_elimination": 12,
+          "algebraic_simplification": 0,
+          "strength_reduction": 0
+        },
+        "algebraic_simplification": {
+          "constant_folding": 0,
+          "constant_propagation": 0,
+          "common_subexpression": 0,
+          "dead_code_elimination": 0,
+          "algebraic_simplification": 0,
+          "strength_reduction": 0
+        },
+        "strength_reduction": {
+          "constant_folding": 0,
+          "constant_propagation": 0,
+          "common_subexpression": 0,
+          "dead_code_elimination": 0,
+          "algebraic_simplification": 0,
+          "strength_reduction": 0
+        }
+      },
+      "per_strategy_prf": {
+        "constant_folding": {
+          "support": 72,
+          "precision": 0.8696,
+          "recall": 0.8333,
+          "f1": 0.8511
+        },
+        "constant_propagation": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "common_subexpression": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "dead_code_elimination": {
+          "support": 21,
+          "precision": 1.0,
+          "recall": 0.5714,
+          "f1": 0.7273
+        },
+        "algebraic_simplification": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "strength_reduction": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "times_selected": {
+        "constant_folding": 69,
+        "constant_propagation": 0,
+        "common_subexpression": 12,
+        "dead_code_elimination": 12,
+        "algebraic_simplification": 0,
+        "strength_reduction": 0
+      },
+      "times_oracle": {
+        "constant_folding": 72,
+        "constant_propagation": 0,
+        "common_subexpression": 0,
+        "dead_code_elimination": 21,
+        "algebraic_simplification": 0,
+        "strength_reduction": 0
+      }
+    },
+    "passes": {
+      "constant_folding": {
+        "rewrote_pct": 29.03,
+        "reduced_count_pct": 0.0,
+        "mean_count_delta": 0,
+        "max_count_delta": 0
+      },
+      "constant_propagation": {
+        "rewrote_pct": 29.03,
+        "reduced_count_pct": 0.0,
+        "mean_count_delta": 0,
+        "max_count_delta": 0
+      },
+      "common_subexpression": {
+        "rewrote_pct": 26.88,
+        "reduced_count_pct": 0.0,
+        "mean_count_delta": 0,
+        "max_count_delta": 0
+      },
+      "dead_code_elimination": {
+        "rewrote_pct": 22.58,
+        "reduced_count_pct": 22.58,
+        "mean_count_delta": 0.871,
+        "max_count_delta": 10
+      },
+      "algebraic_simplification": {
+        "rewrote_pct": 0.0,
+        "reduced_count_pct": 0.0,
+        "mean_count_delta": 0,
+        "max_count_delta": 0
+      },
+      "strength_reduction": {
+        "rewrote_pct": 0.0,
+        "reduced_count_pct": 0.0,
+        "mean_count_delta": 0,
+        "max_count_delta": 0
+      }
+    },
+    "by_class": {
+      "algebraic_simplification": {
+        "n": 12,
+        "mean_statements": 12.5,
+        "mean_adaptive_reduction": 0,
+        "mean_best_single_reduction": 0,
+        "achieved_best_pct": 0.0,
+        "pct_any_reduction": 0.0,
+        "mean_iterations": 1
+      },
+      "common_subexpression": {
+        "n": 12,
+        "mean_statements": 12.5,
+        "mean_adaptive_reduction": 0,
+        "mean_best_single_reduction": 0,
+        "achieved_best_pct": 0.0,
+        "pct_any_reduction": 0.0,
+        "mean_iterations": 1
+      },
+      "constant_folding": {
+        "n": 12,
+        "mean_statements": 12.5,
+        "mean_adaptive_reduction": 0,
+        "mean_best_single_reduction": 0,
+        "achieved_best_pct": 0.0,
+        "pct_any_reduction": 0.0,
+        "mean_iterations": 1
+      },
+      "constant_propagation": {
+        "n": 12,
+        "mean_statements": 12.5,
+        "mean_adaptive_reduction": 0,
+        "mean_best_single_reduction": 0,
+        "achieved_best_pct": 0.0,
+        "pct_any_reduction": 0.0,
+        "mean_iterations": 1
+      },
+      "dead_code_elimination": {
+        "n": 12,
+        "mean_statements": 12.5,
+        "mean_adaptive_reduction": 6,
+        "mean_best_single_reduction": 6,
+        "achieved_best_pct": 100.0,
+        "pct_any_reduction": 100.0,
+        "mean_iterations": 2
+      },
+      "mixed": {
+        "n": 12,
+        "mean_statements": 12.5,
+        "mean_adaptive_reduction": 0,
+        "mean_best_single_reduction": 0.5,
+        "achieved_best_pct": 0.0,
+        "pct_any_reduction": 0.0,
+        "mean_iterations": 1
+      },
+      "repository": {
+        "n": 9,
+        "mean_statements": 4.7,
+        "mean_adaptive_reduction": 0,
+        "mean_best_single_reduction": 0.333,
+        "achieved_best_pct": 0.0,
+        "pct_any_reduction": 0.0,
+        "mean_iterations": 1
+      },
+      "strength_reduction": {
+        "n": 12,
+        "mean_statements": 12.5,
+        "mean_adaptive_reduction": 0,
+        "mean_best_single_reduction": 0,
+        "achieved_best_pct": 0.0,
+        "pct_any_reduction": 0.0,
+        "mean_iterations": 1
+      }
+    },
+    "by_size": {
+      "5": {
+        "n": 21,
+        "mean_adaptive_reduction": 0.286,
+        "mean_analyze_ms": 0.0421,
+        "mean_optimize_ms": 0.1002
+      },
+      "10": {
+        "n": 21,
+        "mean_adaptive_reduction": 0.714,
+        "mean_analyze_ms": 0.0633,
+        "mean_optimize_ms": 0.1633
+      },
+      "15": {
+        "n": 21,
+        "mean_adaptive_reduction": 1,
+        "mean_analyze_ms": 0.0884,
+        "mean_optimize_ms": 0.2283
+      },
+      "20": {
+        "n": 21,
+        "mean_adaptive_reduction": 1.429,
+        "mean_analyze_ms": 0.113,
+        "mean_optimize_ms": 0.3133
+      }
+    },
+    "latency": {
+      "analyze_ms": {
+        "mean": 0.0727,
+        "median": 0.0686,
+        "p95": 0.1349,
+        "max": 0.1508
+      },
+      "optimize_ms": {
+        "mean": 0.1901,
+        "median": 0.1704,
+        "p95": 0.3246,
+        "max": 0.5258
+      }
+    },
+    "engine_behaviour": {
+      "mean_iterations": 1.129,
+      "max_iterations": 2,
+      "converged_pct": 100.0,
+      "stopped_after_first_iteration_pct": 87.1
+    },
+    "api_latency": {
+      "base_url": "http://localhost:5173",
+      "requests_per_endpoint": 25,
+      "/api/analyze": {
+        "status_200": "25/25",
+        "mean_ms": 2052.384,
+        "median_ms": 2050.502,
+        "p95_ms": 2078.759,
+        "min_ms": 2031.169,
+        "max_ms": 2092.642
+      },
+      "/api/optimize": {
+        "status_200": "25/25",
+        "mean_ms": 2061.632,
+        "median_ms": 2055.877,
+        "p95_ms": 2082.659,
+        "min_ms": 2021.011,
+        "max_ms": 2222.43
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "gen-001",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3704,
+        "constant_propagation": 0.1975,
+        "common_subexpression": 0.1235,
+        "dead_code_elimination": 0.1235,
+        "algebraic_simplification": 0.1235,
+        "strength_reduction": 0.0617
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0629,
+      "optimize_ms": 0.114
+    },
+    {
+      "id": "gen-002",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3704,
+        "constant_propagation": 0.1975,
+        "common_subexpression": 0.1235,
+        "dead_code_elimination": 0.1235,
+        "algebraic_simplification": 0.1235,
+        "strength_reduction": 0.0617
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0446,
+      "optimize_ms": 0.0989
+    },
+    {
+      "id": "gen-003",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3704,
+        "constant_propagation": 0.1975,
+        "common_subexpression": 0.1235,
+        "dead_code_elimination": 0.1235,
+        "algebraic_simplification": 0.1235,
+        "strength_reduction": 0.0617
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0436,
+      "optimize_ms": 0.1002
+    },
+    {
+      "id": "gen-004",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 29,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3693,
+        "constant_propagation": 0.1989,
+        "common_subexpression": 0.1136,
+        "dead_code_elimination": 0.1136,
+        "algebraic_simplification": 0.1136,
+        "strength_reduction": 0.0909
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0653,
+      "optimize_ms": 0.1758
+    },
+    {
+      "id": "gen-005",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 3,
+        "num_tmp_vars": 30,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3457,
+        "constant_propagation": 0.1862,
+        "common_subexpression": 0.1064,
+        "dead_code_elimination": 0.1064,
+        "algebraic_simplification": 0.1064,
+        "strength_reduction": 0.1489
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.068,
+      "optimize_ms": 0.1693
+    },
+    {
+      "id": "gen-006",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 2,
+        "num_tmp_vars": 30,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3571,
+        "constant_propagation": 0.1923,
+        "common_subexpression": 0.1099,
+        "dead_code_elimination": 0.1099,
+        "algebraic_simplification": 0.1099,
+        "strength_reduction": 0.1209
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.071,
+      "optimize_ms": 0.1642
+    },
+    {
+      "id": "gen-007",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 45,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3891,
+        "constant_propagation": 0.1997,
+        "common_subexpression": 0.1175,
+        "dead_code_elimination": 0.1175,
+        "algebraic_simplification": 0.1175,
+        "strength_reduction": 0.0587
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0948,
+      "optimize_ms": 0.2399
+    },
+    {
+      "id": "gen-008",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 2,
+        "num_tmp_vars": 45,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3635,
+        "constant_propagation": 0.1866,
+        "common_subexpression": 0.1097,
+        "dead_code_elimination": 0.1097,
+        "algebraic_simplification": 0.1097,
+        "strength_reduction": 0.1207
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0873,
+      "optimize_ms": 0.2187
+    },
+    {
+      "id": "gen-009",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 2,
+        "num_tmp_vars": 45,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3635,
+        "constant_propagation": 0.1866,
+        "common_subexpression": 0.1097,
+        "dead_code_elimination": 0.1097,
+        "algebraic_simplification": 0.1097,
+        "strength_reduction": 0.1207
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0902,
+      "optimize_ms": 0.2165
+    },
+    {
+      "id": "gen-010",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 3,
+        "num_tmp_vars": 60,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3536,
+        "constant_propagation": 0.1839,
+        "common_subexpression": 0.1051,
+        "dead_code_elimination": 0.1051,
+        "algebraic_simplification": 0.1051,
+        "strength_reduction": 0.1472
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1121,
+      "optimize_ms": 0.2844
+    },
+    {
+      "id": "gen-011",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 4,
+        "num_tmp_vars": 59,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3428,
+        "constant_propagation": 0.1783,
+        "common_subexpression": 0.1019,
+        "dead_code_elimination": 0.1019,
+        "algebraic_simplification": 0.1019,
+        "strength_reduction": 0.1732
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1195,
+      "optimize_ms": 0.3579
+    },
+    {
+      "id": "gen-012",
+      "source": "generated",
+      "opportunity_class": "constant_folding",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 5,
+        "num_tmp_vars": 57,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3326,
+        "constant_propagation": 0.173,
+        "common_subexpression": 0.0989,
+        "dead_code_elimination": 0.0989,
+        "algebraic_simplification": 0.0989,
+        "strength_reduction": 0.1978
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1327,
+      "optimize_ms": 0.3281
+    },
+    {
+      "id": "gen-013",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 4,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.8
+      },
+      "scores": {
+        "constant_folding": 0.3596,
+        "constant_propagation": 0.2472,
+        "common_subexpression": 0.1124,
+        "dead_code_elimination": 0.1124,
+        "algebraic_simplification": 0.1124,
+        "strength_reduction": 0.0562
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0412,
+      "optimize_ms": 0.1014
+    },
+    {
+      "id": "gen-014",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 4,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.8
+      },
+      "scores": {
+        "constant_folding": 0.3596,
+        "constant_propagation": 0.2472,
+        "common_subexpression": 0.1124,
+        "dead_code_elimination": 0.1124,
+        "algebraic_simplification": 0.1124,
+        "strength_reduction": 0.0562
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.036,
+      "optimize_ms": 0.0902
+    },
+    {
+      "id": "gen-015",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 4,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.8
+      },
+      "scores": {
+        "constant_folding": 0.3596,
+        "constant_propagation": 0.2472,
+        "common_subexpression": 0.1124,
+        "dead_code_elimination": 0.1124,
+        "algebraic_simplification": 0.1124,
+        "strength_reduction": 0.0562
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0386,
+      "optimize_ms": 0.0854
+    },
+    {
+      "id": "gen-016",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 19,
+        "const_ratio": 1.0
+      },
+      "scores": {
+        "constant_folding": 0.3592,
+        "constant_propagation": 0.267,
+        "common_subexpression": 0.1068,
+        "dead_code_elimination": 0.1068,
+        "algebraic_simplification": 0.1068,
+        "strength_reduction": 0.0534
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0496,
+      "optimize_ms": 0.1356
+    },
+    {
+      "id": "gen-017",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 17,
+        "const_ratio": 1.0
+      },
+      "scores": {
+        "constant_folding": 0.3592,
+        "constant_propagation": 0.267,
+        "common_subexpression": 0.1068,
+        "dead_code_elimination": 0.1068,
+        "algebraic_simplification": 0.1068,
+        "strength_reduction": 0.0534
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0468,
+      "optimize_ms": 0.143
+    },
+    {
+      "id": "gen-018",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 17,
+        "const_ratio": 1.0
+      },
+      "scores": {
+        "constant_folding": 0.3592,
+        "constant_propagation": 0.267,
+        "common_subexpression": 0.1068,
+        "dead_code_elimination": 0.1068,
+        "algebraic_simplification": 0.1068,
+        "strength_reduction": 0.0534
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0509,
+      "optimize_ms": 0.1458
+    },
+    {
+      "id": "gen-019",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 14,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 29,
+        "const_ratio": 0.9333333333333333
+      },
+      "scores": {
+        "constant_folding": 0.3656,
+        "constant_propagation": 0.2581,
+        "common_subexpression": 0.1075,
+        "dead_code_elimination": 0.1075,
+        "algebraic_simplification": 0.1075,
+        "strength_reduction": 0.0538
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0675,
+      "optimize_ms": 0.1939
+    },
+    {
+      "id": "gen-020",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 14,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 28,
+        "const_ratio": 0.9333333333333333
+      },
+      "scores": {
+        "constant_folding": 0.3656,
+        "constant_propagation": 0.2581,
+        "common_subexpression": 0.1075,
+        "dead_code_elimination": 0.1075,
+        "algebraic_simplification": 0.1075,
+        "strength_reduction": 0.0538
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0635,
+      "optimize_ms": 0.1947
+    },
+    {
+      "id": "gen-021",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 14,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 28,
+        "const_ratio": 0.9333333333333333
+      },
+      "scores": {
+        "constant_folding": 0.3656,
+        "constant_propagation": 0.2581,
+        "common_subexpression": 0.1075,
+        "dead_code_elimination": 0.1075,
+        "algebraic_simplification": 0.1075,
+        "strength_reduction": 0.0538
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0686,
+      "optimize_ms": 0.1824
+    },
+    {
+      "id": "gen-022",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 20,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 35,
+        "const_ratio": 1.0
+      },
+      "scores": {
+        "constant_folding": 0.3636,
+        "constant_propagation": 0.2652,
+        "common_subexpression": 0.1061,
+        "dead_code_elimination": 0.1061,
+        "algebraic_simplification": 0.1061,
+        "strength_reduction": 0.053
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0751,
+      "optimize_ms": 0.2533
+    },
+    {
+      "id": "gen-023",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 20,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 34,
+        "const_ratio": 1.0
+      },
+      "scores": {
+        "constant_folding": 0.3636,
+        "constant_propagation": 0.2652,
+        "common_subexpression": 0.1061,
+        "dead_code_elimination": 0.1061,
+        "algebraic_simplification": 0.1061,
+        "strength_reduction": 0.053
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0835,
+      "optimize_ms": 0.2508
+    },
+    {
+      "id": "gen-024",
+      "source": "generated",
+      "opportunity_class": "constant_propagation",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 20,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 34,
+        "const_ratio": 1.0
+      },
+      "scores": {
+        "constant_folding": 0.3636,
+        "constant_propagation": 0.2652,
+        "common_subexpression": 0.1061,
+        "dead_code_elimination": 0.1061,
+        "algebraic_simplification": 0.1061,
+        "strength_reduction": 0.053
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0935,
+      "optimize_ms": 0.2496
+    },
+    {
+      "id": "gen-025",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 0,
+        "num_repeated_expr": 2,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.2105,
+        "constant_propagation": 0.1053,
+        "common_subexpression": 0.4211,
+        "dead_code_elimination": 0.1053,
+        "algebraic_simplification": 0.1053,
+        "strength_reduction": 0.0526
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.046,
+      "optimize_ms": 0.0946
+    },
+    {
+      "id": "gen-026",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 0,
+        "num_repeated_expr": 2,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.2105,
+        "constant_propagation": 0.1053,
+        "common_subexpression": 0.4211,
+        "dead_code_elimination": 0.1053,
+        "algebraic_simplification": 0.1053,
+        "strength_reduction": 0.0526
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0448,
+      "optimize_ms": 0.0982
+    },
+    {
+      "id": "gen-027",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 0,
+        "num_repeated_expr": 2,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.2105,
+        "constant_propagation": 0.1053,
+        "common_subexpression": 0.4211,
+        "dead_code_elimination": 0.1053,
+        "algebraic_simplification": 0.1053,
+        "strength_reduction": 0.0526
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0412,
+      "optimize_ms": 0.0902
+    },
+    {
+      "id": "gen-028",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 0,
+        "num_repeated_expr": 5,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 20,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.1429,
+        "constant_propagation": 0.0714,
+        "common_subexpression": 0.6071,
+        "dead_code_elimination": 0.0714,
+        "algebraic_simplification": 0.0714,
+        "strength_reduction": 0.0357
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0711,
+      "optimize_ms": 0.1681
+    },
+    {
+      "id": "gen-029",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 0,
+        "num_repeated_expr": 5,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 20,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.1429,
+        "constant_propagation": 0.0714,
+        "common_subexpression": 0.6071,
+        "dead_code_elimination": 0.0714,
+        "algebraic_simplification": 0.0714,
+        "strength_reduction": 0.0357
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0704,
+      "optimize_ms": 0.1609
+    },
+    {
+      "id": "gen-030",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 0,
+        "num_repeated_expr": 5,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 20,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.1429,
+        "constant_propagation": 0.0714,
+        "common_subexpression": 0.6071,
+        "dead_code_elimination": 0.0714,
+        "algebraic_simplification": 0.0714,
+        "strength_reduction": 0.0357
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0727,
+      "optimize_ms": 0.1648
+    },
+    {
+      "id": "gen-031",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 0,
+        "num_repeated_expr": 7,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 31,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.129,
+        "constant_propagation": 0.0645,
+        "common_subexpression": 0.6452,
+        "dead_code_elimination": 0.0645,
+        "algebraic_simplification": 0.0645,
+        "strength_reduction": 0.0323
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1055,
+      "optimize_ms": 0.2328
+    },
+    {
+      "id": "gen-032",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 0,
+        "num_repeated_expr": 7,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 31,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.129,
+        "constant_propagation": 0.0645,
+        "common_subexpression": 0.6452,
+        "dead_code_elimination": 0.0645,
+        "algebraic_simplification": 0.0645,
+        "strength_reduction": 0.0323
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1026,
+      "optimize_ms": 0.2381
+    },
+    {
+      "id": "gen-033",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 0,
+        "num_repeated_expr": 7,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 31,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.129,
+        "constant_propagation": 0.0645,
+        "common_subexpression": 0.6452,
+        "dead_code_elimination": 0.0645,
+        "algebraic_simplification": 0.0645,
+        "strength_reduction": 0.0323
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1138,
+      "optimize_ms": 0.2356
+    },
+    {
+      "id": "gen-034",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 0,
+        "num_repeated_expr": 10,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 40,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.129,
+        "constant_propagation": 0.0645,
+        "common_subexpression": 0.6452,
+        "dead_code_elimination": 0.0645,
+        "algebraic_simplification": 0.0645,
+        "strength_reduction": 0.0323
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1318,
+      "optimize_ms": 0.3012
+    },
+    {
+      "id": "gen-035",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 0,
+        "num_repeated_expr": 10,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 40,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.129,
+        "constant_propagation": 0.0645,
+        "common_subexpression": 0.6452,
+        "dead_code_elimination": 0.0645,
+        "algebraic_simplification": 0.0645,
+        "strength_reduction": 0.0323
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1508,
+      "optimize_ms": 0.3174
+    },
+    {
+      "id": "gen-036",
+      "source": "generated",
+      "opportunity_class": "common_subexpression",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 0,
+        "num_repeated_expr": 10,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 40,
+        "const_ratio": 0.0
+      },
+      "scores": {
+        "constant_folding": 0.129,
+        "constant_propagation": 0.0645,
+        "common_subexpression": 0.6452,
+        "dead_code_elimination": 0.0645,
+        "algebraic_simplification": 0.0645,
+        "strength_reduction": 0.0323
+      },
+      "selected": "common_subexpression",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1375,
+      "optimize_ms": 0.313
+    },
+    {
+      "id": "gen-037",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 2,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.2703,
+        "constant_propagation": 0.1441,
+        "common_subexpression": 0.0901,
+        "dead_code_elimination": 0.3604,
+        "algebraic_simplification": 0.0901,
+        "strength_reduction": 0.045
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 3,
+          "reduction": 2
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 2,
+      "selected_single_pass_reduction": 2,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 2,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0333,
+      "optimize_ms": 0.1234
+    },
+    {
+      "id": "gen-038",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 2,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.2703,
+        "constant_propagation": 0.1441,
+        "common_subexpression": 0.0901,
+        "dead_code_elimination": 0.3604,
+        "algebraic_simplification": 0.0901,
+        "strength_reduction": 0.045
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 3,
+          "reduction": 2
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 2,
+      "selected_single_pass_reduction": 2,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 2,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0271,
+      "optimize_ms": 0.1166
+    },
+    {
+      "id": "gen-039",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 2,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 11,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.2703,
+        "constant_propagation": 0.1441,
+        "common_subexpression": 0.0901,
+        "dead_code_elimination": 0.3604,
+        "algebraic_simplification": 0.0901,
+        "strength_reduction": 0.045
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 3,
+          "reduction": 2
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 2,
+      "selected_single_pass_reduction": 2,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 2,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0274,
+      "optimize_ms": 0.1207
+    },
+    {
+      "id": "gen-040",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 5,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 19,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.2031,
+        "constant_propagation": 0.1094,
+        "common_subexpression": 0.0625,
+        "dead_code_elimination": 0.5312,
+        "algebraic_simplification": 0.0625,
+        "strength_reduction": 0.0312
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 5,
+          "reduction": 5
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 5,
+      "selected_single_pass_reduction": 5,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 5,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.034,
+      "optimize_ms": 0.161
+    },
+    {
+      "id": "gen-041",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 5,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 20,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.2031,
+        "constant_propagation": 0.1094,
+        "common_subexpression": 0.0625,
+        "dead_code_elimination": 0.5312,
+        "algebraic_simplification": 0.0625,
+        "strength_reduction": 0.0312
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 5,
+          "reduction": 5
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 5,
+      "selected_single_pass_reduction": 5,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 5,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0291,
+      "optimize_ms": 0.166
+    },
+    {
+      "id": "gen-042",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 5,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 20,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.2031,
+        "constant_propagation": 0.1094,
+        "common_subexpression": 0.0625,
+        "dead_code_elimination": 0.5312,
+        "algebraic_simplification": 0.0625,
+        "strength_reduction": 0.0312
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 5,
+          "reduction": 5
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 5,
+      "selected_single_pass_reduction": 5,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 5,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0349,
+      "optimize_ms": 0.1567
+    },
+    {
+      "id": "gen-043",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 7,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 31,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.1892,
+        "constant_propagation": 0.0971,
+        "common_subexpression": 0.0571,
+        "dead_code_elimination": 0.571,
+        "algebraic_simplification": 0.0571,
+        "strength_reduction": 0.0286
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 8,
+          "reduction": 7
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 7,
+      "selected_single_pass_reduction": 7,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 7,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0494,
+      "optimize_ms": 0.24
+    },
+    {
+      "id": "gen-044",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 7,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 31,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.1892,
+        "constant_propagation": 0.0971,
+        "common_subexpression": 0.0571,
+        "dead_code_elimination": 0.571,
+        "algebraic_simplification": 0.0571,
+        "strength_reduction": 0.0286
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 8,
+          "reduction": 7
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 7,
+      "selected_single_pass_reduction": 7,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 7,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0498,
+      "optimize_ms": 0.2304
+    },
+    {
+      "id": "gen-045",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 7,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 31,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.1892,
+        "constant_propagation": 0.0971,
+        "common_subexpression": 0.0571,
+        "dead_code_elimination": 0.571,
+        "algebraic_simplification": 0.0571,
+        "strength_reduction": 0.0286
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 8,
+          "reduction": 7
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 7,
+      "selected_single_pass_reduction": 7,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 7,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.048,
+      "optimize_ms": 0.2359
+    },
+    {
+      "id": "gen-046",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 10,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 39,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.191,
+        "constant_propagation": 0.0994,
+        "common_subexpression": 0.0568,
+        "dead_code_elimination": 0.5677,
+        "algebraic_simplification": 0.0568,
+        "strength_reduction": 0.0284
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 10,
+          "reduction": 10
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 10,
+      "selected_single_pass_reduction": 10,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 10,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.052,
+      "optimize_ms": 0.2954
+    },
+    {
+      "id": "gen-047",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 10,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 39,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.191,
+        "constant_propagation": 0.0994,
+        "common_subexpression": 0.0568,
+        "dead_code_elimination": 0.5677,
+        "algebraic_simplification": 0.0568,
+        "strength_reduction": 0.0284
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 10,
+          "reduction": 10
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 10,
+      "selected_single_pass_reduction": 10,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 10,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0529,
+      "optimize_ms": 0.2819
+    },
+    {
+      "id": "gen-048",
+      "source": "generated",
+      "opportunity_class": "dead_code_elimination",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 10,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 40,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.191,
+        "constant_propagation": 0.0994,
+        "common_subexpression": 0.0568,
+        "dead_code_elimination": 0.5677,
+        "algebraic_simplification": 0.0568,
+        "strength_reduction": 0.0284
+      },
+      "selected": "dead_code_elimination",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 10,
+          "reduction": 10
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 10,
+      "selected_single_pass_reduction": 10,
+      "achieved_best": true,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 10,
+      "adaptive_iterations": 2,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0541,
+      "optimize_ms": 0.29
+    },
+    {
+      "id": "gen-049",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3704,
+        "constant_propagation": 0.1975,
+        "common_subexpression": 0.1235,
+        "dead_code_elimination": 0.1235,
+        "algebraic_simplification": 0.1235,
+        "strength_reduction": 0.0617
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0512,
+      "optimize_ms": 0.0987
+    },
+    {
+      "id": "gen-050",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3704,
+        "constant_propagation": 0.1975,
+        "common_subexpression": 0.1235,
+        "dead_code_elimination": 0.1235,
+        "algebraic_simplification": 0.1235,
+        "strength_reduction": 0.0617
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0459,
+      "optimize_ms": 0.0994
+    },
+    {
+      "id": "gen-051",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3704,
+        "constant_propagation": 0.1975,
+        "common_subexpression": 0.1235,
+        "dead_code_elimination": 0.1235,
+        "algebraic_simplification": 0.1235,
+        "strength_reduction": 0.0617
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0456,
+      "optimize_ms": 0.0978
+    },
+    {
+      "id": "gen-052",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 27,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3824,
+        "constant_propagation": 0.2059,
+        "common_subexpression": 0.1176,
+        "dead_code_elimination": 0.1176,
+        "algebraic_simplification": 0.1176,
+        "strength_reduction": 0.0588
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0757,
+      "optimize_ms": 0.1702
+    },
+    {
+      "id": "gen-053",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 27,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3824,
+        "constant_propagation": 0.2059,
+        "common_subexpression": 0.1176,
+        "dead_code_elimination": 0.1176,
+        "algebraic_simplification": 0.1176,
+        "strength_reduction": 0.0588
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0716,
+      "optimize_ms": 0.1761
+    },
+    {
+      "id": "gen-054",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 27,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3824,
+        "constant_propagation": 0.2059,
+        "common_subexpression": 0.1176,
+        "dead_code_elimination": 0.1176,
+        "algebraic_simplification": 0.1176,
+        "strength_reduction": 0.0588
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0758,
+      "optimize_ms": 0.1631
+    },
+    {
+      "id": "gen-055",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 40,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3891,
+        "constant_propagation": 0.1997,
+        "common_subexpression": 0.1175,
+        "dead_code_elimination": 0.1175,
+        "algebraic_simplification": 0.1175,
+        "strength_reduction": 0.0587
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1033,
+      "optimize_ms": 0.2417
+    },
+    {
+      "id": "gen-056",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 40,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3891,
+        "constant_propagation": 0.1997,
+        "common_subexpression": 0.1175,
+        "dead_code_elimination": 0.1175,
+        "algebraic_simplification": 0.1175,
+        "strength_reduction": 0.0587
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1001,
+      "optimize_ms": 0.2341
+    },
+    {
+      "id": "gen-057",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 40,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3891,
+        "constant_propagation": 0.1997,
+        "common_subexpression": 0.1175,
+        "dead_code_elimination": 0.1175,
+        "algebraic_simplification": 0.1175,
+        "strength_reduction": 0.0587
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1034,
+      "optimize_ms": 0.2358
+    },
+    {
+      "id": "gen-058",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 52,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3905,
+        "constant_propagation": 0.2032,
+        "common_subexpression": 0.1161,
+        "dead_code_elimination": 0.1161,
+        "algebraic_simplification": 0.1161,
+        "strength_reduction": 0.058
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1266,
+      "optimize_ms": 0.5258
+    },
+    {
+      "id": "gen-059",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 52,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3905,
+        "constant_propagation": 0.2032,
+        "common_subexpression": 0.1161,
+        "dead_code_elimination": 0.1161,
+        "algebraic_simplification": 0.1161,
+        "strength_reduction": 0.058
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1445,
+      "optimize_ms": 0.3223
+    },
+    {
+      "id": "gen-060",
+      "source": "generated",
+      "opportunity_class": "algebraic_simplification",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 52,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3905,
+        "constant_propagation": 0.2032,
+        "common_subexpression": 0.1161,
+        "dead_code_elimination": 0.1161,
+        "algebraic_simplification": 0.1161,
+        "strength_reduction": 0.058
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1332,
+      "optimize_ms": 0.3101
+    },
+    {
+      "id": "gen-061",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 2,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3448,
+        "constant_propagation": 0.1839,
+        "common_subexpression": 0.1149,
+        "dead_code_elimination": 0.1149,
+        "algebraic_simplification": 0.1149,
+        "strength_reduction": 0.1264
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0468,
+      "optimize_ms": 0.0961
+    },
+    {
+      "id": "gen-062",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 2,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3448,
+        "constant_propagation": 0.1839,
+        "common_subexpression": 0.1149,
+        "dead_code_elimination": 0.1149,
+        "algebraic_simplification": 0.1149,
+        "strength_reduction": 0.1264
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0434,
+      "optimize_ms": 0.0931
+    },
+    {
+      "id": "gen-063",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 2,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.4
+      },
+      "scores": {
+        "constant_folding": 0.3448,
+        "constant_propagation": 0.1839,
+        "common_subexpression": 0.1149,
+        "dead_code_elimination": 0.1149,
+        "algebraic_simplification": 0.1149,
+        "strength_reduction": 0.1264
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0424,
+      "optimize_ms": 0.098
+    },
+    {
+      "id": "gen-064",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 5,
+        "num_tmp_vars": 30,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.325,
+        "constant_propagation": 0.175,
+        "common_subexpression": 0.1,
+        "dead_code_elimination": 0.1,
+        "algebraic_simplification": 0.1,
+        "strength_reduction": 0.2
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0753,
+      "optimize_ms": 0.1647
+    },
+    {
+      "id": "gen-065",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 5,
+        "num_tmp_vars": 30,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.325,
+        "constant_propagation": 0.175,
+        "common_subexpression": 0.1,
+        "dead_code_elimination": 0.1,
+        "algebraic_simplification": 0.1,
+        "strength_reduction": 0.2
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0701,
+      "optimize_ms": 0.1704
+    },
+    {
+      "id": "gen-066",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 5,
+        "num_tmp_vars": 30,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.325,
+        "constant_propagation": 0.175,
+        "common_subexpression": 0.1,
+        "dead_code_elimination": 0.1,
+        "algebraic_simplification": 0.1,
+        "strength_reduction": 0.2
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0762,
+      "optimize_ms": 0.1616
+    },
+    {
+      "id": "gen-067",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 7,
+        "num_tmp_vars": 45,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3308,
+        "constant_propagation": 0.1698,
+        "common_subexpression": 0.0999,
+        "dead_code_elimination": 0.0999,
+        "algebraic_simplification": 0.0999,
+        "strength_reduction": 0.1998
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1056,
+      "optimize_ms": 0.2446
+    },
+    {
+      "id": "gen-068",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 7,
+        "num_tmp_vars": 45,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3308,
+        "constant_propagation": 0.1698,
+        "common_subexpression": 0.0999,
+        "dead_code_elimination": 0.0999,
+        "algebraic_simplification": 0.0999,
+        "strength_reduction": 0.1998
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0999,
+      "optimize_ms": 0.2388
+    },
+    {
+      "id": "gen-069",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 7,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 7,
+        "num_tmp_vars": 45,
+        "const_ratio": 0.4666666666666667
+      },
+      "scores": {
+        "constant_folding": 0.3308,
+        "constant_propagation": 0.1698,
+        "common_subexpression": 0.0999,
+        "dead_code_elimination": 0.0999,
+        "algebraic_simplification": 0.0999,
+        "strength_reduction": 0.1998
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1056,
+      "optimize_ms": 0.2288
+    },
+    {
+      "id": "gen-070",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 10,
+        "num_tmp_vars": 57,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3326,
+        "constant_propagation": 0.173,
+        "common_subexpression": 0.0989,
+        "dead_code_elimination": 0.0989,
+        "algebraic_simplification": 0.0989,
+        "strength_reduction": 0.1978
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1282,
+      "optimize_ms": 0.3075
+    },
+    {
+      "id": "gen-071",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 10,
+        "num_tmp_vars": 57,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3326,
+        "constant_propagation": 0.173,
+        "common_subexpression": 0.0989,
+        "dead_code_elimination": 0.0989,
+        "algebraic_simplification": 0.0989,
+        "strength_reduction": 0.1978
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1386,
+      "optimize_ms": 0.3134
+    },
+    {
+      "id": "gen-072",
+      "source": "generated",
+      "opportunity_class": "strength_reduction",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 10,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 10,
+        "num_tmp_vars": 57,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3326,
+        "constant_propagation": 0.173,
+        "common_subexpression": 0.0989,
+        "dead_code_elimination": 0.0989,
+        "algebraic_simplification": 0.0989,
+        "strength_reduction": 0.1978
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1396,
+      "optimize_ms": 0.3396
+    },
+    {
+      "id": "gen-073",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 3,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 13,
+        "const_ratio": 0.6
+      },
+      "scores": {
+        "constant_folding": 0.3541,
+        "constant_propagation": 0.2153,
+        "common_subexpression": 0.1133,
+        "dead_code_elimination": 0.1133,
+        "algebraic_simplification": 0.1133,
+        "strength_reduction": 0.0907
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0443,
+      "optimize_ms": 0.0957
+    },
+    {
+      "id": "gen-074",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 3,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 13,
+        "const_ratio": 0.6
+      },
+      "scores": {
+        "constant_folding": 0.3666,
+        "constant_propagation": 0.2229,
+        "common_subexpression": 0.1173,
+        "dead_code_elimination": 0.1173,
+        "algebraic_simplification": 0.1173,
+        "strength_reduction": 0.0587
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0387,
+      "optimize_ms": 0.0949
+    },
+    {
+      "id": "gen-075",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 3,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 13,
+        "const_ratio": 0.6
+      },
+      "scores": {
+        "constant_folding": 0.3666,
+        "constant_propagation": 0.2229,
+        "common_subexpression": 0.1173,
+        "dead_code_elimination": 0.1173,
+        "algebraic_simplification": 0.1173,
+        "strength_reduction": 0.0587
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0388,
+      "optimize_ms": 0.0965
+    },
+    {
+      "id": "gen-076",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 3,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 26,
+        "const_ratio": 0.3
+      },
+      "scores": {
+        "constant_folding": 0.3165,
+        "constant_propagation": 0.1468,
+        "common_subexpression": 0.2532,
+        "dead_code_elimination": 0.1013,
+        "algebraic_simplification": 0.1013,
+        "strength_reduction": 0.081
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0768,
+      "optimize_ms": 0.1726
+    },
+    {
+      "id": "gen-077",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 3,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 26,
+        "const_ratio": 0.3
+      },
+      "scores": {
+        "constant_folding": 0.3264,
+        "constant_propagation": 0.1514,
+        "common_subexpression": 0.2611,
+        "dead_code_elimination": 0.1044,
+        "algebraic_simplification": 0.1044,
+        "strength_reduction": 0.0522
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0695,
+      "optimize_ms": 0.1718
+    },
+    {
+      "id": "gen-078",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 10,
+      "statements_in": 10,
+      "features": {
+        "num_statements": 10,
+        "num_constants": 3,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 26,
+        "const_ratio": 0.3
+      },
+      "scores": {
+        "constant_folding": 0.3165,
+        "constant_propagation": 0.1468,
+        "common_subexpression": 0.2532,
+        "dead_code_elimination": 0.1013,
+        "algebraic_simplification": 0.1013,
+        "strength_reduction": 0.081
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 10,
+          "after": 10,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0747,
+      "optimize_ms": 0.1674
+    },
+    {
+      "id": "gen-079",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 4,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 38,
+        "const_ratio": 0.26666666666666666
+      },
+      "scores": {
+        "constant_folding": 0.2807,
+        "constant_propagation": 0.1228,
+        "common_subexpression": 0.2193,
+        "dead_code_elimination": 0.2193,
+        "algebraic_simplification": 0.0877,
+        "strength_reduction": 0.0702
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 14,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1011,
+      "optimize_ms": 0.2363
+    },
+    {
+      "id": "gen-080",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 4,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 37,
+        "const_ratio": 0.26666666666666666
+      },
+      "scores": {
+        "constant_folding": 0.2807,
+        "constant_propagation": 0.1228,
+        "common_subexpression": 0.2193,
+        "dead_code_elimination": 0.2193,
+        "algebraic_simplification": 0.0877,
+        "strength_reduction": 0.0702
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 14,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0936,
+      "optimize_ms": 0.2333
+    },
+    {
+      "id": "gen-081",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 15,
+      "statements_in": 15,
+      "features": {
+        "num_statements": 15,
+        "num_constants": 4,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 38,
+        "const_ratio": 0.26666666666666666
+      },
+      "scores": {
+        "constant_folding": 0.2883,
+        "constant_propagation": 0.1261,
+        "common_subexpression": 0.2252,
+        "dead_code_elimination": 0.2252,
+        "algebraic_simplification": 0.0901,
+        "strength_reduction": 0.045
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 15,
+          "after": 14,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 15,
+          "after": 15,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1035,
+      "optimize_ms": 0.2416
+    },
+    {
+      "id": "gen-082",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 7,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 50,
+        "const_ratio": 0.35
+      },
+      "scores": {
+        "constant_folding": 0.2846,
+        "constant_propagation": 0.131,
+        "common_subexpression": 0.2148,
+        "dead_code_elimination": 0.2148,
+        "algebraic_simplification": 0.0859,
+        "strength_reduction": 0.0687
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 19,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1242,
+      "optimize_ms": 0.3507
+    },
+    {
+      "id": "gen-083",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 7,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 2,
+        "num_tmp_vars": 50,
+        "const_ratio": 0.35
+      },
+      "scores": {
+        "constant_folding": 0.2775,
+        "constant_propagation": 0.1277,
+        "common_subexpression": 0.2094,
+        "dead_code_elimination": 0.2094,
+        "algebraic_simplification": 0.0838,
+        "strength_reduction": 0.0921
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 19,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1227,
+      "optimize_ms": 0.301
+    },
+    {
+      "id": "gen-084",
+      "source": "generated",
+      "opportunity_class": "mixed",
+      "size": 20,
+      "statements_in": 20,
+      "features": {
+        "num_statements": 20,
+        "num_constants": 7,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 50,
+        "const_ratio": 0.35
+      },
+      "scores": {
+        "constant_folding": 0.2846,
+        "constant_propagation": 0.131,
+        "common_subexpression": 0.2148,
+        "dead_code_elimination": 0.2148,
+        "algebraic_simplification": 0.0859,
+        "strength_reduction": 0.0687
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 20,
+          "after": 19,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 20,
+          "after": 20,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.1193,
+      "optimize_ms": 0.2863
+    },
+    {
+      "id": "repo-085",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 3,
+      "statements_in": 3,
+      "features": {
+        "num_statements": 3,
+        "num_constants": 2,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 8,
+        "const_ratio": 0.6666666666666666
+      },
+      "scores": {
+        "constant_folding": 0.3529,
+        "constant_propagation": 0.2353,
+        "common_subexpression": 0.1176,
+        "dead_code_elimination": 0.1176,
+        "algebraic_simplification": 0.1176,
+        "strength_reduction": 0.0588
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0329,
+      "optimize_ms": 0.0684
+    },
+    {
+      "id": "repo-086",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 2,
+      "statements_in": 2,
+      "features": {
+        "num_statements": 2,
+        "num_constants": 1,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 5,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.3438,
+        "constant_propagation": 0.2187,
+        "common_subexpression": 0.125,
+        "dead_code_elimination": 0.125,
+        "algebraic_simplification": 0.125,
+        "strength_reduction": 0.0625
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 2,
+          "after": 2,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 2,
+          "after": 2,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 2,
+          "after": 2,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 2,
+          "after": 2,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 2,
+          "after": 2,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 2,
+          "after": 2,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0198,
+      "optimize_ms": 0.045
+    },
+    {
+      "id": "repo-087",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 3,
+      "statements_in": 3,
+      "features": {
+        "num_statements": 3,
+        "num_constants": 1,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 6,
+        "const_ratio": 0.3333333333333333
+      },
+      "scores": {
+        "constant_folding": 0.2973,
+        "constant_propagation": 0.1622,
+        "common_subexpression": 0.2703,
+        "dead_code_elimination": 0.1081,
+        "algebraic_simplification": 0.1081,
+        "strength_reduction": 0.0541
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0323,
+      "optimize_ms": 0.0686
+    },
+    {
+      "id": "repo-088",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 3,
+      "statements_in": 3,
+      "features": {
+        "num_statements": 3,
+        "num_constants": 3,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 7,
+        "const_ratio": 1.0
+      },
+      "scores": {
+        "constant_folding": 0.3425,
+        "constant_propagation": 0.274,
+        "common_subexpression": 0.1096,
+        "dead_code_elimination": 0.1096,
+        "algebraic_simplification": 0.1096,
+        "strength_reduction": 0.0548
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 3,
+          "after": 3,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0241,
+      "optimize_ms": 0.0644
+    },
+    {
+      "id": "repo-089",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 6,
+      "statements_in": 6,
+      "features": {
+        "num_statements": 6,
+        "num_constants": 3,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 0,
+        "num_tmp_vars": 12,
+        "const_ratio": 0.5
+      },
+      "scores": {
+        "constant_folding": 0.2747,
+        "constant_propagation": 0.1538,
+        "common_subexpression": 0.2198,
+        "dead_code_elimination": 0.2198,
+        "algebraic_simplification": 0.0879,
+        "strength_reduction": 0.044
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": true,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 6,
+          "after": 5,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0423,
+      "optimize_ms": 0.1012
+    },
+    {
+      "id": "repo-090",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 4,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 9,
+        "const_ratio": 0.8
+      },
+      "scores": {
+        "constant_folding": 0.3478,
+        "constant_propagation": 0.2391,
+        "common_subexpression": 0.1087,
+        "dead_code_elimination": 0.1087,
+        "algebraic_simplification": 0.1087,
+        "strength_reduction": 0.087
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0369,
+      "optimize_ms": 0.0913
+    },
+    {
+      "id": "repo-091",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 5,
+      "statements_in": 5,
+      "features": {
+        "num_statements": 5,
+        "num_constants": 1,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 0,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 8,
+        "const_ratio": 0.2
+      },
+      "scores": {
+        "constant_folding": 0.2941,
+        "constant_propagation": 0.139,
+        "common_subexpression": 0.2674,
+        "dead_code_elimination": 0.107,
+        "algebraic_simplification": 0.107,
+        "strength_reduction": 0.0856
+      },
+      "selected": "constant_folding",
+      "oracle": "constant_folding",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 5,
+          "after": 5,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 0,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": false,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0392,
+      "optimize_ms": 0.0928
+    },
+    {
+      "id": "repo-092",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 6,
+      "statements_in": 6,
+      "features": {
+        "num_statements": 6,
+        "num_constants": 5,
+        "num_repeated_expr": 0,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 10,
+        "const_ratio": 0.8333333333333334
+      },
+      "scores": {
+        "constant_folding": 0.3009,
+        "constant_propagation": 0.2083,
+        "common_subexpression": 0.0926,
+        "dead_code_elimination": 0.2315,
+        "algebraic_simplification": 0.0926,
+        "strength_reduction": 0.0741
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": false,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 6,
+          "after": 5,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 6,
+          "after": 6,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0347,
+      "optimize_ms": 0.0965
+    },
+    {
+      "id": "repo-093",
+      "source": "repository",
+      "opportunity_class": "repository",
+      "size": 9,
+      "statements_in": 9,
+      "features": {
+        "num_statements": 9,
+        "num_constants": 6,
+        "num_repeated_expr": 1,
+        "num_dead_stmts": 1,
+        "num_algebraic_ops": 0,
+        "num_loop_ops": 1,
+        "num_tmp_vars": 15,
+        "const_ratio": 0.6666666666666666
+      },
+      "scores": {
+        "constant_folding": 0.2719,
+        "constant_propagation": 0.1655,
+        "common_subexpression": 0.2069,
+        "dead_code_elimination": 0.2069,
+        "algebraic_simplification": 0.0827,
+        "strength_reduction": 0.0662
+      },
+      "selected": "constant_folding",
+      "oracle": "dead_code_elimination",
+      "per_pass": {
+        "constant_folding": {
+          "rewrote_tac": false,
+          "before": 9,
+          "after": 9,
+          "reduction": 0
+        },
+        "constant_propagation": {
+          "rewrote_tac": true,
+          "before": 9,
+          "after": 9,
+          "reduction": 0
+        },
+        "common_subexpression": {
+          "rewrote_tac": true,
+          "before": 9,
+          "after": 9,
+          "reduction": 0
+        },
+        "dead_code_elimination": {
+          "rewrote_tac": true,
+          "before": 9,
+          "after": 8,
+          "reduction": 1
+        },
+        "algebraic_simplification": {
+          "rewrote_tac": false,
+          "before": 9,
+          "after": 9,
+          "reduction": 0
+        },
+        "strength_reduction": {
+          "rewrote_tac": false,
+          "before": 9,
+          "after": 9,
+          "reduction": 0
+        }
+      },
+      "best_single_pass_reduction": 1,
+      "selected_single_pass_reduction": 0,
+      "achieved_best": false,
+      "any_pass_reduces": true,
+      "adaptive_reduction": 0,
+      "adaptive_iterations": 1,
+      "adaptive_converged": true,
+      "analyze_ms": 0.0534,
+      "optimize_ms": 0.1401
+    }
+  ]
+}
