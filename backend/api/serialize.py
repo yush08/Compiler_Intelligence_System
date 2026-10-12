@@ -32,7 +32,10 @@ def instruction_to_line(instr: Instruction) -> str:
     if op == Instruction.GOTO:
         return f"goto {instr.result}"
     if op == Instruction.IF:
-        return f"if {instr.arg1} {instr.arg2} goto {instr.result}"
+        # instr.relop holds "<", ">=", "==" ... The operator used to be dropped
+        # here, so the API returned `if i n goto L2`, which is not valid TAC.
+        relop = instr.relop or "?"
+        return f"if {instr.arg1} {relop} {instr.arg2} goto {instr.result}"
     if op == Instruction.UMINUS:
         return f"{instr.result} = -{instr.arg1}"
     if op in OP_SYMBOLS:

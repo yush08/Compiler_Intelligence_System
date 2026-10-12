@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "records_checked": 177,
+  "distinct_programs": 177,
+  "errors": [],
+  "warnings": [
+    "strategy 'strength_reduction' never appears as best_strategy (measured reduction is 0 for every sample)"
+  ],
+  "label_counts": {
+    "constant_folding": 46,
+    "constant_propagation": 31,
+    "common_subexpression": 18,
+    "dead_code_elimination": 59,
+    "algebraic_simplification": 23,
+    "strength_reduction": 0
+  },
+  "skipped_programs": []
+}

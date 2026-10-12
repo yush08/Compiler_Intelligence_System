@@ -13,3 +13,6 @@ pydantic
 pytest
 pytest-cov
 httpx
+
+# Optional: for loading dataset/processed/*.csv as a DataFrame
+pandas

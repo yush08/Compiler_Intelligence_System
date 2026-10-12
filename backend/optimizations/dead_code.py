@@ -51,8 +51,12 @@ def dead_code_elimination(tac: TAC) -> TAC:
             result_tac.add(instr)
             continue
 
-        # For assignments: keep only if result is used later
-        if instr.is_assignment() and instr.result is not None:
+        # For assignments: keep only if result is used later. Control flow was
+        # already returned above, so every remaining statement that defines a
+        # result is an assignment -- including CONST/ADD/MUL forms. The old
+        # is_assignment() gate only matched the copy opcode, so it kept dead
+        # statements such as `unused = 999`.
+        if instr.result is not None:
             # Result is used if its usage count > 0
             if result_usage_count.get(instr.result, 0) > 0:
                 result_tac.add(instr)
@@ -85,10 +89,11 @@ def dead_code_elimination_score(tac: TAC) -> float:
         if instr.arg2 is not None and instr.arg2 in result_usage_count:
             result_usage_count[instr.arg2] += 1
 
-    # Count dead assignments (result usage count is 0)
+    # Count dead assignments (result usage count is 0). Control flow is never
+    # dead code, exactly as in dead_code_elimination above.
     dead_assignments = 0
     for instr in tac.instructions:
-        if instr.is_assignment() and instr.result is not None:
+        if instr.result is not None and instr.opcode not in {Instruction.LABEL, Instruction.GOTO, Instruction.IF}:
             if result_usage_count.get(instr.result, 0) == 0:
                 dead_assignments += 1
 

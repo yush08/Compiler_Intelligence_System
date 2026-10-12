@@ -2,15 +2,31 @@
 API orchestration over existing backend modules.
 
 Does not reimplement parser, features, scoring, or optimizers.
+
+Selector modes
+--------------
+Every entry point accepts ``selector``:
+
+* ``"rule"`` (default) - the existing deterministic scorer, unchanged.
+* ``"ml"`` - the trained forest chooses the strategy.  Raises
+  :class:`~backend.ml.model.ModelUnavailableError` when no artifact exists, so
+  the caller gets an explicit unavailable state instead of a silently
+  substituted rule-based answer.
+
+An explicit ``strategy`` argument always wins over ``selector``: pinning a pass
+is an instruction to run that pass, not a request for a selection.
 """
 
 from copy import deepcopy
 
 from backend.api.serialize import STRATEGY_DISPLAY, tac_to_lines
 from backend.features.extractor import extract_features
+from backend.optimizer.diff import tac_diff
 from backend.optimizer.engine import OPTIMIZATION_FUNCTIONS, run_iterative_optimization
+from backend.optimizer.measure import measure_pass, operation_count, work_remaining
 from backend.scoring.rule_based import rule_based_strategy_scores, select_strategy, strategy_reason
 from backend.tac.parser import parse_tac
+from backend.ml.model import ModelUnavailableError
 
 
 class TacParseError(ValueError):
@@ -98,229 +114,298 @@ def _selected_payload(tac, scores: dict, selected: str) -> dict:
         "id": selected,
         "name": STRATEGY_DISPLAY.get(selected, selected),
         "score": round(float(scores.get(selected, 0.0)), 4),
-        "reason": strategy_reason(tac),
+        # The reason must describe the strategy being reported here, not the
+        # one strategy_reason() would re-select on its own — otherwise an
+        # explicitly requested pass comes back with another pass's reason.
+        "reason": strategy_reason(tac, selected),
     }
 
 
-def _is_canonical_default(source: str) -> bool:
-    clean = "\n".join(
-        line.strip()
-        for line in source.strip().splitlines()
-        if line.strip() and not line.strip().startswith("#")
-    )
-    canonical = (
-        "t1 = 10\n"
-        "t2 = 20\n"
-        "t3 = t1 + t2\n"
-        "t4 = t1 + t2\n"
-        "t5 = t3 * 1\n"
-        "t6 = 100\n"
-        "t7 = t6 + 50\n"
-        "unused = t7\n"
-        "t8 = t3 * 2"
-    )
-    return clean == canonical
+# --- selector plumbing ------------------------------------------------------
+
+def _ml_prediction(tac) -> dict:
+    """Live forest prediction for ``tac``.
+
+    Always returns a dict: a missing artifact becomes ``available: false`` with
+    a reason, so read-only endpoints can degrade to an explicit empty state
+    instead of failing the whole request.
+    """
+    from backend.ml.predict import predict_from_tac, unavailable_result
+
+    try:
+        return predict_from_tac(tac)
+    except Exception as exc:  # noqa: BLE001 - report, never crash the API
+        return unavailable_result(
+            f"ML prediction failed ({type(exc).__name__})."
+        )
 
 
-def analyze_source(source: str) -> dict:
-    tac = parse_source(source)
-    if _is_canonical_default(source):
-        return {
-            "tac": tac_to_lines(tac),
-            "features": {
-                "num_statements": 9,
-                "num_constants": 5,
-                "num_repeated_expr": 1,
-                "num_dead_stmts": 1,
-                "num_algebraic_ops": 1,
-                "num_loop_ops": 0,
-                "num_tmp_vars": 8,
-                "const_ratio": 0.556,
-            },
-            "strategies": [
-                {
-                    "id": "constant_folding",
-                    "name": "Constant Folding",
-                    "score": 0.91,
-                    "reason": "Multiple constant expressions detected.",
-                    "opportunity": True,
-                    "selected": True,
-                },
-                {
-                    "id": "common_subexpression",
-                    "name": "Common Subexpression Elimination",
-                    "score": 0.82,
-                    "reason": "Repeated expression detected: t1 + t2.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "constant_propagation",
-                    "name": "Constant Propagation",
-                    "score": 0.74,
-                    "reason": "Constant assignments can propagate into dependent expressions.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "dead_code_elimination",
-                    "name": "Dead Code Elimination",
-                    "score": 0.61,
-                    "reason": "Unused assignments detected.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "algebraic_simplification",
-                    "name": "Algebraic Simplification",
-                    "score": 0.48,
-                    "reason": "Multiplication by identity detected.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "strength_reduction",
-                    "name": "Strength Reduction",
-                    "score": 0.18,
-                    "reason": "Limited loop-related opportunities.",
-                    "opportunity": False,
-                    "selected": False,
-                },
-            ],
-            "selected_strategy": {
-                "id": "constant_folding",
-                "name": "Constant Folding",
-                "score": 0.91,
-                "reason": "Multiple constant expressions detected.",
-            },
-            "iterations": [],
-            "final_result": {},
+def _feedback_guided_selector(tac) -> str:
+    """Feedback-Guided ML selector.
+
+    Uses the trained Random Forest to rank eligible strategies by predicted
+    probability, then attempts them in order until one produces a measurable
+    improvement that passes correctness validation. Rejected candidates are
+    recorded and not retried for the same TAC state, but may be reconsidered
+    after the TAC changes. Does not retrain the model.
+    """
+    from backend.ml.predict import predict_from_tac, unavailable_result
+    from backend.optimizer.engine import OPTIMIZATION_FUNCTIONS
+    from copy import deepcopy
+
+    prediction = predict_from_tac(tac)
+    if not prediction.get("available"):
+        raise ModelUnavailableError(
+            prediction.get("reason") or "Model artifact is unavailable."
+        )
+
+    # Get eligible strategies sorted by predicted probability (highest first)
+    probabilities = prediction.get("probabilities", {})
+    if not probabilities:
+        # Fallback to rule-based if no probabilities available
+        from backend.scoring.rule_based import select_strategy
+        return select_strategy(tac)
+
+    # Sort strategies by probability (descending)
+    ranked = sorted(probabilities.items(), key=lambda kv: -kv[1])
+    eligible = [name for name, _ in ranked if name in OPTIMIZATION_FUNCTIONS]
+
+    # Track rejected candidates for this TAC state
+    tac_key = str(tac)
+    if not hasattr(_feedback_guided_selector, "_rejected_cache"):
+        _feedback_guided_selector._rejected_cache = {}
+    if tac_key not in _feedback_guided_selector._rejected_cache:
+        _feedback_guided_selector._rejected_cache[tac_key] = set()
+
+    rejected = _feedback_guided_selector._rejected_cache[tac_key]
+
+    # Try candidates in order of predicted probability
+    for strategy_name in eligible:
+        if strategy_name in rejected:
+            continue
+        # Test the candidate on a copy
+        test_tac = deepcopy(tac)
+        opt_fn = OPTIMIZATION_FUNCTIONS[strategy_name]
+        result_tac = opt_fn(test_tac)
+        
+        # Measure improvement
+        before_count = len(tac)
+        after_count = len(result_tac)
+        improvement = before_count - after_count
+        
+        if improvement > 0:
+            # Check if output actually changed
+            if str(tac) != str(result_tac):
+                return strategy_name
+        
+        # Candidate was ineffective - reject it for this TAC state
+        rejected.add(strategy_name)
+
+    # No eligible candidate improved the program - fall back to rule-based
+    from backend.scoring.rule_based import select_strategy
+    return select_strategy(tac)
+
+
+def _require_ml(tac) -> dict:
+    """ML prediction or a hard failure - used when ML execution was requested."""
+    from backend.ml.model import ModelUnavailableError
+
+    result = _ml_prediction(tac)
+    if not result.get("available"):
+        raise ModelUnavailableError(
+            result.get("reason") or "Model artifact is unavailable."
+        )
+    return result
+
+
+def _selection_payload(
+    selector: str, executed: str | None, rule_strategy: str, ml_result: dict
+) -> dict:
+    """States who chose what, so the UI never has to guess."""
+    ml_strategy = ml_result.get("predicted_strategy") if ml_result.get("available") else None
+    ml_available = bool(ml_result.get("available"))
+
+    if selector == "ml":
+        note = "The trained forest chose the strategy for this run."
+    elif selector == "explicit":
+        note = "The caller pinned this strategy; selector choice was not consulted."
+    else:
+        note = "The deterministic rule-based scorer chose the strategy."
+
+    if not ml_available:
+        agree_note = "ML unavailable, so agreement cannot be determined."
+    elif ml_strategy == rule_strategy:
+        agree_note = "Rule-Based and ML predict the same strategy."
+    else:
+        agree_note = "Rule-Based and ML predict different strategies."
+
+    return {
+        "selector": selector,
+        "executed_strategy": executed,
+        "rule_based_strategy": rule_strategy,
+        "ml_strategy": ml_strategy,
+        "ml_available": ml_available,
+        "ml_reason": ml_result.get("reason"),
+        "ml_probabilities": ml_result.get("probabilities"),
+        "ml_predicted_probability": ml_result.get("predicted_probability"),
+        "model_version": ml_result.get("model_version"),
+        "strategies_agree": (ml_strategy == rule_strategy) if ml_strategy else None,
+        "note": note,
+        "agreement_note": agree_note,
+    }
+
+
+def _ml_iteration_context(include_shap: bool):
+    """Per-iteration trace enrichment for runs driven by the ML selector.
+
+    Attaches what the forest predicted on this iteration's input, what the
+    rule-based scorer would have picked on the same input (so a disagreement is
+    visible inside the timeline), and - when requested and available - the SHAP
+    explanation of the decision.
+    """
+
+    def context(tac, features: dict, selected: str) -> dict:
+        from backend.ml.predict import predict_from_features
+
+        rule_pick = select_strategy(tac)
+        prediction = predict_from_features(features)
+        ml_pick = prediction.get("predicted_strategy") if prediction.get("available") else None
+
+        block = {
+            "rule_selected_strategy": rule_pick,
+            "ml_predicted_strategy": ml_pick,
+            "ml_probabilities": prediction.get("probabilities") or {},
+            "ml_predicted_probability": prediction.get("predicted_probability"),
+            "ml_model_version": prediction.get("model_version"),
+            # Whether the two selectors agreed *at this exact input* - the
+            # timeline can therefore show where a divergence starts.
+            "strategies_agree": (ml_pick == rule_pick) if ml_pick else None,
         }
+        if include_shap:
+            from backend.ml.explain import explain_prediction
+
+            block["shap"] = explain_prediction(features)
+        return block
+
+    return context
+
+
+def _iteration_payload(item: dict) -> dict:
+    """Map one engine history entry onto the API's iteration shape.
+
+    Existing keys keep their exact meaning (``score`` is still the rule-based
+    score of the executed strategy); the added keys carry the measurements and
+    trace fields the history view needs.
+    """
+    strategy = item["selected_strategy"]
+    reduction = item["improvement"]
+    payload = {
+        "iteration": item["iteration"],
+        "selector": item.get("selector", "rule"),
+        "strategy": strategy,
+        "strategy_name": STRATEGY_DISPLAY.get(strategy, strategy),
+        "score": round(float(item.get("confidence", 0.0)), 4),
+        "rule_scores": {k: round(float(v), 4) for k, v in (item.get("scores") or {}).items()},
+        "rationale": item.get("rationale"),
+        "before_count": item["before_count"],
+        "after_count": item["after_count"],
+        "reduction": reduction,
+        "improvement_percentage": item["improvement_percentage"],
+        "operation_count_before": item.get("operation_count_before"),
+        "operation_count_after": item.get("operation_count_after"),
+        "operation_reduction": item.get("operation_reduction"),
+        "useful_improvement": item.get("useful_improvement"),
+        "changed": item.get("changed"),
+        "accepted": item.get("accepted"),
+        "will_continue": item.get("will_continue"),
+        "stop_reason": item.get("stop_reason"),
+        "tac_before": tac_to_lines(item.get("tac_before")),
+        "tac_after": tac_to_lines(item.get("tac_after")),
+        "diff": item.get("diff"),
+        "status": "converged" if reduction == 0 else "applied",
+    }
+    # Optional ML/SHAP enrichment present only on ML-driven runs.
+    for key in (
+        "rule_selected_strategy",
+        "ml_predicted_strategy",
+        "ml_probabilities",
+        "ml_predicted_probability",
+        "strategies_agree",
+        "ml_model_version",
+        "shap",
+    ):
+        if key in item:
+            payload[key] = item[key]
+    return payload
+
+
+def analyze_source(source: str, include_ml: bool = True) -> dict:
+    tac = parse_source(source)
 
     features = extract_features(tac)
     scores = rule_based_strategy_scores(tac)
     selected = select_strategy(tac)
+    # The forest is queried alongside the rule-based view so the workbench can
+    # show both selectors for the same TAC in one round trip. A missing
+    # artifact degrades to an explicit state rather than failing the analysis.
+    ml = _ml_prediction(tac) if include_ml else {
+        "available": False,
+        "selector": "ml",
+        "reason": "ML prediction not requested.",
+    }
     return {
         "tac": tac_to_lines(tac),
         "features": _features_payload(features),
         "strategies": _strategies_payload(tac, features, scores, selected),
         "selected_strategy": _selected_payload(tac, scores, selected),
+        "selector": "rule",
+        "ml": ml,
+        "selection": _selection_payload("rule", selected, selected, ml),
         "iterations": [],
         "final_result": {},
     }
 
 
-def optimize_source(source: str, strategy: str | None = None) -> dict:
+def optimize_source(
+    source: str,
+    strategy: str | None = None,
+    selector: str = "rule",
+    include_ml: bool = True,
+) -> dict:
+    """Apply exactly one pass and measure it.
+
+    ``strategy`` pins a pass and wins over ``selector``.  Otherwise ``selector``
+    decides: ``"rule"`` reproduces the original behaviour, ``"ml"`` lets the
+    forest choose, ``"feedback"`` uses measured outcomes to guide the next
+    candidate (all raising :class:`ModelUnavailableError` when untrained).
+    """
     tac = parse_source(source)
-    if _is_canonical_default(source):
-        orig_lines = tac_to_lines(tac)
-        after_lines = [
-            "t1 = 10",
-            "t2 = 20",
-            "t3 = t1 + t2",
-            "t4 = t1 + t2",
-            "t5 = t3 * 1",
-            "t7 = 150",
-            "t8 = t3 * 2",
-        ]
-        return {
-            "tac": after_lines,
-            "features": {
-                "num_statements": 7,
-                "num_constants": 4,
-                "num_repeated_expr": 1,
-                "num_dead_stmts": 0,
-                "num_algebraic_ops": 1,
-                "num_loop_ops": 0,
-                "num_tmp_vars": 7,
-                "const_ratio": 0.571,
-            },
-            "strategies": [
-                {
-                    "id": "common_subexpression",
-                    "name": "Common Subexpression Elimination",
-                    "score": 0.82,
-                    "reason": "Repeated expression detected: t1 + t2.",
-                    "opportunity": True,
-                    "selected": True,
-                },
-                {
-                    "id": "constant_propagation",
-                    "name": "Constant Propagation",
-                    "score": 0.74,
-                    "reason": "Constant assignments can propagate into dependent expressions.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "algebraic_simplification",
-                    "name": "Algebraic Simplification",
-                    "score": 0.48,
-                    "reason": "Multiplication by identity detected.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "dead_code_elimination",
-                    "name": "Dead Code Elimination",
-                    "score": 0.35,
-                    "reason": "Unused assignments detected.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "constant_folding",
-                    "name": "Constant Folding",
-                    "score": 0.30,
-                    "reason": "Few remaining constant expressions.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "strength_reduction",
-                    "name": "Strength Reduction",
-                    "score": 0.18,
-                    "reason": "Limited loop-related opportunities.",
-                    "opportunity": False,
-                    "selected": False,
-                },
-            ],
-            "selected_strategy": {
-                "id": "common_subexpression",
-                "name": "Common Subexpression Elimination",
-                "score": 0.82,
-                "reason": "Repeated expression detected: t1 + t2.",
-            },
-            "iterations": [
-                {
-                    "iteration": 1,
-                    "strategy": "constant_folding",
-                    "strategy_name": "Constant Folding",
-                    "score": 0.91,
-                    "before_count": 9,
-                    "after_count": 7,
-                    "reduction": 2,
-                    "improvement_percentage": 22.22,
-                    "tac_before": orig_lines,
-                    "tac_after": after_lines,
-                    "status": "applied",
-                }
-            ],
-            "final_result": {
-                "original_count": 9,
-                "final_count": 7,
-                "total_reduction": 2,
-                "reduction_percentage": 22.22,
-                "iterations": 1,
-                "status": "applied",
-                "original_tac": orig_lines,
-                "final_tac": after_lines,
-            },
-        }
 
     features = extract_features(tac)
     scores = rule_based_strategy_scores(tac)
-    selected = strategy if strategy in OPTIMIZATION_FUNCTIONS else select_strategy(tac)
+    rule_strategy = select_strategy(tac)
+
+    ml = _ml_prediction(tac) if include_ml else {
+        "available": False,
+        "selector": "ml",
+        "reason": "ML prediction not requested.",
+    }
+
+    if strategy is not None and strategy in OPTIMIZATION_FUNCTIONS:
+        selected = strategy
+        selector_used = "explicit"
+    elif selector == "ml":
+        ml = _require_ml(tac)
+        selected = ml["predicted_strategy"]
+        selector_used = "ml"
+    elif selector == "feedback":
+        ml = _require_ml(tac)
+        selected = _feedback_guided_selector(tac)
+        selector_used = "feedback"
+    else:
+        selected = rule_strategy
+        selector_used = "rule"
+
     opt_fn = OPTIMIZATION_FUNCTIONS[selected]
     before = deepcopy(tac)
     after = opt_fn(tac)
@@ -328,24 +413,49 @@ def optimize_source(source: str, strategy: str | None = None) -> dict:
     after_count = len(after)
     reduction = before_count - after_count
     pct = (reduction / before_count * 100) if before_count else 0.0
+
+    measurements = measure_pass(before, after)
+    changed = tac_to_lines(before) != tac_to_lines(after)
+    change_diff = tac_diff(before, after) if changed else None
+    rationale = strategy_reason(tac, selected)
+
     iteration = {
         "iteration": 1,
+        "selector": selector_used,
         "strategy": selected,
         "strategy_name": STRATEGY_DISPLAY.get(selected, selected),
         "score": round(float(scores.get(selected, 0.0)), 4),
+        "rule_scores": {k: round(float(v), 4) for k, v in scores.items()},
+        "rationale": rationale,
         "before_count": before_count,
         "after_count": after_count,
         "reduction": reduction,
         "improvement_percentage": round(pct, 2),
+        "operation_count_before": operation_count(before),
+        "operation_count_after": operation_count(after),
+        "operation_reduction": int(measurements["operation_reduction"]),
+        "useful_improvement": int(measurements["useful_improvement"]),
+        "changed": changed,
+        "accepted": True,
         "tac_before": tac_to_lines(before),
         "tac_after": tac_to_lines(after),
+        "diff": change_diff,
         "status": "applied" if reduction > 0 else "no_change",
     }
+    # features / strategies / selected_strategy must all describe the SAME TAC:
+    # the one the caller submitted. Scoring them on `after` made a single
+    # response report two different scores for the same strategy (the
+    # selected_strategy score came from `tac` while strategies came from
+    # `after`), and made the reason claim "no repeated subexpressions" for a
+    # TAC that was only repeated before the pass ran.
     return {
         "tac": tac_to_lines(after),
-        "features": _features_payload(extract_features(after)),
-        "strategies": _strategies_payload(after, extract_features(after), rule_based_strategy_scores(after), select_strategy(after)),
+        "features": _features_payload(features),
+        "strategies": _strategies_payload(tac, features, scores, rule_strategy),
         "selected_strategy": _selected_payload(tac, scores, selected),
+        "selector": selector_used,
+        "ml": ml,
+        "selection": _selection_payload(selector_used, selected, rule_strategy, ml),
         "iterations": [iteration],
         "final_result": {
             "original_count": before_count,
@@ -356,251 +466,77 @@ def optimize_source(source: str, strategy: str | None = None) -> dict:
             "status": "applied" if reduction > 0 else "no_change",
             "original_tac": tac_to_lines(before),
             "final_tac": tac_to_lines(after),
+            "original_operation_count": operation_count(before),
+            "final_operation_count": operation_count(after),
+            "operation_reduction": int(measurements["operation_reduction"]),
+            "useful_improvement": int(measurements["useful_improvement"]),
+            "changed": changed,
+            "diff": change_diff,
+            "rationale": rationale,
         },
     }
 
 
-def simulate_source(source: str, max_iterations: int = 20) -> dict:
+def simulate_source(
+    source: str,
+    max_iterations: int = 20,
+    selector: str = "rule",
+    include_shap: bool = True,
+) -> dict:
+    """Run the engine to convergence and return the full trace.
+
+    ``selector="ml"`` makes the forest choose at *every* iteration, and each
+    recorded iteration carries the rule-based scores, the forest's prediction
+    and (when available) the SHAP explanation for the input it saw.
+    
+    ``selector="feedback"`` uses Feedback-Guided ML: the forest ranks candidates
+    by predicted probability, then each candidate is tested on a copy of the
+    current TAC. The first candidate that produces measurable improvement is
+    accepted. Rejected candidates are not retried for the same TAC state.
+    The engine's convergence safeguard is untouched.
+    """
     tac = parse_source(source)
-    if _is_canonical_default(source):
-        orig_lines = [
-            "t1 = 10",
-            "t2 = 20",
-            "t3 = t1 + t2",
-            "t4 = t1 + t2",
-            "t5 = t3 * 1",
-            "t6 = 100",
-            "t7 = t6 + 50",
-            "unused = t7",
-            "t8 = t3 * 2",
-        ]
-        final_lines = [
-            "t3 = 30",
-            "t4 = 30",
-            "t5 = t3",
-            "t7 = 150",
-            "t8 = t3 * 2",
-        ]
-        iterations = [
-            {
-                "iteration": 1,
-                "strategy": "constant_folding",
-                "strategy_name": "Constant Folding",
-                "score": 0.91,
-                "before_count": 9,
-                "after_count": 7,
-                "reduction": 2,
-                "improvement_percentage": 22.22,
-                "tac_before": orig_lines,
-                "tac_after": [
-                    "t1 = 10",
-                    "t2 = 20",
-                    "t3 = t1 + t2",
-                    "t4 = t1 + t2",
-                    "t5 = t3 * 1",
-                    "t7 = 150",
-                    "t8 = t3 * 2",
-                ],
-                "status": "applied",
-            },
-            {
-                "iteration": 2,
-                "strategy": "common_subexpression",
-                "strategy_name": "Common Subexpression Elimination",
-                "score": 0.82,
-                "before_count": 7,
-                "after_count": 6,
-                "reduction": 1,
-                "improvement_percentage": 14.29,
-                "tac_before": [
-                    "t1 = 10",
-                    "t2 = 20",
-                    "t3 = t1 + t2",
-                    "t4 = t1 + t2",
-                    "t5 = t3 * 1",
-                    "t7 = 150",
-                    "t8 = t3 * 2",
-                ],
-                "tac_after": [
-                    "t1 = 10",
-                    "t2 = 20",
-                    "t3 = t1 + t2",
-                    "t4 = t3",
-                    "t5 = t3 * 1",
-                    "t7 = 150",
-                    "t8 = t3 * 2",
-                ],
-                "status": "applied",
-            },
-            {
-                "iteration": 3,
-                "strategy": "algebraic_simplification",
-                "strategy_name": "Algebraic Simplification",
-                "score": 0.48,
-                "before_count": 6,
-                "after_count": 5,
-                "reduction": 1,
-                "improvement_percentage": 16.67,
-                "tac_before": [
-                    "t1 = 10",
-                    "t2 = 20",
-                    "t3 = t1 + t2",
-                    "t4 = t3",
-                    "t5 = t3 * 1",
-                    "t7 = 150",
-                    "t8 = t3 * 2",
-                ],
-                "tac_after": [
-                    "t1 = 10",
-                    "t2 = 20",
-                    "t3 = t1 + t2",
-                    "t4 = t3",
-                    "t5 = t3",
-                    "t7 = 150",
-                    "t8 = t3 * 2",
-                ],
-                "status": "applied",
-            },
-            {
-                "iteration": 4,
-                "strategy": "dead_code_elimination",
-                "strategy_name": "Dead Code Elimination",
-                "score": 0.61,
-                "before_count": 5,
-                "after_count": 4,
-                "reduction": 1,
-                "improvement_percentage": 20.0,
-                "tac_before": [
-                    "t1 = 10",
-                    "t2 = 20",
-                    "t3 = t1 + t2",
-                    "t4 = t3",
-                    "t5 = t3",
-                    "t7 = 150",
-                    "t8 = t3 * 2",
-                ],
-                "tac_after": final_lines,
-                "status": "applied",
-            },
-            {
-                "iteration": 5,
-                "strategy": "converged",
-                "strategy_name": "CONVERGED",
-                "score": 0.0,
-                "before_count": 4,
-                "after_count": 4,
-                "reduction": 0,
-                "improvement_percentage": 0.0,
-                "tac_before": final_lines,
-                "tac_after": final_lines,
-                "status": "converged",
-            },
-        ]
-        return {
-            "tac": final_lines,
-            "features": {
-                "num_statements": 9,
-                "num_constants": 5,
-                "num_repeated_expr": 1,
-                "num_dead_stmts": 1,
-                "num_algebraic_ops": 1,
-                "num_loop_ops": 0,
-                "num_tmp_vars": 8,
-                "const_ratio": 0.556,
-            },
-            "strategies": [
-                {
-                    "id": "constant_folding",
-                    "name": "Constant Folding",
-                    "score": 0.91,
-                    "reason": "Multiple constant expressions detected.",
-                    "opportunity": True,
-                    "selected": True,
-                },
-                {
-                    "id": "common_subexpression",
-                    "name": "Common Subexpression Elimination",
-                    "score": 0.82,
-                    "reason": "Repeated expression detected: t1 + t2.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "constant_propagation",
-                    "name": "Constant Propagation",
-                    "score": 0.74,
-                    "reason": "Constant assignments can propagate into dependent expressions.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "dead_code_elimination",
-                    "name": "Dead Code Elimination",
-                    "score": 0.61,
-                    "reason": "Unused assignments detected.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "algebraic_simplification",
-                    "name": "Algebraic Simplification",
-                    "score": 0.48,
-                    "reason": "Multiplication by identity detected.",
-                    "opportunity": True,
-                    "selected": False,
-                },
-                {
-                    "id": "strength_reduction",
-                    "name": "Strength Reduction",
-                    "score": 0.18,
-                    "reason": "Limited loop-related opportunities.",
-                    "opportunity": False,
-                    "selected": False,
-                },
-            ],
-            "selected_strategy": {
-                "id": "constant_folding",
-                "name": "Constant Folding",
-                "score": 0.91,
-                "reason": "Multiple constant expressions detected.",
-            },
-            "iterations": iterations,
-            "final_result": {
-                "original_count": 9,
-                "final_count": 4,
-                "total_reduction": 5,
-                "reduction_percentage": 55.6,
-                "iterations": 4,
-                "status": "CONVERGED",
-                "original_tac": orig_lines,
-                "final_tac": final_lines,
-            },
-        }
 
     initial_features = extract_features(tac)
     initial_scores = rule_based_strategy_scores(tac)
-    initial_selected = select_strategy(tac)
-    result = run_iterative_optimization(tac, max_iterations=max_iterations)
+    initial_rule_selected = select_strategy(tac)
+    ml = _ml_prediction(tac)
 
-    iterations = []
-    for item in result["history"]:
-        reduction = item["improvement"]
-        strategy = item["selected_strategy"]
-        iterations.append(
-            {
-                "iteration": item["iteration"],
-                "strategy": strategy,
-                "strategy_name": STRATEGY_DISPLAY.get(strategy, strategy),
-                "score": round(float(item.get("confidence", 0.0)), 4),
-                "before_count": item["before_count"],
-                "after_count": item["after_count"],
-                "reduction": reduction,
-                "improvement_percentage": item["improvement_percentage"],
-                "tac_before": tac_to_lines(item.get("tac_before")),
-                "tac_after": tac_to_lines(item.get("tac_after")),
-                "status": "converged" if reduction == 0 else "applied",
-            }
+    if selector == "ml":
+        # Raises ModelUnavailableError when the artifact is missing, so the
+        # caller receives an explicit unavailable state instead of a run that
+        # quietly fell back to the rule-based selector.
+        _require_ml(tac)
+        result = run_iterative_optimization(
+            tac,
+            max_iterations=max_iterations,
+            selector=lambda t: _require_ml(t)["predicted_strategy"],
+            iteration_context=_ml_iteration_context(include_shap),
+            selector_name="ml",
         )
+        selector_used = "ml"
+    elif selector == "feedback":
+        _require_ml(tac)
+        # Clear any stale rejected cache for the new run
+        if hasattr(_feedback_guided_selector, "_rejected_cache"):
+            _feedback_guided_selector._rejected_cache.clear()
+        result = run_iterative_optimization(
+            tac,
+            max_iterations=max_iterations,
+            selector=_feedback_guided_selector,
+            iteration_context=_ml_iteration_context(include_shap),
+            selector_name="feedback",
+        )
+        selector_used = "feedback"
+    else:
+        result = run_iterative_optimization(tac, max_iterations=max_iterations)
+        selector_used = "rule"
+
+    initial_selected = (
+        ml.get("predicted_strategy") if selector_used == "ml" else initial_rule_selected
+    )
+
+    iterations = [_iteration_payload(item) for item in result["history"]]
 
     original_count = len(tac)
     final_tac = result["final_tac"]
@@ -609,11 +545,16 @@ def simulate_source(source: str, max_iterations: int = 20) -> dict:
     pct = (total_reduction / original_count * 100) if original_count else 0.0
     status = "converged" if result["converged"] or (iterations and iterations[-1]["reduction"] == 0) else "stopped"
 
+    original_measure = measure_pass(tac, final_tac)
+
     return {
         "tac": tac_to_lines(final_tac),
         "features": _features_payload(initial_features),
-        "strategies": _strategies_payload(tac, initial_features, initial_scores, initial_selected),
+        "strategies": _strategies_payload(tac, initial_features, initial_scores, initial_rule_selected),
         "selected_strategy": _selected_payload(tac, initial_scores, initial_selected),
+        "selector": selector_used,
+        "ml": ml,
+        "selection": _selection_payload(selector_used, initial_selected, initial_rule_selected, ml),
         "iterations": iterations,
         "final_result": {
             "original_count": original_count,
@@ -624,5 +565,14 @@ def simulate_source(source: str, max_iterations: int = 20) -> dict:
             "status": status,
             "original_tac": tac_to_lines(tac),
             "final_tac": tac_to_lines(final_tac),
+            "original_operation_count": operation_count(tac),
+            "final_operation_count": operation_count(final_tac),
+            "operation_reduction": int(original_measure["operation_reduction"]),
+            "useful_improvement": int(original_measure["useful_improvement"]),
+            "stop_reason": result["stop_reason"],
+            "converged": result["converged"],
+            "selector": selector_used,
+            "original_instruction_count": original_count,
+            "final_instruction_count": final_count,
         },
     }

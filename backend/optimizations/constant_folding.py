@@ -73,31 +73,9 @@ def _fold_instruction(instr: Instruction) -> Instruction | None:
                 except (ValueError, ZeroDivisionError):
                     return instr
 
-    # Case 2: ASSIGN instruction with binary operator in arg1/arg2
-    # e.g., t1 = 5 + 3 represented as ASSIGN with arg1="5" and arg2="3"
-    # This handles the case where the parser creates ASSIGN with op-related args
-    if instr.opcode == Instruction.ASSIGN and instr.arg1 is not None and instr.arg2 is not None:
-        if Instruction._is_constant(instr.arg1) and Instruction._is_constant(instr.arg2):
-            try:
-                val1 = float(instr.arg1)
-                val2 = float(instr.arg2)
-
-                # We need to know the operation - but ASSIGN doesn't store it
-                # For now, assume it's addition if we can detect from context
-                # Or we can try to infer from the original TAC representation
-                # Since we can't reliably determine the op from ASSIGN alone,
-                # only handle the case where both are constants and use addition
-                # (most common case for constant folding demos)
-                result_val = val1 + val2
-
-                if result_val == int(result_val):
-                    result_str = str(int(result_val))
-                else:
-                    result_str = str(result_val)
-
-                return Instruction(Instruction.CONST, result=instr.result, arg1=result_str)
-
-            except (ValueError, ZeroDivisionError):
-                return instr
-
+    # Case 2: a copy (`t = x`) never has two constant operands, and the parser
+    # does not emit ASSIGN with arg2 at all, so this branch was unreachable.
+    # It was also wrong: it computed `val1 + val2` regardless of the real
+    # operator, which would have silently turned `2 * 3` into `5` had anything
+    # ever constructed such an instruction.
     return None

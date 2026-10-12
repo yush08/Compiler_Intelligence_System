@@ -55,7 +55,7 @@ def parse_tac(source: str) -> TAC:
 def _parse_line(line: str) -> Instruction | None:
     """Parse a single line of TAC."""
     # Label: "L1:" or "L1: "
-    label_match = re.match(r"^([A-Za_][A-Za0-9_]*)\s*:", line)
+    label_match = re.match(r"^([A-Za-z_][A-Za-z0-9_]*)\s*:", line)
     if label_match:
         label_name = label_match.group(1)
         rest = line[label_match.end():].strip()
@@ -63,14 +63,14 @@ def _parse_line(line: str) -> Instruction | None:
         return instr
 
     # Goto: "goto L1"
-    goto_match = re.match(r"^goto\s+([A-Za_][A-Za0-9_]*)\s*$", line)
+    goto_match = re.match(r"^goto\s+([A-Za-z_][A-Za-z0-9_]*)\s*$", line)
     if goto_match:
         target = goto_match.group(1)
         return Instruction(Instruction.GOTO, result=target)
 
     # Conditional: "if x > 0 goto L1"
     if_match = re.match(
-        r"^if\s+(.+?)\s+(>=|<=|>|<|==|!=)\s+(.+?)\s+goto\s+([A-Za_][A-Za0-9_]*)\s*$",
+        r"^if\s+(.+?)\s+(>=|<=|>|<|==|!=)\s+(.+?)\s+goto\s+([A-Za-z_][A-Za-z0-9_]*)\s*$",
         line,
     )
     if if_match:
@@ -83,6 +83,7 @@ def _parse_line(line: str) -> Instruction | None:
             result=label,
             arg1=arg1,
             arg2=arg2,
+            relop=op,
         )
 
     # Assignment: "result = arg1 op arg2" or "result = value"
@@ -96,7 +97,7 @@ def _parse_line(line: str) -> Instruction | None:
 
     # Standalone value assignment (e.g., "t = 5")
     # Try: result = value
-    simple_assign = re.match(r"^([A-Za_][A-Za0-9_]*)\s*=\s*(.+)$", line)
+    simple_assign = re.match(r"^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$", line)
     if simple_assign:
         result = simple_assign.group(1)
         value = simple_assign.group(2).strip()
@@ -135,24 +136,30 @@ def _parse_rhs(rhs: str, result: str) -> Instruction:
             result=result,
             arg1=arg1,
             arg2=arg2,
+            relop=op,
         )
 
-    # Binary arithmetic: "a + b", "t1 * 3", "x - y"
+    # Binary arithmetic: "a + b", "t1 * 3", "x - y", "a % b"
     # Try to match: arg1 operator arg2
     arith_match = re.match(
-        r"^(.+?)\s*([+\-*/])\s+(.+)$", rhs
+        r"^(.+?)\s*([+\-*/%])\s+(.+)$", rhs
     )
     if arith_match:
         arg1 = arith_match.group(1).strip()
         op = arith_match.group(2)
         arg2 = arith_match.group(3).strip()
-        return Instruction(Instruction.ADD if op == "+" else
-                           Instruction.SUB if op == "-" else
-                           Instruction.MUL if op == "*" else
-                           Instruction.DIV,
-                           result=result,
-                           arg1=arg1,
-                           arg2=arg2)
+        # The module docstring promises % support and Instruction.is_binary_op()
+        # includes MOD, but the pattern omitted it, so `t1 = a % b` silently
+        # degraded to a copy with arg1="a % b": constant folding could not fold
+        # it and the feature extractor never saw a constant operand.
+        opcode = {
+            "+": Instruction.ADD,
+            "-": Instruction.SUB,
+            "*": Instruction.MUL,
+            "/": Instruction.DIV,
+            "%": Instruction.MOD,
+        }[op]
+        return Instruction(opcode, result=result, arg1=arg1, arg2=arg2)
 
     # Single operand assignment (e.g., "t = a")
     return Instruction(Instruction.ASSIGN, result=result, arg1=rhs.strip())

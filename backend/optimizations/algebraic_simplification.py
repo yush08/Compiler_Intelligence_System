@@ -36,8 +36,11 @@ def algebraic_simplification(tac: TAC) -> TAC:
 
 def _simplify_instruction(instr: Instruction) -> Instruction | None:
     """Simplify a single instruction if possible."""
-    # Only simplify assignments
-    if not instr.is_assignment() or instr.result is None:
+    # Only simplify statements that produce a value. The old is_assignment()
+    # gate required opcode ASSIGN while every rule below inspects
+    # ADD/SUB/MUL/DIV, so no identity could ever be applied. Control flow
+    # carries no algebraic form and falls through to the final return.
+    if instr.result is None:
         return None
 
     # Check for x + 0 → x, 0 + x → x
@@ -77,6 +80,12 @@ def _simplify_instruction(instr: Instruction) -> Instruction | None:
         if Instruction._is_constant(instr.arg2):
             if float(instr.arg2) == 0:
                 # Result is 0 - return a constant assignment
+                return Instruction(Instruction.CONST, result=instr.result, arg1="0")
+        # `0 * x → 0` was listed in the module docstring, counted by
+        # algebraic_simplification_score() and by the feature extractor's
+        # _has_algebraic_opportunity(), but never actually applied here.
+        if Instruction._is_constant(instr.arg1):
+            if float(instr.arg1) == 0:
                 return Instruction(Instruction.CONST, result=instr.result, arg1="0")
 
     return None

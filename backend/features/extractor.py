@@ -5,7 +5,65 @@ extract_features(tac) returns a dictionary of measurable features
 calculated from the actual TAC instructions.
 """
 
+import re
+
 from ..tac.instruction import Instruction, TAC
+
+
+# Opcodes that describe control flow rather than a value computation.
+# Matches the set dead_code_elimination never treats as removable.
+CONTROL_FLOW_OPCODES = frozenset({Instruction.LABEL, Instruction.GOTO, Instruction.IF})
+
+# The parser's temporaries follow the t<digits> convention (t1, t2, ...).
+# Named variables such as `unused`, `a`, `b` are ordinary variables, and
+# numeric literals are not variables at all.
+_TEMPORARY_NAME = re.compile(r"^t\d+$")
+
+# Canonical name AND ORDER of the eight model inputs. This is the single source
+# of truth: the dataset generator, the ML training pipeline, the API and the
+# frontend all derive their feature list from here, so a model can never be
+# trained on one ordering and scored on another.
+FEATURE_KEYS = [
+    "num_statements",
+    "num_constants",
+    "num_repeated_expr",
+    "num_dead_stmts",
+    "num_algebraic_ops",
+    "num_loop_ops",
+    "num_tmp_vars",
+    "const_ratio",
+]
+
+# Human-readable definitions, kept next to the code that computes them so the
+# Dataset Explorer can never describe a feature differently from how it is
+# actually measured.  Note that num_loop_ops counts control-flow instructions
+# (labels/gotos/conditionals), not multiplications.
+FEATURE_DESCRIPTIONS = {
+    "num_statements": "Total number of TAC instructions.",
+    "num_constants": (
+        "Statements with a constant operand: CONST assignments plus binary "
+        "operations that reference a numeric literal."
+    ),
+    "num_repeated_expr": (
+        "Distinct binary expressions that appear more than once - the "
+        "common-subexpression opportunity count."
+    ),
+    "num_dead_stmts": (
+        "Non-control-flow assignments whose result is never read afterwards - "
+        "the dead-code opportunity count. Computed by a static liveness scan, "
+        "not by running the dead-code pass."
+    ),
+    "num_algebraic_ops": (
+        "Statements matching an algebraic identity such as x+0, x*1, x-0, "
+        "x/1 or x*0."
+    ),
+    "num_loop_ops": (
+        "Control-flow instructions (labels, gotos, conditionals) that form "
+        "loops and branches."
+    ),
+    "num_tmp_vars": "Distinct temporary variables named t<number>.",
+    "const_ratio": "num_constants divided by num_statements, in the range [0, 1].",
+}
 
 
 def extract_features(tac: TAC) -> dict:
@@ -61,7 +119,11 @@ def extract_features(tac: TAC) -> dict:
                 expr_counts[sig] = expr_counts.get(sig, 0) + 1
     num_repeated_expr = sum(1 for count in expr_counts.values() if count > 1)
 
-    # num_dead_stmts: count of assignments whose results are never used
+    # num_dead_stmts: count of statements whose results are never used later.
+    # This mirrors dead_code_elimination exactly: usage is counted for every
+    # defined result, and control flow (labels, gotos, conditionals) is never
+    # treated as dead. The old gate used is_assignment(), which only matches
+    # the copy opcode, so straight-line statements were never counted.
     result_usage = {}
     for instr in instructions:
         if instr.result is not None:
@@ -72,38 +134,32 @@ def extract_features(tac: TAC) -> dict:
         if instr.arg2 is not None and instr.arg2 in result_usage:
             result_usage[instr.arg2] += 1
     num_dead_stmts = sum(1 for instr in instructions
-                         if instr.is_assignment() and instr.result is not None
+                         if instr.result is not None
+                         and instr.opcode not in CONTROL_FLOW_OPCODES
                          and result_usage.get(instr.result, 0) == 0)
 
     # num_algebraic_ops: count of algebraic simplification opportunities
-    num_algebraic_ops = 0
-    for instr in instructions:
-        if instr.is_assignment():
-            # Check x+0, x*1, x-0, x/1, x*0
-            if _has_algebraic_opportunity(instr):
-                num_algebraic_ops += 1
+    # (x+0, x*1, x-0, x/1, x*0). The instruction only needs a result var; the
+    # old is_assignment() gate required opcode ASSIGN while every check below
+    # requires ADD/SUB/MUL/DIV, which made this feature always 0.
+    num_algebraic_ops = sum(1 for instr in instructions
+                            if _has_algebraic_opportunity(instr))
 
-    # num_loop_ops: count of loop-related operations (multiplication by counter, etc.)
-    num_loop_ops = 0
-    for instr in instructions:
-        if instr.opcode == Instruction.MUL:
-            if instr.arg2 is not None and Instruction._is_constant(instr.arg2):
-                try:
-                    val = float(instr.arg2)
-                    if val == int(val) and int(val) >= 2:
-                        num_loop_ops += 1
-                except ValueError:
-                    pass
+    # num_loop_ops: control-flow instructions (labels, gotos, conditionals)
+    # that actually form loops and branches. Multiplication by a constant is a
+    # strength-reduction opportunity, not evidence of a loop, so it is not
+    # counted here.
+    num_loop_ops = sum(1 for instr in instructions
+                       if instr.opcode in CONTROL_FLOW_OPCODES)
 
-    # num_tmp_vars: count of unique temporary/variable names
+    # num_tmp_vars: count of distinct temporary variables (t1, t2, ...).
+    # Numeric literals and named variables are excluded; occurrences are not
+    # double counted because the names are collected into a set.
     tmp_vars = set()
     for instr in instructions:
-        if instr.result is not None:
-            tmp_vars.add(instr.result)
-        if instr.arg1 is not None:
-            tmp_vars.add(instr.arg1)
-        if instr.arg2 is not None:
-            tmp_vars.add(instr.arg2)
+        for name in (instr.result, instr.arg1, instr.arg2):
+            if name is not None and _TEMPORARY_NAME.match(name):
+                tmp_vars.add(name)
     num_tmp_vars = len(tmp_vars)
 
     # const_ratio: ratio of constant assignments
@@ -141,7 +197,10 @@ def _expression_signature_for_features(instr: Instruction) -> str | None:
 
 def _has_algebraic_opportunity(instr: Instruction) -> bool:
     """Check if an instruction has an algebraic simplification opportunity."""
-    if not instr.is_assignment() or instr.result is None:
+    # Any value-producing statement can carry an algebraic identity. Requiring
+    # opcode ASSIGN here was contradictory: every rule below inspects
+    # ADD/SUB/MUL/DIV, so the function could never return True.
+    if instr.result is None or instr.opcode in CONTROL_FLOW_OPCODES:
         return False
 
     # Check x + 0 or 0 + x

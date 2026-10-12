@@ -13,6 +13,20 @@ from ..tac.instruction import Instruction
 from ..features.extractor import extract_features
 
 
+# Canonical strategy ids, in the order used to break scoring ties. This is the
+# single source of truth for "which strategy wins a tie": select_strategy(),
+# the dataset generator's best_strategy labelling, and the experiment runner
+# all read it from here instead of each re-declaring their own copy.
+STRATEGY_TIE_ORDER = [
+    "constant_folding",
+    "constant_propagation",
+    "common_subexpression",
+    "dead_code_elimination",
+    "algebraic_simplification",
+    "strength_reduction",
+]
+
+
 def rule_based_strategy_scores(tac) -> dict:
     """
     Calculate rule-based strategy scores for a TAC.
@@ -95,33 +109,31 @@ def select_strategy(tac) -> str:
     if len(best_strategies) == 1:
         return best_strategies[0]
 
-    # Tie-breaking by deterministic order
-    tie_order = [
-        "constant_folding",
-        "constant_propagation",
-        "common_subexpression",
-        "dead_code_elimination",
-        "algebraic_simplification",
-        "strength_reduction",
-    ]
-
-    for name in tie_order:
+    # Tie-breaking by deterministic order (STRATEGY_TIE_ORDER) - never random.
+    for name in STRATEGY_TIE_ORDER:
         if name in best_strategies:
             return name
 
-    return "constant_folding"  # fallback
+    return STRATEGY_TIE_ORDER[0]  # fallback
 
 
-def strategy_reason(tac) -> str:
+def strategy_reason(tac, selected: str | None = None) -> str:
     """
     Generate a human-readable reason for why a strategy was selected.
 
     Returns a brief explanation based on the detected features.
+
+    ``selected`` lets a caller that already knows which strategy it is
+    reporting (for example a pass the user asked for explicitly) get the reason
+    for *that* strategy. Without it the reason is derived from
+    :func:`select_strategy`, which may name a different strategy than the one
+    the caller is reporting.
     """
     features = extract_features(tac)
 
     scores = rule_based_strategy_scores(tac)
-    selected = select_strategy(tac)
+    if selected is None:
+        selected = select_strategy(tac)
 
     reasons = {
         "constant_folding": (

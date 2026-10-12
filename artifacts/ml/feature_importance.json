@@ -1,0 +1,311 @@
+{
+  "generated_at": "2026-10-12T16:59:49+00:00",
+  "model_version": "rf-v1-b4ee0236dea17f02",
+  "native": {
+    "available": true,
+    "features": [
+      {
+        "feature": "num_dead_stmts",
+        "importance": 0.222245,
+        "rank": 1
+      },
+      {
+        "feature": "num_algebraic_ops",
+        "importance": 0.201693,
+        "rank": 2
+      },
+      {
+        "feature": "num_repeated_expr",
+        "importance": 0.169679,
+        "rank": 3
+      },
+      {
+        "feature": "const_ratio",
+        "importance": 0.155815,
+        "rank": 4
+      },
+      {
+        "feature": "num_constants",
+        "importance": 0.113187,
+        "rank": 5
+      },
+      {
+        "feature": "num_statements",
+        "importance": 0.08608,
+        "rank": 6
+      },
+      {
+        "feature": "num_loop_ops",
+        "importance": 0.046316,
+        "rank": 7
+      },
+      {
+        "feature": "num_tmp_vars",
+        "importance": 0.004984,
+        "rank": 8
+      }
+    ]
+  },
+  "shap": {
+    "available": true,
+    "reason": null,
+    "explainer": "TreeExplainer",
+    "computed_over": "training split (124 rows)",
+    "aggregation": "mean(|SHAP value|) per feature, averaged across target classes",
+    "features": [
+      {
+        "feature": "num_dead_stmts",
+        "mean_abs_shap": 0.093642,
+        "rank": 1
+      },
+      {
+        "feature": "num_algebraic_ops",
+        "mean_abs_shap": 0.068845,
+        "rank": 2
+      },
+      {
+        "feature": "num_repeated_expr",
+        "mean_abs_shap": 0.055685,
+        "rank": 3
+      },
+      {
+        "feature": "const_ratio",
+        "mean_abs_shap": 0.046281,
+        "rank": 4
+      },
+      {
+        "feature": "num_constants",
+        "mean_abs_shap": 0.031922,
+        "rank": 5
+      },
+      {
+        "feature": "num_statements",
+        "mean_abs_shap": 0.025787,
+        "rank": 6
+      },
+      {
+        "feature": "num_loop_ops",
+        "mean_abs_shap": 0.016258,
+        "rank": 7
+      },
+      {
+        "feature": "num_tmp_vars",
+        "mean_abs_shap": 0.002201,
+        "rank": 8
+      }
+    ],
+    "per_class": {
+      "algebraic_simplification": [
+        {
+          "feature": "num_algebraic_ops",
+          "mean_abs_shap": 0.169774,
+          "rank": 1
+        },
+        {
+          "feature": "num_dead_stmts",
+          "mean_abs_shap": 0.056063,
+          "rank": 2
+        },
+        {
+          "feature": "const_ratio",
+          "mean_abs_shap": 0.025851,
+          "rank": 3
+        },
+        {
+          "feature": "num_constants",
+          "mean_abs_shap": 0.021964,
+          "rank": 4
+        },
+        {
+          "feature": "num_repeated_expr",
+          "mean_abs_shap": 0.020377,
+          "rank": 5
+        },
+        {
+          "feature": "num_statements",
+          "mean_abs_shap": 0.007453,
+          "rank": 6
+        },
+        {
+          "feature": "num_loop_ops",
+          "mean_abs_shap": 0.006465,
+          "rank": 7
+        },
+        {
+          "feature": "num_tmp_vars",
+          "mean_abs_shap": 0.001863,
+          "rank": 8
+        }
+      ],
+      "common_subexpression": [
+        {
+          "feature": "num_repeated_expr",
+          "mean_abs_shap": 0.139212,
+          "rank": 1
+        },
+        {
+          "feature": "num_constants",
+          "mean_abs_shap": 0.056542,
+          "rank": 2
+        },
+        {
+          "feature": "const_ratio",
+          "mean_abs_shap": 0.0512,
+          "rank": 3
+        },
+        {
+          "feature": "num_statements",
+          "mean_abs_shap": 0.030124,
+          "rank": 4
+        },
+        {
+          "feature": "num_dead_stmts",
+          "mean_abs_shap": 0.020388,
+          "rank": 5
+        },
+        {
+          "feature": "num_algebraic_ops",
+          "mean_abs_shap": 0.012975,
+          "rank": 6
+        },
+        {
+          "feature": "num_loop_ops",
+          "mean_abs_shap": 0.001749,
+          "rank": 7
+        },
+        {
+          "feature": "num_tmp_vars",
+          "mean_abs_shap": 0.000121,
+          "rank": 8
+        }
+      ],
+      "constant_folding": [
+        {
+          "feature": "num_dead_stmts",
+          "mean_abs_shap": 0.111738,
+          "rank": 1
+        },
+        {
+          "feature": "num_algebraic_ops",
+          "mean_abs_shap": 0.095542,
+          "rank": 2
+        },
+        {
+          "feature": "num_repeated_expr",
+          "mean_abs_shap": 0.068913,
+          "rank": 3
+        },
+        {
+          "feature": "num_statements",
+          "mean_abs_shap": 0.051103,
+          "rank": 4
+        },
+        {
+          "feature": "const_ratio",
+          "mean_abs_shap": 0.050802,
+          "rank": 5
+        },
+        {
+          "feature": "num_constants",
+          "mean_abs_shap": 0.022948,
+          "rank": 6
+        },
+        {
+          "feature": "num_loop_ops",
+          "mean_abs_shap": 0.019825,
+          "rank": 7
+        },
+        {
+          "feature": "num_tmp_vars",
+          "mean_abs_shap": 0.003153,
+          "rank": 8
+        }
+      ],
+      "constant_propagation": [
+        {
+          "feature": "const_ratio",
+          "mean_abs_shap": 0.082045,
+          "rank": 1
+        },
+        {
+          "feature": "num_dead_stmts",
+          "mean_abs_shap": 0.052117,
+          "rank": 2
+        },
+        {
+          "feature": "num_algebraic_ops",
+          "mean_abs_shap": 0.050267,
+          "rank": 3
+        },
+        {
+          "feature": "num_loop_ops",
+          "mean_abs_shap": 0.040644,
+          "rank": 4
+        },
+        {
+          "feature": "num_constants",
+          "mean_abs_shap": 0.036469,
+          "rank": 5
+        },
+        {
+          "feature": "num_repeated_expr",
+          "mean_abs_shap": 0.03307,
+          "rank": 6
+        },
+        {
+          "feature": "num_statements",
+          "mean_abs_shap": 0.030864,
+          "rank": 7
+        },
+        {
+          "feature": "num_tmp_vars",
+          "mean_abs_shap": 0.002004,
+          "rank": 8
+        }
+      ],
+      "dead_code_elimination": [
+        {
+          "feature": "num_dead_stmts",
+          "mean_abs_shap": 0.227904,
+          "rank": 1
+        },
+        {
+          "feature": "num_constants",
+          "mean_abs_shap": 0.021687,
+          "rank": 2
+        },
+        {
+          "feature": "const_ratio",
+          "mean_abs_shap": 0.021506,
+          "rank": 3
+        },
+        {
+          "feature": "num_repeated_expr",
+          "mean_abs_shap": 0.016852,
+          "rank": 4
+        },
+        {
+          "feature": "num_algebraic_ops",
+          "mean_abs_shap": 0.015667,
+          "rank": 5
+        },
+        {
+          "feature": "num_loop_ops",
+          "mean_abs_shap": 0.012606,
+          "rank": 6
+        },
+        {
+          "feature": "num_statements",
+          "mean_abs_shap": 0.009388,
+          "rank": 7
+        },
+        {
+          "feature": "num_tmp_vars",
+          "mean_abs_shap": 0.003863,
+          "rank": 8
+        }
+      ]
+    }
+  },
+  "comparison_note": "Native importance is the forest's mean impurity decrease; SHAP importance is mean |contribution| to the model output. They are different measures and may rank features differently."
+}

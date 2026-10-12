@@ -14,50 +14,58 @@ def constant_propagation(tac: TAC) -> TAC:
     """
     Apply constant propagation to the TAC.
 
-    Uses a simple constant environment to track known constants
-    and replaces variable references with their values.
+    Walks the TAC once, forwards, keeping a constant environment that is
+    updated after every instruction. The previous implementation built the
+    environment in a separate pre-pass and then applied it in a second pass,
+    so a *later* redefinition of a variable overwrote the value an *earlier*
+    read had to see: `a = 10 / x = a / a = 99` propagated 99 into `x`.
     """
     if not tac.instructions:
         return tac
 
-    # Build a constant environment by scanning instructions
     const_env = {}  # variable -> constant value
     result_tac = TAC()
 
-    # First pass: build the constant environment
-    for instr in tac.instructions:
-        _update_const_env(instr, const_env)
-
-    # Second pass: propagate constants
     for instr in tac.instructions:
         new_instr = _propagate_instruction(instr, const_env)
-        result_tac.add(new_instr if new_instr else instr)
+        applied = new_instr if new_instr else instr
+        result_tac.add(applied)
+        # Record the definition only after the instruction itself has been
+        # propagated, so an instruction never sees its own new binding.
+        _update_const_env(applied, const_env)
 
     return result_tac
 
 
 def _update_const_env(instr: Instruction, const_env: dict):
-    """Update the constant environment based on an instruction."""
+    """Record what `instr` just defined.
+
+    A definition that is neither a literal nor a copy of a known constant must
+    REMOVE the previous binding. Leaving a stale entry in place made
+    `a = 10 / a = x / b = a` propagate 10 into `b`.
+    """
+    var = instr.result
+    if var is None:
+        return
+
     if instr.opcode == Instruction.CONST:
-        # t = 5  →  const_env[t] = 5
-        var = instr.result
-        val = instr.arg1
         try:
-            const_env[var] = float(val)
-        except ValueError:
-            pass
+            const_env[var] = float(instr.arg1)
+        except (TypeError, ValueError):
+            const_env.pop(var, None)
+        return
 
-    elif instr.is_assignment() and instr.arg2 is None:
-        # t = x  where x is already known as constant
-        if instr.arg1 in const_env:
-            var = instr.result
-            const_env[var] = const_env[instr.arg1]
+    if instr.is_assignment() and instr.arg2 is None:
+        # `t = x`: t inherits x's constant only while x still holds one.
+        source = instr.arg1
+        if source is not None and source in const_env:
+            const_env[var] = const_env[source]
+        else:
+            const_env.pop(var, None)
+        return
 
-    elif instr.is_binary_op() and instr.has_constant_result():
-        # t = 5 + 3  →  we'll handle this in folding, but also track
-        # the result as a constant if both args are already known
-        # Actually, this case is better handled by constant folding first
-        pass
+    # Binary/unary results and control-flow targets are not known constants.
+    const_env.pop(var, None)
 
 
 def _propagate_instruction(instr: Instruction, const_env: dict) -> Instruction | None:
@@ -85,44 +93,65 @@ def _propagate_instruction(instr: Instruction, const_env: dict) -> Instruction |
         new_arg1 = _propagate_arg(instr.arg1, const_env)
         new_arg2 = _propagate_arg(instr.arg2, const_env) if instr.arg2 else None
 
-        # Check if both args are now constants
-        arg1_is_const = new_arg1 is not None and new_arg1 != instr.arg1
-        arg2_is_const = new_arg2 is not None and new_arg2 != instr.arg2
-
-        if arg1_is_const and arg2_is_const:
-            # Both args are constants - constant folding would handle this
-            # But we can still try to simplify
-            try:
-                v1 = float(new_arg1)
-                v2 = float(new_arg2)
-                if instr.opcode == Instruction.ADD:
-                    result_val = v1 + v2
-                elif instr.opcode == Instruction.SUB:
-                    result_val = v1 - v2
-                elif instr.opcode == Instruction.MUL:
-                    result_val = v1 * v2
-                elif instr.opcode == Instruction.DIV:
-                    if v2 == 0:
-                        return instr
-                    result_val = v1 / v2
-                elif instr.opcode == Instruction.MOD:
-                    if v2 == 0:
-                        return instr
-                    result_val = v1 % v2
-
-                if result_val == int(result_val):
-                    result_str = str(int(result_val))
-                else:
-                    result_str = str(result_val)
-                return Instruction(Instruction.CONST, result=instr.result, arg1=result_str)
-            except (ValueError, ZeroDivisionError):
-                pass
+        # Fold once at least one operand was actually REPLACED by a propagated
+        # value and both operands are literals afterwards.
+        #
+        # The old test required *both* arguments to have changed, so `p = c + 3`
+        # (where only `c` was a variable) stayed as `p = 12 + 3` and the pass
+        # never removed any work. Folding unconditionally instead would make
+        # this pass swallow constant folding - `f0 = 5 + 3` must remain CF's
+        # job, which it does because a binary definition never enters the
+        # constant environment unless this pass folded it itself.
+        propagated = (new_arg1 != instr.arg1) or (new_arg2 != instr.arg2)
+        if (
+            propagated
+            and new_arg1 is not None
+            and new_arg2 is not None
+            and Instruction._is_constant(new_arg1)
+            and Instruction._is_constant(new_arg2)
+        ):
+            folded = _fold_operands(instr.opcode, new_arg1, new_arg2)
+            if folded is not None:
+                return Instruction(Instruction.CONST, result=instr.result, arg1=folded)
 
         # Return modified instruction with propagated args
-        new_instr = Instruction(instr.opcode, result=instr.result, arg1=new_arg1, arg2=new_arg2)
-        return new_instr
+        return Instruction(instr.opcode, result=instr.result, arg1=new_arg1, arg2=new_arg2)
 
     return None
+
+
+def _fold_operands(opcode: str, arg1: str, arg2: str) -> str | None:
+    """Evaluate a binary operation on two literals.
+
+    Returns None when the operation is undefined (division or modulo by zero),
+    so the caller leaves the original instruction alone instead of crashing.
+    """
+    try:
+        v1 = float(arg1)
+        v2 = float(arg2)
+
+        if opcode == Instruction.ADD:
+            value = v1 + v2
+        elif opcode == Instruction.SUB:
+            value = v1 - v2
+        elif opcode == Instruction.MUL:
+            value = v1 * v2
+        elif opcode == Instruction.DIV:
+            if v2 == 0:
+                return None
+            value = v1 / v2
+        elif opcode == Instruction.MOD:
+            if v2 == 0:
+                return None
+            value = v1 % v2
+        else:
+            return None
+    except (ValueError, TypeError, OverflowError):
+        return None
+
+    if value == int(value):
+        return str(int(value))
+    return str(value)
 
 
 def _propagate_arg(arg: str, const_env: dict) -> str | None:

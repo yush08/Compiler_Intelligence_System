@@ -1,0 +1,147 @@
+{
+  "model_version": "rf-v1-b4ee0236dea17f02",
+  "generated_at": "2026-10-12T16:59:49+00:00",
+  "splits": {
+    "train": {
+      "labels": [
+        "constant_folding",
+        "constant_propagation",
+        "common_subexpression",
+        "dead_code_elimination",
+        "algebraic_simplification"
+      ],
+      "matrix": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          19,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          14,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          39,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11
+        ]
+      ],
+      "note": "Rows/columns follow the target vocabulary in order."
+    },
+    "validation": {
+      "labels": [
+        "constant_folding",
+        "constant_propagation",
+        "common_subexpression",
+        "dead_code_elimination",
+        "algebraic_simplification"
+      ],
+      "matrix": [
+        [
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4
+        ]
+      ],
+      "note": "Rows/columns follow the target vocabulary in order."
+    },
+    "test": {
+      "labels": [
+        "constant_folding",
+        "constant_propagation",
+        "common_subexpression",
+        "dead_code_elimination",
+        "algebraic_simplification"
+      ],
+      "matrix": [
+        [
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          4,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      ],
+      "note": "Rows/columns follow the target vocabulary in order."
+    }
+  }
+}

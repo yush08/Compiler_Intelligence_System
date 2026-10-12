@@ -32,24 +32,37 @@ class Instruction:
         arg1: str | None = None,
         arg2: str | None = None,
         label: str | None = None,
+        relop: str | None = None,
     ):
         self.opcode = opcode
         self.result = result  # target variable/temp
         self.arg1 = arg1  # first operand
         self.arg2 = arg2  # second operand
         self.label = label  # label for jumps/branches
+        # Relational operator of a conditional ("if a < b goto L"). The parser
+        # used to drop it, so `if i < n goto L2` serialized as `if i n goto L2`
+        # and could not be parsed back.
+        self.relop = relop
 
     def __repr__(self):
         if self.opcode == self.ASSIGN:
             if self.arg2 is None:
                 return f"{self.result} = {self.arg1}"
             return f"{self.result} = {self.arg1} {self.opcode} {self.arg2}"
+        elif self.opcode == self.CONST:
+            # CONST is a plain literal definition; the generic branch below
+            # used to render it as "t4 = 0 const None".
+            return f"{self.result} = {self.arg1}"
+        elif self.opcode == self.UMINUS:
+            return f"{self.result} = -{self.arg1}"
         elif self.opcode == self.LABEL:
             return f"{self.result}:"
         elif self.opcode == self.GOTO:
             return f"goto {self.result}"
         elif self.opcode == self.IF:
-            return f"if {self.arg1} {self.opcode} {self.arg2} goto {self.result}"
+            # `self.opcode` is the literal "if", not the relational operator.
+            relop = self.relop or "?"
+            return f"if {self.arg1} {relop} {self.arg2} goto {self.result}"
         else:
             return f"{self.result} = {self.arg1} {self.opcode} {self.arg2}"
 

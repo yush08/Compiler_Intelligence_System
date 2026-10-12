@@ -1,0 +1,118 @@
+{
+  "model_version": "rf-v1-b4ee0236dea17f02",
+  "generated_at": "2026-10-12T16:59:49+00:00",
+  "splits": {
+    "train": {
+      "constant_folding": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 35,
+        "evaluated": true
+      },
+      "constant_propagation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 19,
+        "evaluated": true
+      },
+      "common_subexpression": {
+        "precision": 0.823529,
+        "recall": 1.0,
+        "f1": 0.903226,
+        "support": 14,
+        "evaluated": true
+      },
+      "dead_code_elimination": {
+        "precision": 1.0,
+        "recall": 0.866667,
+        "f1": 0.928571,
+        "support": 45,
+        "evaluated": true
+      },
+      "algebraic_simplification": {
+        "precision": 0.785714,
+        "recall": 1.0,
+        "f1": 0.88,
+        "support": 11,
+        "evaluated": true
+      }
+    },
+    "validation": {
+      "constant_folding": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 5,
+        "evaluated": true
+      },
+      "constant_propagation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 8,
+        "evaluated": true
+      },
+      "common_subexpression": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2,
+        "evaluated": true
+      },
+      "dead_code_elimination": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 8,
+        "evaluated": true
+      },
+      "algebraic_simplification": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 4,
+        "evaluated": true
+      }
+    },
+    "test": {
+      "constant_folding": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "evaluated": true
+      },
+      "constant_propagation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 4,
+        "evaluated": true
+      },
+      "common_subexpression": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2,
+        "evaluated": true
+      },
+      "dead_code_elimination": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "evaluated": true
+      },
+      "algebraic_simplification": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 8,
+        "evaluated": true
+      }
+    }
+  },
+  "note": "A class with support 0 in a split is flagged evaluated=false and was not meaningfully assessed in that split."
+}

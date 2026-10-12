@@ -1,0 +1,1423 @@
+{
+  "generator": "experiments/generate_dataset.py",
+  "dataset_seed": 20261005,
+  "program_count": 177,
+  "programs": [
+    {
+      "sample_id": "sample-0001",
+      "generation_category": "constant_folding",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "f0 = 26 + 33\nf1 = 82 - 86\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b"
+    },
+    {
+      "sample_id": "sample-0002",
+      "generation_category": "constant_folding",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 10,
+      "replicate": 0,
+      "tac_program": "f0 = 97 * 12\nf1 = 10 - 24\nf2 = 64 - 55\nf3 = 89 - 55\nf4 = 68 - 96\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b"
+    },
+    {
+      "sample_id": "sample-0003",
+      "generation_category": "constant_folding",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 15,
+      "replicate": 0,
+      "tac_program": "f0 = 48 + 27\nf1 = 51 + 84\nf2 = 88 + 63\nf3 = 14 - 19\nf4 = 99 + 83\nf5 = 23 - 28\nf6 = 18 + 38\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b"
+    },
+    {
+      "sample_id": "sample-0004",
+      "generation_category": "constant_folding",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 20,
+      "replicate": 0,
+      "tac_program": "f0 = 70 + 16\nf1 = 5 + 97\nf2 = 19 - 31\nf3 = 51 * 53\nf4 = 89 + 56\nf5 = 58 * 57\nf6 = 77 * 14\nf7 = 93 - 61\nf8 = 83 + 44\nf9 = 12 - 62\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b\npad8 = zin8a + zin8b\npad9 = zin9a + zin9b"
+    },
+    {
+      "sample_id": "sample-0005",
+      "generation_category": "constant_propagation",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "c0 = 25\np0 = c0 + 9\nc1 = 11\np1 = c1 + 4\npad0 = zin0a + zin0b"
+    },
+    {
+      "sample_id": "sample-0006",
+      "generation_category": "constant_propagation",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 10,
+      "replicate": 0,
+      "tac_program": "c0 = 4\np0 = c0 + 3\nc1 = 28\np1 = c1 + 5\nc2 = 10\np2 = c2 + 9\nc3 = 27\np3 = c3 + 7\nc4 = 10\np4 = c4 + 8"
+    },
+    {
+      "sample_id": "sample-0007",
+      "generation_category": "constant_propagation",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 15,
+      "replicate": 0,
+      "tac_program": "c0 = 11\np0 = c0 + 3\nc1 = 28\np1 = c1 + 4\nc2 = 27\np2 = c2 + 8\nc3 = 38\np3 = c3 + 7\nc4 = 12\np4 = c4 + 2\nc5 = 18\np5 = c5 + 8\nc6 = 32\np6 = c6 + 3\npad0 = zin0a + zin0b"
+    },
+    {
+      "sample_id": "sample-0008",
+      "generation_category": "constant_propagation",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 20,
+      "replicate": 0,
+      "tac_program": "c0 = 21\np0 = c0 + 2\nc1 = 20\np1 = c1 + 1\nc2 = 50\np2 = c2 + 6\nc3 = 49\np3 = c3 + 5\nc4 = 18\np4 = c4 + 3\nc5 = 7\np5 = c5 + 5\nc6 = 34\np6 = c6 + 5\nc7 = 34\np7 = c7 + 9\nc8 = 17\np8 = c8 + 6\nc9 = 14\np9 = c9 + 1"
+    },
+    {
+      "sample_id": "sample-0009",
+      "generation_category": "common_subexpression",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "r0a = in0 + in1\nr0b = in0 + in1\nr1a = in2 + in3\nr1b = in2 + in3\npad0 = zin0a + zin0b"
+    },
+    {
+      "sample_id": "sample-0010",
+      "generation_category": "common_subexpression",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 10,
+      "replicate": 0,
+      "tac_program": "r0a = in0 + in1\nr0b = in0 + in1\nr1a = in2 + in3\nr1b = in2 + in3\nr2a = in4 + in5\nr2b = in4 + in5\nr3a = in6 + in7\nr3b = in6 + in7\nr4a = in8 + in9\nr4b = in8 + in9"
+    },
+    {
+      "sample_id": "sample-0011",
+      "generation_category": "common_subexpression",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 15,
+      "replicate": 0,
+      "tac_program": "r0a = in0 + in1\nr0b = in0 + in1\nr1a = in2 + in3\nr1b = in2 + in3\nr2a = in4 + in5\nr2b = in4 + in5\nr3a = in6 + in7\nr3b = in6 + in7\nr4a = in8 + in9\nr4b = in8 + in9\nr5a = in10 + in11\nr5b = in10 + in11\nr6a = in12 + in13\nr6b = in12 + in13\npad0 = zin0a + zin0b"
+    },
+    {
+      "sample_id": "sample-0012",
+      "generation_category": "common_subexpression",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 20,
+      "replicate": 0,
+      "tac_program": "r0a = in0 + in1\nr0b = in0 + in1\nr1a = in2 + in3\nr1b = in2 + in3\nr2a = in4 + in5\nr2b = in4 + in5\nr3a = in6 + in7\nr3b = in6 + in7\nr4a = in8 + in9\nr4b = in8 + in9\nr5a = in10 + in11\nr5b = in10 + in11\nr6a = in12 + in13\nr6b = in12 + in13\nr7a = in14 + in15\nr7b = in14 + in15\nr8a = in16 + in17\nr8b = in16 + in17\nr9a = in18 + in19\nr9b = in18 + in19"
+    },
+    {
+      "sample_id": "sample-0013",
+      "generation_category": "dead_code_elimination",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "unused0 = 22\nused0 = in0\nunused1 = 23\nused1 = in1\npad0 = zin0a + zin0b"
+    },
+    {
+      "sample_id": "sample-0014",
+      "generation_category": "dead_code_elimination",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 10,
+      "replicate": 0,
+      "tac_program": "unused0 = 86\nused0 = in0\nunused1 = 5\nused1 = in1\nunused2 = 24\nused2 = in2\nunused3 = 24\nused3 = in3\nunused4 = 66\nused4 = in4"
+    },
+    {
+      "sample_id": "sample-0015",
+      "generation_category": "dead_code_elimination",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 15,
+      "replicate": 0,
+      "tac_program": "unused0 = 60\nused0 = in0\nunused1 = 38\nused1 = in1\nunused2 = 21\nused2 = in2\nunused3 = 9\nused3 = in3\nunused4 = 25\nused4 = in4\nunused5 = 53\nused5 = in5\nunused6 = 72\nused6 = in6\npad0 = zin0a + zin0b"
+    },
+    {
+      "sample_id": "sample-0016",
+      "generation_category": "dead_code_elimination",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 20,
+      "replicate": 0,
+      "tac_program": "unused0 = 33\nused0 = in0\nunused1 = 61\nused1 = in1\nunused2 = 16\nused2 = in2\nunused3 = 16\nused3 = in3\nunused4 = 28\nused4 = in4\nunused5 = 21\nused5 = in5\nunused6 = 65\nused6 = in6\nunused7 = 84\nused7 = in7\nunused8 = 73\nused8 = in8\nunused9 = 88\nused9 = in9"
+    },
+    {
+      "sample_id": "sample-0017",
+      "generation_category": "algebraic_simplification",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "g0 = in0 + 0\ng1 = in1 * 1\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b"
+    },
+    {
+      "sample_id": "sample-0018",
+      "generation_category": "algebraic_simplification",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 10,
+      "replicate": 0,
+      "tac_program": "g0 = in0 + 0\ng1 = in1 * 1\ng2 = in2 - 0\ng3 = in3 / 1\ng4 = in4 * 0\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b"
+    },
+    {
+      "sample_id": "sample-0019",
+      "generation_category": "algebraic_simplification",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 15,
+      "replicate": 0,
+      "tac_program": "g0 = in0 + 0\ng1 = in1 * 1\ng2 = in2 - 0\ng3 = in3 / 1\ng4 = in4 * 0\ng5 = in5 + 0\ng6 = in6 * 1\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b"
+    },
+    {
+      "sample_id": "sample-0020",
+      "generation_category": "algebraic_simplification",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 20,
+      "replicate": 0,
+      "tac_program": "g0 = in0 + 0\ng1 = in1 * 1\ng2 = in2 - 0\ng3 = in3 / 1\ng4 = in4 * 0\ng5 = in5 + 0\ng6 = in6 * 1\ng7 = in7 - 0\ng8 = in8 / 1\ng9 = in9 * 0\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b\npad8 = zin8a + zin8b\npad9 = zin9a + zin9b"
+    },
+    {
+      "sample_id": "sample-0021",
+      "generation_category": "strength_reduction",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "s0 = in0 * 2\ns1 = in1 * 4\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b"
+    },
+    {
+      "sample_id": "sample-0022",
+      "generation_category": "strength_reduction",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 10,
+      "replicate": 0,
+      "tac_program": "s0 = in0 * 2\ns1 = in1 * 4\ns2 = in2 * 8\ns3 = in3 * 16\ns4 = in4 * 3\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b"
+    },
+    {
+      "sample_id": "sample-0023",
+      "generation_category": "strength_reduction",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 15,
+      "replicate": 0,
+      "tac_program": "s0 = in0 * 2\ns1 = in1 * 4\ns2 = in2 * 8\ns3 = in3 * 16\ns4 = in4 * 3\ns5 = in5 * 5\ns6 = in6 * 10\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b"
+    },
+    {
+      "sample_id": "sample-0024",
+      "generation_category": "strength_reduction",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 20,
+      "replicate": 0,
+      "tac_program": "s0 = in0 * 2\ns1 = in1 * 4\ns2 = in2 * 8\ns3 = in3 * 16\ns4 = in4 * 3\ns5 = in5 * 5\ns6 = in6 * 10\ns7 = in7 * 2\ns8 = in8 * 4\ns9 = in9 * 8\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b\npad8 = zin8a + zin8b\npad9 = zin9a + zin9b"
+    },
+    {
+      "sample_id": "sample-0025",
+      "generation_category": "mixed",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "f0 = 98 * 86\nc0 = 2\np0 = c0 + 7\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b"
+    },
+    {
+      "sample_id": "sample-0026",
+      "generation_category": "mixed",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 10,
+      "replicate": 0,
+      "tac_program": "f0 = 74 * 35\nc0 = 10\np0 = c0 + 5\nr0a = in0 + in1\nr0b = in0 + in1\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b"
+    },
+    {
+      "sample_id": "sample-0027",
+      "generation_category": "mixed",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 15,
+      "replicate": 0,
+      "tac_program": "f0 = 26 * 79\nc0 = 13\np0 = c0 + 5\nr0a = in0 + in1\nr0b = in0 + in1\nunused0 = 81\nused0 = in0\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b"
+    },
+    {
+      "sample_id": "sample-0028",
+      "generation_category": "mixed",
+      "source": "experiments/corpus.generate_program",
+      "requested_size": 20,
+      "replicate": 0,
+      "tac_program": "f0 = 19 - 74\nc0 = 29\np0 = c0 + 1\nr0a = in0 + in1\nr0b = in0 + in1\nunused0 = 49\nused0 = in0\ng0 = in0 + 0\ns0 = in0 * 2\nf0 = 80 - 18\npad0 = zin0a + zin0b\npad1 = zin1a + zin1b\npad2 = zin2a + zin2b\npad3 = zin3a + zin3b\npad4 = zin4a + zin4b\npad5 = zin5a + zin5b\npad6 = zin6a + zin6b\npad7 = zin7a + zin7b\npad8 = zin8a + zin8b\npad9 = zin9a + zin9b"
+    },
+    {
+      "sample_id": "sample-0029",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-constant-folding']",
+      "requested_size": 3,
+      "replicate": 0,
+      "tac_program": "t1 = 5 + 3\nt2 = a + b\nt3 = t1 * 1"
+    },
+    {
+      "sample_id": "sample-0030",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-dead-code']",
+      "requested_size": 2,
+      "replicate": 0,
+      "tac_program": "t1 = a + b\nx = 10"
+    },
+    {
+      "sample_id": "sample-0031",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-cse']",
+      "requested_size": 3,
+      "replicate": 0,
+      "tac_program": "t1 = a + b\nt2 = a + b\nt3 = t1 * 1"
+    },
+    {
+      "sample_id": "sample-0032",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-algebraic']",
+      "requested_size": 3,
+      "replicate": 0,
+      "tac_program": "t1 = 5 + 0\nt2 = 5 * 1\nt3 = 10 - 0"
+    },
+    {
+      "sample_id": "sample-0033",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-mixed']",
+      "requested_size": 6,
+      "replicate": 0,
+      "tac_program": "t1 = 5 + 3\nt2 = a + b\nt3 = a + b\nt4 = t1 * 1\nt5 = 100\nx = t4"
+    },
+    {
+      "sample_id": "sample-0034",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/frontend-constant-folding']",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "a1 = 4\na2 = 6\na3 = a1 + a2\na4 = a3 * 2\na5 = a4 + 10"
+    },
+    {
+      "sample_id": "sample-0035",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/frontend-cse']",
+      "requested_size": 5,
+      "replicate": 0,
+      "tac_program": "x1 = input_a\nx2 = input_b\nx3 = x1 + x2\nx4 = x1 + x2\nx5 = x3 * 4"
+    },
+    {
+      "sample_id": "sample-0036",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/frontend-dead-code']",
+      "requested_size": 6,
+      "replicate": 0,
+      "tac_program": "d1 = 18\nd2 = d1 + 2\nunused_a = 99\nd3 = d2 * 2\nunused_b = d3 + 4\nresult = d3"
+    },
+    {
+      "sample_id": "sample-0037",
+      "generation_category": "repository",
+      "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/test-api-default']",
+      "requested_size": 9,
+      "replicate": 0,
+      "tac_program": "t1 = 10\nt2 = 20\nt3 = t1 + t2\nt4 = t1 + t2\nt5 = t3 * 1\nt6 = 100\nt7 = t6 + 50\nunused = t7\nt8 = t3 * 2"
+    },
+    {
+      "sample_id": "sample-0038",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "f0 = 37 + 82\nf1 = 53 - 21\nf2 = 70 - 84\nf3 = 15 + 1\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0039",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "f0 = 86 + 94\nf1 = 89 * 77\nf2 = 87 * 20\nf3 = 59 * 37\nf4 = 81 - 6\nf5 = 55 - 35\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0040",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "f0 = 89 - 28\nf1 = 22 - 53\nf2 = 70 + 10\nf3 = 40 + 14\nf4 = 53 * 97\nf5 = 92 - 92\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0041",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "f0 = 68 + 17\nf1 = 31 - 87\nf2 = 12 + 48\nf3 = 85 - 70\nf4 = 28 * 99\nf5 = 91 * 11\nf6 = 19 + 99\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + f6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0042",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "f0 = 30 - 77\nf1 = 74 - 40\nf2 = 53 - 21\nacc = f0 + f1\nacc = acc + f2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0043",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "f0 = 22 - 8\nf1 = 29 + 5\nf2 = 92 + 19\nacc = f0 + f1\nacc = acc + f2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0044",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "f0 = 46 - 23\nf1 = 89 - 17\nf2 = 93 * 7\nf3 = 79 + 29\nf4 = 18 - 49\nf5 = 42 * 42\nf6 = 88 + 18\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + f6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0045",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "f0 = 59 + 31\nf1 = 15 + 41\nf2 = 37 + 5\nf3 = 40 - 56\nf4 = 51 - 74\nf5 = 4 + 39\nf6 = 74 - 61\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + f6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0046",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "f0 = 99 + 21\nf1 = 25 - 91\nf2 = 70 * 91\nf3 = 83 - 90\nf4 = 39 - 35\nf5 = 98 * 54\nf6 = 24 + 74\nf7 = 91 * 85\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + f6\nacc = acc + f7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0047",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "f0 = 80 * 35\nf1 = 18 + 1\nf2 = 87 + 95\nf3 = 3 - 10\nf4 = 69 - 77\nf5 = 14 + 3\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0048",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 10,
+      "tac_program": "f0 = 57 + 2\nf1 = 63 * 97\nf2 = 67 - 51\nf3 = 26 * 22\nf4 = 41 * 71\nf5 = 23 * 92\nf6 = 8 + 10\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + f6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0049",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 11,
+      "tac_program": "f0 = 36 * 70\nf1 = 74 * 84\nf2 = 98 + 24\nf3 = 59 + 98\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0050",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 12,
+      "tac_program": "f0 = 79 + 93\nf1 = 22 + 33\nf2 = 6 * 74\nacc = f0 + f1\nacc = acc + f2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0051",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 13,
+      "tac_program": "f0 = 48 + 73\nf1 = 19 - 52\nf2 = 58 * 87\nf3 = 28 - 26\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0052",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 14,
+      "tac_program": "f0 = 59 + 58\nf1 = 16 - 20\nf2 = 21 + 4\nf3 = 12 + 43\nf4 = 61 * 66\nf5 = 23 + 92\nf6 = 96 - 6\nf7 = 72 + 63\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + f6\nacc = acc + f7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0053",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 15,
+      "tac_program": "f0 = 18 - 94\nf1 = 23 * 25\nf2 = 34 - 79\nf3 = 48 + 46\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0054",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 16,
+      "tac_program": "f0 = 45 * 51\nf1 = 21 * 78\nf2 = 57 + 89\nf3 = 12 - 91\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0055",
+      "generation_category": "constant_folding_live",
+      "source": "experiments/generate_dataset.constant_folding_live",
+      "requested_size": 0,
+      "replicate": 17,
+      "tac_program": "f0 = 23 * 70\nf1 = 77 * 83\nf2 = 94 - 40\nacc = f0 + f1\nacc = acc + f2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0056",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "c0 = 25\np0 = c0 + 7\nc1 = 44\np1 = c1 + 9\nc2 = 11\np2 = c2 + 7\nc3 = 8\np3 = c3 + 5\nc4 = 5\np4 = c4 + 6\nc5 = 44\np5 = c5 + 9\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0057",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "c0 = 14\np0 = c0 + 2\nc1 = 40\np1 = c1 + 6\nc2 = 23\np2 = c2 + 9\nacc = p0 + p1\nacc = acc + p2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0058",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "c0 = 21\np0 = c0 + 9\nc1 = 7\np1 = c1 + 2\nc2 = 8\np2 = c2 + 3\nc3 = 45\np3 = c3 + 7\nc4 = 48\np4 = c4 + 6\nc5 = 27\np5 = c5 + 4\nc6 = 39\np6 = c6 + 9\nc7 = 33\np7 = c7 + 2\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + p6\nacc = acc + p7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0059",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "c0 = 31\np0 = c0 + 2\nc1 = 43\np1 = c1 + 2\nc2 = 21\np2 = c2 + 4\nc3 = 42\np3 = c3 + 8\nc4 = 23\np4 = c4 + 5\nc5 = 19\np5 = c5 + 7\nc6 = 17\np6 = c6 + 6\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + p6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0060",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "c0 = 27\np0 = c0 + 4\nc1 = 36\np1 = c1 + 7\nc2 = 36\np2 = c2 + 2\nc3 = 26\np3 = c3 + 6\nc4 = 39\np4 = c4 + 9\nc5 = 43\np5 = c5 + 6\nc6 = 37\np6 = c6 + 3\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + p6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0061",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "c0 = 12\np0 = c0 + 4\nc1 = 8\np1 = c1 + 5\nc2 = 28\np2 = c2 + 2\nc3 = 41\np3 = c3 + 6\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0062",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "c0 = 36\np0 = c0 + 8\nc1 = 36\np1 = c1 + 6\nc2 = 24\np2 = c2 + 2\nc3 = 24\np3 = c3 + 7\nc4 = 48\np4 = c4 + 8\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0063",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "c0 = 10\np0 = c0 + 6\nc1 = 42\np1 = c1 + 5\nc2 = 1\np2 = c2 + 8\nacc = p0 + p1\nacc = acc + p2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0064",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "c0 = 8\np0 = c0 + 4\nc1 = 27\np1 = c1 + 5\nc2 = 33\np2 = c2 + 2\nc3 = 1\np3 = c3 + 4\nc4 = 17\np4 = c4 + 7\nc5 = 47\np5 = c5 + 5\nc6 = 24\np6 = c6 + 4\nc7 = 9\np7 = c7 + 6\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + p6\nacc = acc + p7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0065",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "c0 = 35\np0 = c0 + 2\nc1 = 35\np1 = c1 + 4\nc2 = 23\np2 = c2 + 2\nc3 = 11\np3 = c3 + 3\nc4 = 50\np4 = c4 + 2\nc5 = 42\np5 = c5 + 4\nc6 = 47\np6 = c6 + 2\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + p6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0066",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 10,
+      "tac_program": "c0 = 33\np0 = c0 + 4\nc1 = 15\np1 = c1 + 5\nc2 = 40\np2 = c2 + 6\nc3 = 28\np3 = c3 + 4\nc4 = 18\np4 = c4 + 4\nc5 = 23\np5 = c5 + 8\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0067",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 11,
+      "tac_program": "c0 = 25\np0 = c0 + 9\nc1 = 42\np1 = c1 + 5\nc2 = 31\np2 = c2 + 5\nacc = p0 + p1\nacc = acc + p2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0068",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 12,
+      "tac_program": "c0 = 32\np0 = c0 + 4\nc1 = 27\np1 = c1 + 7\nc2 = 14\np2 = c2 + 5\nc3 = 21\np3 = c3 + 2\nc4 = 17\np4 = c4 + 6\nc5 = 34\np5 = c5 + 4\nc6 = 32\np6 = c6 + 9\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + p6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0069",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 13,
+      "tac_program": "c0 = 4\np0 = c0 + 8\nc1 = 10\np1 = c1 + 6\nc2 = 31\np2 = c2 + 2\nc3 = 48\np3 = c3 + 4\nc4 = 5\np4 = c4 + 8\nc5 = 25\np5 = c5 + 9\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + p5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0070",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 14,
+      "tac_program": "c0 = 45\np0 = c0 + 4\nc1 = 30\np1 = c1 + 2\nc2 = 49\np2 = c2 + 6\nacc = p0 + p1\nacc = acc + p2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0071",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 15,
+      "tac_program": "c0 = 30\np0 = c0 + 6\nc1 = 4\np1 = c1 + 3\nc2 = 15\np2 = c2 + 4\nacc = p0 + p1\nacc = acc + p2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0072",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 16,
+      "tac_program": "c0 = 19\np0 = c0 + 3\nc1 = 4\np1 = c1 + 3\nc2 = 27\np2 = c2 + 9\nc3 = 7\np3 = c3 + 4\nc4 = 7\np4 = c4 + 8\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0073",
+      "generation_category": "constant_propagation_live",
+      "source": "experiments/generate_dataset.constant_propagation_live",
+      "requested_size": 0,
+      "replicate": 17,
+      "tac_program": "c0 = 10\np0 = c0 + 6\nc1 = 41\np1 = c1 + 4\nc2 = 49\np2 = c2 + 5\nc3 = 42\np3 = c3 + 2\nc4 = 27\np4 = c4 + 7\nacc = p0 + p1\nacc = acc + p2\nacc = acc + p3\nacc = acc + p4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0074",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "r0a = zin0_867a * zin0_603b\nr0b = zin0_603b * zin0_867a\nr1a = zin1_999a * zin1_194b\nr1b = zin1_194b * zin1_999a\nr2a = zin2_2a * zin2_913b\nr2b = zin2_913b * zin2_2a\nr3a = zin3_960a * zin3_348b\nr3b = zin3_960a * zin3_348b\nr4a = zin4_902a * zin4_936b\nr4b = zin4_936b * zin4_902a\nr5a = zin5_759a * zin5_462b\nr5b = zin5_462b * zin5_759a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0075",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "r0a = zin0_484a + zin0_598b\nr0b = zin0_484a + zin0_598b\nr1a = zin1_265a + zin1_334b\nr1b = zin1_265a + zin1_334b\nr2a = zin2_9a + zin2_198b\nr2b = zin2_198b + zin2_9a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0076",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "r0a = zin0_304a * zin0_849b\nr0b = zin0_304a * zin0_849b\nr1a = zin1_818a * zin1_124b\nr1b = zin1_124b * zin1_818a\nr2a = zin2_28a * zin2_968b\nr2b = zin2_28a * zin2_968b\nr3a = zin3_532a * zin3_114b\nr3b = zin3_532a * zin3_114b\nr4a = zin4_371a * zin4_757b\nr4b = zin4_757b * zin4_371a\nr5a = zin5_63a * zin5_347b\nr5b = zin5_347b * zin5_63a\nr6a = zin6_47a * zin6_566b\nr6b = zin6_566b * zin6_47a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + r6a\nacc = acc + r6b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0077",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "r0a = zin0_890a * zin0_384b\nr0b = zin0_384b * zin0_890a\nr1a = zin1_722a * zin1_937b\nr1b = zin1_722a * zin1_937b\nr2a = zin2_171a * zin2_510b\nr2b = zin2_171a * zin2_510b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0078",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "r0a = zin0_853a + zin0_216b\nr0b = zin0_853a + zin0_216b\nr1a = zin1_596a + zin1_96b\nr1b = zin1_596a + zin1_96b\nr2a = zin2_216a + zin2_769b\nr2b = zin2_769b + zin2_216a\nr3a = zin3_293a + zin3_207b\nr3b = zin3_207b + zin3_293a\nr4a = zin4_583a + zin4_524b\nr4b = zin4_583a + zin4_524b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0079",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "r0a = zin0_326a * zin0_848b\nr0b = zin0_326a * zin0_848b\nr1a = zin1_870a * zin1_247b\nr1b = zin1_870a * zin1_247b\nr2a = zin2_935a * zin2_334b\nr2b = zin2_334b * zin2_935a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0080",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "r0a = zin0_793a * zin0_866b\nr0b = zin0_866b * zin0_793a\nr1a = zin1_606a * zin1_506b\nr1b = zin1_506b * zin1_606a\nr2a = zin2_665a * zin2_66b\nr2b = zin2_665a * zin2_66b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0081",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "r0a = zin0_768a + zin0_907b\nr0b = zin0_907b + zin0_768a\nr1a = zin1_93a + zin1_986b\nr1b = zin1_93a + zin1_986b\nr2a = zin2_103a + zin2_416b\nr2b = zin2_103a + zin2_416b\nr3a = zin3_867a + zin3_10b\nr3b = zin3_10b + zin3_867a\nr4a = zin4_598a + zin4_939b\nr4b = zin4_939b + zin4_598a\nr5a = zin5_700a + zin5_4b\nr5b = zin5_4b + zin5_700a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0082",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "r0a = zin0_214a + zin0_850b\nr0b = zin0_214a + zin0_850b\nr1a = zin1_454a + zin1_258b\nr1b = zin1_258b + zin1_454a\nr2a = zin2_239a + zin2_273b\nr2b = zin2_273b + zin2_239a\nr3a = zin3_111a + zin3_227b\nr3b = zin3_111a + zin3_227b\nr4a = zin4_734a + zin4_653b\nr4b = zin4_653b + zin4_734a\nr5a = zin5_117a + zin5_866b\nr5b = zin5_866b + zin5_117a\nr6a = zin6_54a + zin6_358b\nr6b = zin6_358b + zin6_54a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + r6a\nacc = acc + r6b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0083",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "r0a = zin0_585a * zin0_201b\nr0b = zin0_585a * zin0_201b\nr1a = zin1_988a * zin1_190b\nr1b = zin1_190b * zin1_988a\nr2a = zin2_63a * zin2_792b\nr2b = zin2_792b * zin2_63a\nr3a = zin3_817a * zin3_829b\nr3b = zin3_817a * zin3_829b\nr4a = zin4_389a * zin4_545b\nr4b = zin4_545b * zin4_389a\nr5a = zin5_272a * zin5_586b\nr5b = zin5_586b * zin5_272a\nr6a = zin6_291a * zin6_575b\nr6b = zin6_291a * zin6_575b\nr7a = zin7_437a * zin7_388b\nr7b = zin7_437a * zin7_388b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + r6a\nacc = acc + r6b\nacc = acc + r7a\nacc = acc + r7b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0084",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 10,
+      "tac_program": "r0a = zin0_119a * zin0_524b\nr0b = zin0_119a * zin0_524b\nr1a = zin1_498a * zin1_374b\nr1b = zin1_498a * zin1_374b\nr2a = zin2_831a * zin2_680b\nr2b = zin2_680b * zin2_831a\nr3a = zin3_55a * zin3_794b\nr3b = zin3_794b * zin3_55a\nr4a = zin4_354a * zin4_437b\nr4b = zin4_437b * zin4_354a\nr5a = zin5_404a * zin5_137b\nr5b = zin5_137b * zin5_404a\nr6a = zin6_151a * zin6_413b\nr6b = zin6_151a * zin6_413b\nr7a = zin7_713a * zin7_745b\nr7b = zin7_713a * zin7_745b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + r6a\nacc = acc + r6b\nacc = acc + r7a\nacc = acc + r7b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0085",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 11,
+      "tac_program": "r0a = zin0_434a + zin0_202b\nr0b = zin0_202b + zin0_434a\nr1a = zin1_969a + zin1_766b\nr1b = zin1_766b + zin1_969a\nr2a = zin2_833a + zin2_279b\nr2b = zin2_833a + zin2_279b\nr3a = zin3_609a + zin3_840b\nr3b = zin3_840b + zin3_609a\nr4a = zin4_228a + zin4_224b\nr4b = zin4_228a + zin4_224b\nr5a = zin5_44a + zin5_26b\nr5b = zin5_44a + zin5_26b\nr6a = zin6_609a + zin6_331b\nr6b = zin6_609a + zin6_331b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + r6a\nacc = acc + r6b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0086",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 12,
+      "tac_program": "r0a = zin0_309a + zin0_795b\nr0b = zin0_795b + zin0_309a\nr1a = zin1_658a + zin1_654b\nr1b = zin1_654b + zin1_658a\nr2a = zin2_284a + zin2_363b\nr2b = zin2_284a + zin2_363b\nr3a = zin3_194a + zin3_521b\nr3b = zin3_194a + zin3_521b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0087",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 13,
+      "tac_program": "r0a = zin0_335a + zin0_166b\nr0b = zin0_335a + zin0_166b\nr1a = zin1_246a + zin1_875b\nr1b = zin1_875b + zin1_246a\nr2a = zin2_968a + zin2_826b\nr2b = zin2_968a + zin2_826b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0088",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 14,
+      "tac_program": "r0a = zin0_8a + zin0_78b\nr0b = zin0_8a + zin0_78b\nr1a = zin1_385a + zin1_154b\nr1b = zin1_385a + zin1_154b\nr2a = zin2_45a + zin2_10b\nr2b = zin2_45a + zin2_10b\nr3a = zin3_155a + zin3_152b\nr3b = zin3_152b + zin3_155a\nr4a = zin4_233a + zin4_182b\nr4b = zin4_233a + zin4_182b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0089",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 15,
+      "tac_program": "r0a = zin0_290a + zin0_511b\nr0b = zin0_290a + zin0_511b\nr1a = zin1_351a + zin1_333b\nr1b = zin1_351a + zin1_333b\nr2a = zin2_634a + zin2_970b\nr2b = zin2_970b + zin2_634a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0090",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 16,
+      "tac_program": "r0a = zin0_539a * zin0_809b\nr0b = zin0_809b * zin0_539a\nr1a = zin1_873a * zin1_21b\nr1b = zin1_873a * zin1_21b\nr2a = zin2_515a * zin2_60b\nr2b = zin2_60b * zin2_515a\nr3a = zin3_480a * zin3_995b\nr3b = zin3_480a * zin3_995b\nr4a = zin4_502a * zin4_846b\nr4b = zin4_502a * zin4_846b\nr5a = zin5_801a * zin5_802b\nr5b = zin5_801a * zin5_802b\nr6a = zin6_638a * zin6_470b\nr6b = zin6_638a * zin6_470b\nr7a = zin7_25a * zin7_791b\nr7b = zin7_791b * zin7_25a\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + r6a\nacc = acc + r6b\nacc = acc + r7a\nacc = acc + r7b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0091",
+      "generation_category": "common_subexpression_live",
+      "source": "experiments/generate_dataset.common_subexpression_live",
+      "requested_size": 0,
+      "replicate": 17,
+      "tac_program": "r0a = zin0_111a * zin0_339b\nr0b = zin0_111a * zin0_339b\nr1a = zin1_922a * zin1_227b\nr1b = zin1_227b * zin1_922a\nr2a = zin2_866a * zin2_244b\nr2b = zin2_866a * zin2_244b\nacc = r0a + r0b\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0092",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "g0 = vin707_0 - 0\ng1 = vin576_1 / 1\ng2 = vin403_2 - 0\ng3 = vin499_3 / 1\ng4 = vin347_4 / 1\ng5 = vin238_5 / 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0093",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "g0 = vin110_0 * 1\ng1 = vin677_1 + 0\ng2 = vin661_2 + 0\ng3 = vin587_3 + 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0094",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "g0 = vin601_0 + 0\ng1 = vin845_1 / 1\ng2 = vin952_2 + 0\ng3 = vin244_3 * 0\ng4 = vin245_4 * 1\ng5 = vin952_5 * 0\ng6 = vin564_6 * 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0095",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "g0 = vin936_0 + 0\ng1 = vin879_1 * 0\ng2 = vin918_2 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0096",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "g0 = vin185_0 * 0\ng1 = vin518_1 / 1\ng2 = vin447_2 + 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0097",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "g0 = vin561_0 - 0\ng1 = vin328_1 + 0\ng2 = vin854_2 - 0\ng3 = vin957_3 / 1\ng4 = vin290_4 / 1\ng5 = vin911_5 + 0\ng6 = vin269_6 / 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0098",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "g0 = vin500_0 * 0\ng1 = vin143_1 * 0\ng2 = vin364_2 / 1\ng3 = vin955_3 / 1\ng4 = vin445_4 / 1\ng5 = vin971_5 * 0\ng6 = vin447_6 * 0\ng7 = vin553_7 * 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + g7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0099",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "g0 = vin473_0 - 0\ng1 = vin108_1 - 0\ng2 = vin586_2 - 0\ng3 = vin135_3 - 0\ng4 = vin841_4 - 0\ng5 = vin154_5 - 0\ng6 = vin410_6 * 1\ng7 = vin116_7 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + g7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0100",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "g0 = vin293_0 * 0\ng1 = vin328_1 / 1\ng2 = vin793_2 / 1\ng3 = vin890_3 * 0\ng4 = vin195_4 + 0\ng5 = vin901_5 / 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0101",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "g0 = vin12_0 / 1\ng1 = vin464_1 * 0\ng2 = vin291_2 + 0\ng3 = vin240_3 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0102",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 10,
+      "tac_program": "g0 = vin520_0 + 0\ng1 = vin165_1 + 0\ng2 = vin102_2 + 0\ng3 = vin766_3 + 0\ng4 = vin561_4 * 1\ng5 = vin997_5 + 0\ng6 = vin410_6 * 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0103",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 11,
+      "tac_program": "g0 = vin885_0 - 0\ng1 = vin127_1 - 0\ng2 = vin79_2 + 0\ng3 = vin322_3 * 0\ng4 = vin91_4 / 1\ng5 = vin69_5 * 1\ng6 = vin219_6 + 0\ng7 = vin163_7 * 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + g7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0104",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 12,
+      "tac_program": "g0 = vin516_0 - 0\ng1 = vin350_1 + 0\ng2 = vin822_2 / 1\ng3 = vin935_3 * 1\ng4 = vin977_4 * 0\ng5 = vin756_5 + 0\ng6 = vin81_6 - 0\ng7 = vin841_7 * 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + g7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0105",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 13,
+      "tac_program": "g0 = vin563_0 * 0\ng1 = vin634_1 * 1\ng2 = vin270_2 * 1\ng3 = vin867_3 - 0\ng4 = vin657_4 - 0\ng5 = vin501_5 * 1\ng6 = vin348_6 / 1\ng7 = vin614_7 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + g7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0106",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 14,
+      "tac_program": "g0 = vin599_0 * 1\ng1 = vin281_1 * 0\ng2 = vin61_2 / 1\ng3 = vin599_3 + 0\ng4 = vin7_4 / 1\ng5 = vin477_5 * 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0107",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 15,
+      "tac_program": "g0 = vin645_0 - 0\ng1 = vin740_1 * 1\ng2 = vin208_2 / 1\ng3 = vin648_3 + 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0108",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 16,
+      "tac_program": "g0 = vin491_0 + 0\ng1 = vin495_1 - 0\ng2 = vin728_2 * 0\ng3 = vin955_3 / 1\ng4 = vin890_4 * 1\ng5 = vin426_5 * 1\ng6 = vin958_6 * 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + g6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0109",
+      "generation_category": "algebraic_simplification_live",
+      "source": "experiments/generate_dataset.algebraic_simplification_live",
+      "requested_size": 0,
+      "replicate": 17,
+      "tac_program": "g0 = vin783_0 * 0\ng1 = vin755_1 - 0\ng2 = vin83_2 * 1\ng3 = vin597_3 + 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0110",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "unused0 = 42\nunused1 = 8\nunused2 = 49\nunused3 = 56\nunused4 = 42\nunused5 = 60\nunused6 = 66\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4\nstored5 = in5\nstored6 = in6"
+    },
+    {
+      "sample_id": "sample-0111",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "unused0 = 38\nunused1 = 63\nunused2 = 41\nunused3 = 5\nunused4 = 99\nunused5 = 91\nunused6 = 8\nunused7 = 17\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4\nstored5 = in5\nstored6 = in6\nstored7 = in7"
+    },
+    {
+      "sample_id": "sample-0112",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "unused0 = 42\nunused1 = 28\nunused2 = 33\nunused3 = 20\nunused4 = 87\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4"
+    },
+    {
+      "sample_id": "sample-0113",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "unused0 = 51\nunused1 = 51\nunused2 = 94\nunused3 = 79\nunused4 = 32\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4"
+    },
+    {
+      "sample_id": "sample-0114",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "unused0 = 54\nunused1 = 4\nunused2 = 9\nunused3 = 39\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3"
+    },
+    {
+      "sample_id": "sample-0115",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "unused0 = 54\nunused1 = 64\nunused2 = 30\nstored0 = in0\nstored1 = in1\nstored2 = in2"
+    },
+    {
+      "sample_id": "sample-0116",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "unused0 = 40\nunused1 = 38\nunused2 = 86\nstored0 = in0\nstored1 = in1\nstored2 = in2"
+    },
+    {
+      "sample_id": "sample-0117",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "unused0 = 54\nunused1 = 34\nunused2 = 86\nunused3 = 71\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3"
+    },
+    {
+      "sample_id": "sample-0118",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "unused0 = 87\nunused1 = 1\nunused2 = 27\nunused3 = 28\nunused4 = 94\nunused5 = 48\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4\nstored5 = in5"
+    },
+    {
+      "sample_id": "sample-0119",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "unused0 = 51\nunused1 = 28\nunused2 = 93\nunused3 = 82\nunused4 = 14\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4"
+    },
+    {
+      "sample_id": "sample-0120",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 10,
+      "tac_program": "unused0 = 40\nunused1 = 1\nunused2 = 80\nunused3 = 65\nunused4 = 51\nunused5 = 97\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4\nstored5 = in5"
+    },
+    {
+      "sample_id": "sample-0121",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 11,
+      "tac_program": "unused0 = 50\nunused1 = 22\nunused2 = 33\nunused3 = 85\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3"
+    },
+    {
+      "sample_id": "sample-0122",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 12,
+      "tac_program": "unused0 = 74\nunused1 = 68\nunused2 = 65\nunused3 = 10\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3"
+    },
+    {
+      "sample_id": "sample-0123",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 13,
+      "tac_program": "unused0 = 44\nunused1 = 5\nunused2 = 64\nunused3 = 93\nunused4 = 47\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4"
+    },
+    {
+      "sample_id": "sample-0124",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 14,
+      "tac_program": "unused0 = 62\nunused1 = 81\nunused2 = 33\nunused3 = 87\nunused4 = 35\nunused5 = 8\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4\nstored5 = in5"
+    },
+    {
+      "sample_id": "sample-0125",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 15,
+      "tac_program": "unused0 = 23\nunused1 = 37\nunused2 = 4\nunused3 = 79\nunused4 = 97\nunused5 = 76\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4\nstored5 = in5"
+    },
+    {
+      "sample_id": "sample-0126",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 16,
+      "tac_program": "unused0 = 21\nunused1 = 24\nunused2 = 99\nunused3 = 33\nunused4 = 80\nunused5 = 37\nstored0 = in0\nstored1 = in1\nstored2 = in2\nstored3 = in3\nstored4 = in4\nstored5 = in5"
+    },
+    {
+      "sample_id": "sample-0127",
+      "generation_category": "dead_code_live",
+      "source": "experiments/generate_dataset.dead_code_live",
+      "requested_size": 0,
+      "replicate": 17,
+      "tac_program": "unused0 = 70\nunused1 = 99\nunused2 = 55\nstored0 = in0\nstored1 = in1\nstored2 = in2"
+    },
+    {
+      "sample_id": "sample-0128",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "s0 = zsrc421_0 * 2\ns1 = zsrc566_1 * 32\ns2 = zsrc933_2 * 7\ns3 = zsrc800_3 * 10\ns4 = zsrc403_4 * 3\ns5 = zsrc925_5 * 16\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0129",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "s0 = zsrc899_0 * 2\ns1 = zsrc350_1 * 8\ns2 = zsrc206_2 * 5\ns3 = zsrc705_3 * 10\ns4 = zsrc119_4 * 4\ns5 = zsrc175_5 * 16\ns6 = zsrc868_6 * 6\ns7 = zsrc727_7 * 7\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + s6\nacc = acc + s7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0130",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "s0 = zsrc640_0 * 8\ns1 = zsrc595_1 * 16\ns2 = zsrc250_2 * 10\ns3 = zsrc134_3 * 16\ns4 = zsrc426_4 * 6\ns5 = zsrc812_5 * 32\ns6 = zsrc563_6 * 8\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + s6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0131",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "s0 = zsrc848_0 * 3\ns1 = zsrc26_1 * 8\ns2 = zsrc26_2 * 16\ns3 = zsrc958_3 * 16\ns4 = zsrc193_4 * 3\ns5 = zsrc724_5 * 8\ns6 = zsrc767_6 * 5\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + s6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0132",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "s0 = zsrc630_0 * 32\ns1 = zsrc352_1 * 4\ns2 = zsrc745_2 * 4\ns3 = zsrc264_3 * 3\ns4 = zsrc235_4 * 32\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0133",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "s0 = zsrc276_0 * 7\ns1 = zsrc816_1 * 3\ns2 = zsrc199_2 * 8\ns3 = zsrc519_3 * 32\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0134",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "s0 = zsrc33_0 * 10\ns1 = zsrc588_1 * 5\ns2 = zsrc139_2 * 16\ns3 = zsrc32_3 * 6\ns4 = zsrc9_4 * 3\ns5 = zsrc558_5 * 32\ns6 = zsrc76_6 * 32\ns7 = zsrc517_7 * 4\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + s6\nacc = acc + s7\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0135",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "s0 = zsrc19_0 * 10\ns1 = zsrc711_1 * 7\ns2 = zsrc700_2 * 5\nacc = s0 + s1\nacc = acc + s2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0136",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "s0 = zsrc18_0 * 6\ns1 = zsrc303_1 * 5\ns2 = zsrc488_2 * 4\ns3 = zsrc612_3 * 6\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0137",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "s0 = zsrc516_0 * 32\ns1 = zsrc38_1 * 10\ns2 = zsrc107_2 * 4\ns3 = zsrc147_3 * 2\ns4 = zsrc672_4 * 2\ns5 = zsrc478_5 * 10\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0138",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 10,
+      "tac_program": "s0 = zsrc387_0 * 7\ns1 = zsrc338_1 * 2\ns2 = zsrc243_2 * 10\ns3 = zsrc191_3 * 8\ns4 = zsrc297_4 * 7\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0139",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 11,
+      "tac_program": "s0 = zsrc515_0 * 2\ns1 = zsrc228_1 * 16\ns2 = zsrc564_2 * 2\nacc = s0 + s1\nacc = acc + s2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0140",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 12,
+      "tac_program": "s0 = zsrc683_0 * 7\ns1 = zsrc923_1 * 8\ns2 = zsrc597_2 * 2\ns3 = zsrc10_3 * 32\ns4 = zsrc854_4 * 5\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0141",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 13,
+      "tac_program": "s0 = zsrc685_0 * 10\ns1 = zsrc796_1 * 2\ns2 = zsrc171_2 * 3\ns3 = zsrc602_3 * 32\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0142",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 14,
+      "tac_program": "s0 = zsrc612_0 * 5\ns1 = zsrc241_1 * 8\ns2 = zsrc938_2 * 8\ns3 = zsrc105_3 * 8\ns4 = zsrc608_4 * 3\ns5 = zsrc275_5 * 8\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0143",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 15,
+      "tac_program": "s0 = zsrc514_0 * 6\ns1 = zsrc676_1 * 6\ns2 = zsrc798_2 * 10\ns3 = zsrc865_3 * 6\ns4 = zsrc385_4 * 7\ns5 = zsrc619_5 * 8\ns6 = zsrc736_6 * 6\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + s6\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0144",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 16,
+      "tac_program": "s0 = zsrc927_0 * 7\ns1 = zsrc348_1 * 5\ns2 = zsrc304_2 * 2\ns3 = zsrc115_3 * 16\ns4 = zsrc775_4 * 2\ns5 = zsrc800_5 * 2\nacc = s0 + s1\nacc = acc + s2\nacc = acc + s3\nacc = acc + s4\nacc = acc + s5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0145",
+      "generation_category": "strength_reduction_live",
+      "source": "experiments/generate_dataset.strength_reduction_live",
+      "requested_size": 0,
+      "replicate": 17,
+      "tac_program": "s0 = zsrc294_0 * 6\ns1 = zsrc851_1 * 2\ns2 = zsrc53_2 * 10\nacc = s0 + s1\nacc = acc + s2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0146",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "n = 13\ni = 0\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w56_2\nacc = acc + w55_0\ni = i + 1\nacc = acc + w31_1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0147",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "n = 6\ni = 0\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + w39_2\nacc = acc + w52_1\nacc = acc + i\ni = i + 1\nacc = acc + w36_0\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0148",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "n = 11\ni = 0\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w58_1\ni = i + 1\nacc = acc + w46_0\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0149",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "n = 4\ni = 3\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w75_1\nacc = acc + w4_0\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0150",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "n = 14\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0151",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "n = 13\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + w10_0\nacc = acc + i\ni = i + 1\nacc = acc + w60_2\nacc = acc + w7_1\nacc = acc + w54_3\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0152",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "n = 8\ni = 2\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0153",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "n = 8\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0154",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "n = 5\ni = 2\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w0_0\ni = i + 1\nacc = acc + w20_1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0155",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "n = 14\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w2_1\nacc = acc + w59_0\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0156",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 10,
+      "tac_program": "n = 2\ni = 3\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\nacc = acc + w70_2\nacc = acc + w42_1\nacc = acc + w98_0\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0157",
+      "generation_category": "loops",
+      "source": "experiments/generate_dataset.loops",
+      "requested_size": 0,
+      "replicate": 11,
+      "tac_program": "n = 8\ni = 3\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w7_0\nacc = acc + w21_1\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
+    },
+    {
+      "sample_id": "sample-0158",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "p0 = h + e\np1 = p0 + a\np2 = p1 + c\np3 = p2 + b\np4 = p3 + f\np5 = p4 + d\np5 = p5 + h"
+    },
+    {
+      "sample_id": "sample-0159",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "p0 = b + f\np1 = p0 + h\np2 = p1 + d\np2 = p2 + b"
+    },
+    {
+      "sample_id": "sample-0160",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "p0 = d + f\np1 = p0 + e\np1 = p1 + d"
+    },
+    {
+      "sample_id": "sample-0161",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "p0 = g + b\np1 = p0 + d\np2 = p1 + h\np3 = p2 + c\np3 = p3 + g"
+    },
+    {
+      "sample_id": "sample-0162",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "p0 = e + c\np1 = p0 + d\np1 = p1 + e"
+    },
+    {
+      "sample_id": "sample-0163",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "p0 = h + a\np1 = p0 + g\np2 = p1 + e\np3 = p2 + f\np3 = p3 + h"
+    },
+    {
+      "sample_id": "sample-0164",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "p0 = e + b\np1 = p0 + c\np1 = p1 + e"
+    },
+    {
+      "sample_id": "sample-0165",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "p0 = h + a\np1 = p0 + e\np2 = p1 + d\np3 = p2 + b\np4 = p3 + g\np5 = p4 + f\np6 = p5 + c\np7 = p6 + h\np7 = p7 + h"
+    },
+    {
+      "sample_id": "sample-0166",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "p0 = g + a\np1 = p0 + e\np2 = p1 + h\np3 = p2 + f\np4 = p3 + d\np5 = p4 + c\np6 = p5 + b\np6 = p6 + g"
+    },
+    {
+      "sample_id": "sample-0167",
+      "generation_category": "no_opportunity",
+      "source": "experiments/generate_dataset.no_opportunity",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "p0 = a + b\np1 = p0 + e\np2 = p1 + d\np3 = p2 + h\np4 = p3 + g\np4 = p4 + a"
+    },
+    {
+      "sample_id": "sample-0168",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "t1 = t0 + in1\nt2 = 16 + 16\nt3 = t2 + t2\nt4 = 47 + 21\nt5 = 27 + 45\nt6 = t5 + in6\nt7 = t6 + in7\nt8 = t7 + t7\nt9 = t8 + 0\nt10 = 48 + 2\nt10 = t10 + t10"
+    },
+    {
+      "sample_id": "sample-0169",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "t1 = t0 * 1\nt2 = t1 * 3\nt3 = t2 + in3\nt4 = t3 + in4\nt5 = t4 * 7\nt6 = t5 * 1\nt6 = t6 + t6"
+    },
+    {
+      "sample_id": "sample-0170",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "t1 = t0 * 1\nt2 = 15 + 45\nt3 = t2 * 1\nt4 = t3 + t3\nt5 = t4 * 6\nt6 = t5 + 0\nt7 = t6 + 0\nt7 = t7 + t7"
+    },
+    {
+      "sample_id": "sample-0171",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "t1 = t0 + t0\nt2 = t1 + 0\nt3 = 10 + 25\nt4 = t3 + in4\nt5 = t4 * 8\nt6 = t5 * 1\nt7 = t6 + t6\nt8 = t7 * 7\nt9 = t8 * 3\nt9 = t9 + t9"
+    },
+    {
+      "sample_id": "sample-0172",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "t1 = t0 * 1\nt2 = t1 * 1\nt3 = 29 + 29\nt4 = t3 * 2\nt5 = t4 + t4\nt6 = t5 * 6\nt7 = t6 + in7\nt7 = t7 + t7"
+    },
+    {
+      "sample_id": "sample-0173",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "t1 = t0 + t0\nt2 = t1 + in2\nt3 = t2 * 3\nt4 = t3 * 5\nt5 = t4 + 0\nt5 = t5 + t5"
+    },
+    {
+      "sample_id": "sample-0174",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "t1 = t0 + in1\nt2 = 40 + 44\nt3 = t2 + t2\nt4 = t3 + 0\nt5 = t4 * 2\nt6 = t5 * 1\nt7 = t6 * 3\nt8 = t7 + t7\nt8 = t8 + t8"
+    },
+    {
+      "sample_id": "sample-0175",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "t1 = t0 * 1\nt2 = t1 + t1\nt3 = t2 + t2\nt4 = t3 + in4\nt5 = t4 + 0\nt6 = t5 * 6\nt7 = t6 + in7\nt8 = t7 + in8\nt9 = t8 + 0\nt10 = t9 + t9\nt10 = t10 + t10"
+    },
+    {
+      "sample_id": "sample-0176",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 8,
+      "tac_program": "t1 = t0 * 1\nt2 = t1 + t1\nt3 = t2 + 0\nt4 = t3 * 8\nt5 = t4 + t4\nt6 = t5 + in6\nt6 = t6 + t6"
+    },
+    {
+      "sample_id": "sample-0177",
+      "generation_category": "temporaries",
+      "source": "experiments/generate_dataset.temporaries",
+      "requested_size": 0,
+      "replicate": 9,
+      "tac_program": "t1 = t0 * 1\nt2 = t1 + in2\nt3 = 7 + 30\nt4 = 4 + 26\nt4 = t4 + t4"
+    }
+  ]
+}

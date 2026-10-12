@@ -1,0 +1,1295 @@
+{
+  "available": true,
+  "split": "test",
+  "evaluated_samples": 26,
+  "target_classes": [
+    "constant_folding",
+    "constant_propagation",
+    "common_subexpression",
+    "dead_code_elimination",
+    "algebraic_simplification"
+  ],
+  "generated_at": "2026-10-12T17:00:27+00:00",
+  "methodology": {
+    "prediction": "Each selector's decision is compared with the stored best_strategy label. The label is never used as either selector's prediction.",
+    "optimization": "Each selector's chosen strategy is applied once to an independent deepcopy of the same original TAC and measured with optimizer.measure.measure_pass.",
+    "separation": "Prediction quality and optimization effectiveness are reported separately and are never combined into one number.",
+    "rule_based_selector": "backend.scoring.rule_based.select_strategy (deterministic argmax + tie order)",
+    "ml_selector": "RandomForestClassifier.predict over the eight features"
+  },
+  "prediction": {
+    "rule_based": {
+      "evaluated_samples": 26,
+      "labels": [
+        "constant_folding",
+        "constant_propagation",
+        "common_subexpression",
+        "dead_code_elimination",
+        "algebraic_simplification"
+      ],
+      "accuracy": 0.846154,
+      "macro_f1": 0.75,
+      "weighted_f1": 0.788462,
+      "per_class": {
+        "constant_folding": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.75,
+          "support": 6,
+          "evaluated": true
+        },
+        "constant_propagation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 4,
+          "evaluated": true
+        },
+        "common_subexpression": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2,
+          "evaluated": true
+        },
+        "dead_code_elimination": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 6,
+          "evaluated": true
+        },
+        "algebraic_simplification": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8,
+          "evaluated": true
+        }
+      },
+      "confusion_matrix": [
+        [
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "constant_folding",
+        "constant_propagation",
+        "common_subexpression",
+        "dead_code_elimination",
+        "algebraic_simplification"
+      ],
+      "confusion_matrix_note": "Rows/columns follow the target vocabulary in order.",
+      "classification_report": {
+        "constant_folding": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1-score": 0.75,
+          "support": 6.0
+        },
+        "constant_propagation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "common_subexpression": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "dead_code_elimination": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 6.0
+        },
+        "algebraic_simplification": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 8.0
+        }
+      },
+      "absent_classes": [],
+      "predicted_outside_vocabulary": [],
+      "true_outside_vocabulary": [],
+      "actual_distribution": {
+        "by_class": {
+          "constant_folding": 6,
+          "constant_propagation": 4,
+          "common_subexpression": 2,
+          "dead_code_elimination": 6,
+          "algebraic_simplification": 8
+        },
+        "outside_vocabulary": {}
+      },
+      "predicted_distribution": {
+        "by_class": {
+          "constant_folding": 10,
+          "constant_propagation": 0,
+          "common_subexpression": 2,
+          "dead_code_elimination": 6,
+          "algebraic_simplification": 8
+        },
+        "outside_vocabulary": {}
+      }
+    },
+    "ml": {
+      "evaluated_samples": 26,
+      "labels": [
+        "constant_folding",
+        "constant_propagation",
+        "common_subexpression",
+        "dead_code_elimination",
+        "algebraic_simplification"
+      ],
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "constant_folding": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 6,
+          "evaluated": true
+        },
+        "constant_propagation": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 4,
+          "evaluated": true
+        },
+        "common_subexpression": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2,
+          "evaluated": true
+        },
+        "dead_code_elimination": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 6,
+          "evaluated": true
+        },
+        "algebraic_simplification": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8,
+          "evaluated": true
+        }
+      },
+      "confusion_matrix": [
+        [
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          4,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "constant_folding",
+        "constant_propagation",
+        "common_subexpression",
+        "dead_code_elimination",
+        "algebraic_simplification"
+      ],
+      "confusion_matrix_note": "Rows/columns follow the target vocabulary in order.",
+      "classification_report": {
+        "constant_folding": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 6.0
+        },
+        "constant_propagation": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 4.0
+        },
+        "common_subexpression": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "dead_code_elimination": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 6.0
+        },
+        "algebraic_simplification": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 8.0
+        }
+      },
+      "absent_classes": [],
+      "predicted_outside_vocabulary": [],
+      "true_outside_vocabulary": [],
+      "actual_distribution": {
+        "by_class": {
+          "constant_folding": 6,
+          "constant_propagation": 4,
+          "common_subexpression": 2,
+          "dead_code_elimination": 6,
+          "algebraic_simplification": 8
+        },
+        "outside_vocabulary": {}
+      },
+      "predicted_distribution": {
+        "by_class": {
+          "constant_folding": 6,
+          "constant_propagation": 4,
+          "common_subexpression": 2,
+          "dead_code_elimination": 6,
+          "algebraic_simplification": 8
+        },
+        "outside_vocabulary": {}
+      }
+    },
+    "same_prediction_count": 22,
+    "disagreement_count": 4
+  },
+  "optimization": {
+    "rule_based": {
+      "programs": 26,
+      "mean_instruction_reduction": 2.076923,
+      "mean_operation_reduction": 4.653846,
+      "mean_useful_improvement": 6.730769,
+      "improved_programs": 18,
+      "improved_pct": 69.2308,
+      "unchanged_programs": 8,
+      "unchanged_pct": 30.7692,
+      "regressed_programs": 0,
+      "failed_programs": 0,
+      "strategy_distribution": {
+        "constant_folding": 10,
+        "algebraic_simplification": 8,
+        "dead_code_elimination": 6,
+        "common_subexpression": 2
+      }
+    },
+    "ml": {
+      "programs": 26,
+      "mean_instruction_reduction": 2.076923,
+      "mean_operation_reduction": 5.730769,
+      "mean_useful_improvement": 7.807692,
+      "improved_programs": 22,
+      "improved_pct": 84.6154,
+      "unchanged_programs": 4,
+      "unchanged_pct": 15.3846,
+      "regressed_programs": 0,
+      "failed_programs": 0,
+      "strategy_distribution": {
+        "algebraic_simplification": 8,
+        "constant_folding": 6,
+        "dead_code_elimination": 6,
+        "constant_propagation": 4,
+        "common_subexpression": 2
+      }
+    },
+    "program_wins": {
+      "rule_based": 0,
+      "ml": 4,
+      "tie": 22
+    },
+    "overall_winner": "ml",
+    "overall_note": "ML achieved a higher mean useful improvement.",
+    "same_strategy_programs": 22,
+    "different_strategy_programs": 4
+  },
+  "per_program": [
+    {
+      "sample_id": "sample-0003",
+      "category": "constant_folding",
+      "ground_truth": "dead_code_elimination",
+      "rule_strategy": "dead_code_elimination",
+      "ml_strategy": "dead_code_elimination",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 15,
+        "original_operation_count": 15,
+        "instruction_reduction": 15,
+        "operation_reduction": 15,
+        "useful_improvement": 30,
+        "reduction_percentage": 100.0
+      },
+      "ml": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 15,
+        "original_operation_count": 15,
+        "instruction_reduction": 15,
+        "operation_reduction": 15,
+        "useful_improvement": 30,
+        "reduction_percentage": 100.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0006",
+      "category": "constant_propagation",
+      "ground_truth": "dead_code_elimination",
+      "rule_strategy": "dead_code_elimination",
+      "ml_strategy": "dead_code_elimination",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 10,
+        "original_operation_count": 5,
+        "instruction_reduction": 5,
+        "operation_reduction": 5,
+        "useful_improvement": 10,
+        "reduction_percentage": 50.0
+      },
+      "ml": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 10,
+        "original_operation_count": 5,
+        "instruction_reduction": 5,
+        "operation_reduction": 5,
+        "useful_improvement": 10,
+        "reduction_percentage": 50.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0024",
+      "category": "strength_reduction",
+      "ground_truth": "dead_code_elimination",
+      "rule_strategy": "dead_code_elimination",
+      "ml_strategy": "dead_code_elimination",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 20,
+        "original_operation_count": 20,
+        "instruction_reduction": 20,
+        "operation_reduction": 20,
+        "useful_improvement": 40,
+        "reduction_percentage": 100.0
+      },
+      "ml": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 20,
+        "original_operation_count": 20,
+        "instruction_reduction": 20,
+        "operation_reduction": 20,
+        "useful_improvement": 40,
+        "reduction_percentage": 100.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0025",
+      "category": "mixed",
+      "ground_truth": "dead_code_elimination",
+      "rule_strategy": "dead_code_elimination",
+      "ml_strategy": "dead_code_elimination",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 5,
+        "original_operation_count": 4,
+        "instruction_reduction": 4,
+        "operation_reduction": 4,
+        "useful_improvement": 8,
+        "reduction_percentage": 80.0
+      },
+      "ml": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 5,
+        "original_operation_count": 4,
+        "instruction_reduction": 4,
+        "operation_reduction": 4,
+        "useful_improvement": 8,
+        "reduction_percentage": 80.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0029",
+      "category": "repository",
+      "ground_truth": "dead_code_elimination",
+      "rule_strategy": "dead_code_elimination",
+      "ml_strategy": "dead_code_elimination",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 3,
+        "original_operation_count": 3,
+        "instruction_reduction": 2,
+        "operation_reduction": 2,
+        "useful_improvement": 4,
+        "reduction_percentage": 66.6667
+      },
+      "ml": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 3,
+        "original_operation_count": 3,
+        "instruction_reduction": 2,
+        "operation_reduction": 2,
+        "useful_improvement": 4,
+        "reduction_percentage": 66.6667
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0039",
+      "category": "constant_folding_live",
+      "ground_truth": "constant_folding",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_folding",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0040",
+      "category": "constant_folding_live",
+      "ground_truth": "constant_folding",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_folding",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0059",
+      "category": "constant_propagation_live",
+      "ground_truth": "constant_propagation",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_propagation",
+      "strategies_match": false,
+      "rule_correct": false,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 21,
+        "original_operation_count": 14,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_propagation",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 21,
+        "original_operation_count": 14,
+        "instruction_reduction": 0,
+        "operation_reduction": 13,
+        "useful_improvement": 13,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "ml"
+    },
+    {
+      "sample_id": "sample-0071",
+      "category": "constant_propagation_live",
+      "ground_truth": "constant_propagation",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_propagation",
+      "strategies_match": false,
+      "rule_correct": false,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 9,
+        "original_operation_count": 6,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_propagation",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 9,
+        "original_operation_count": 6,
+        "instruction_reduction": 0,
+        "operation_reduction": 5,
+        "useful_improvement": 5,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "ml"
+    },
+    {
+      "sample_id": "sample-0073",
+      "category": "constant_propagation_live",
+      "ground_truth": "constant_propagation",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_propagation",
+      "strategies_match": false,
+      "rule_correct": false,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 15,
+        "original_operation_count": 10,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_propagation",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 15,
+        "original_operation_count": 10,
+        "instruction_reduction": 0,
+        "operation_reduction": 9,
+        "useful_improvement": 9,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "ml"
+    },
+    {
+      "sample_id": "sample-0074",
+      "category": "common_subexpression_live",
+      "ground_truth": "common_subexpression",
+      "rule_strategy": "common_subexpression",
+      "ml_strategy": "common_subexpression",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "common_subexpression",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 24,
+        "original_operation_count": 24,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "common_subexpression",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 24,
+        "original_operation_count": 24,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0076",
+      "category": "common_subexpression_live",
+      "ground_truth": "common_subexpression",
+      "rule_strategy": "common_subexpression",
+      "ml_strategy": "common_subexpression",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "common_subexpression",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 28,
+        "original_operation_count": 28,
+        "instruction_reduction": 0,
+        "operation_reduction": 7,
+        "useful_improvement": 7,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "common_subexpression",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 28,
+        "original_operation_count": 28,
+        "instruction_reduction": 0,
+        "operation_reduction": 7,
+        "useful_improvement": 7,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0094",
+      "category": "algebraic_simplification_live",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 14,
+        "original_operation_count": 14,
+        "instruction_reduction": 0,
+        "operation_reduction": 7,
+        "useful_improvement": 7,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 14,
+        "original_operation_count": 14,
+        "instruction_reduction": 0,
+        "operation_reduction": 7,
+        "useful_improvement": 7,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0095",
+      "category": "algebraic_simplification_live",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 6,
+        "original_operation_count": 6,
+        "instruction_reduction": 0,
+        "operation_reduction": 3,
+        "useful_improvement": 3,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 6,
+        "original_operation_count": 6,
+        "instruction_reduction": 0,
+        "operation_reduction": 3,
+        "useful_improvement": 3,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0097",
+      "category": "algebraic_simplification_live",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 14,
+        "original_operation_count": 14,
+        "instruction_reduction": 0,
+        "operation_reduction": 7,
+        "useful_improvement": 7,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 14,
+        "original_operation_count": 14,
+        "instruction_reduction": 0,
+        "operation_reduction": 7,
+        "useful_improvement": 7,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0098",
+      "category": "algebraic_simplification_live",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 8,
+        "useful_improvement": 8,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 8,
+        "useful_improvement": 8,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0103",
+      "category": "algebraic_simplification_live",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 8,
+        "useful_improvement": 8,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 8,
+        "useful_improvement": 8,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0104",
+      "category": "algebraic_simplification_live",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 8,
+        "useful_improvement": 8,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 8,
+        "useful_improvement": 8,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0106",
+      "category": "algebraic_simplification_live",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 6,
+        "useful_improvement": 6,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0114",
+      "category": "dead_code_live",
+      "ground_truth": "dead_code_elimination",
+      "rule_strategy": "dead_code_elimination",
+      "ml_strategy": "dead_code_elimination",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 8,
+        "original_operation_count": 0,
+        "instruction_reduction": 8,
+        "operation_reduction": 0,
+        "useful_improvement": 8,
+        "reduction_percentage": 100.0
+      },
+      "ml": {
+        "strategy": "dead_code_elimination",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 8,
+        "original_operation_count": 0,
+        "instruction_reduction": 8,
+        "operation_reduction": 0,
+        "useful_improvement": 8,
+        "reduction_percentage": 100.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0134",
+      "category": "strength_reduction_live",
+      "ground_truth": "constant_folding",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_folding",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 16,
+        "original_operation_count": 16,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0138",
+      "category": "strength_reduction_live",
+      "ground_truth": "constant_folding",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_folding",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 10,
+        "original_operation_count": 10,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 10,
+        "original_operation_count": 10,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0140",
+      "category": "strength_reduction_live",
+      "ground_truth": "constant_folding",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_folding",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 10,
+        "original_operation_count": 10,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 10,
+        "original_operation_count": 10,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0142",
+      "category": "strength_reduction_live",
+      "ground_truth": "constant_folding",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_folding",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 12,
+        "original_operation_count": 12,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0151",
+      "category": "loops",
+      "ground_truth": "constant_propagation",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "constant_propagation",
+      "strategies_match": false,
+      "rule_correct": false,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 14,
+        "original_operation_count": 6,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "constant_propagation",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 14,
+        "original_operation_count": 6,
+        "instruction_reduction": 0,
+        "operation_reduction": 1,
+        "useful_improvement": 1,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "ml"
+    },
+    {
+      "sample_id": "sample-0175",
+      "category": "temporaries",
+      "ground_truth": "algebraic_simplification",
+      "rule_strategy": "algebraic_simplification",
+      "ml_strategy": "algebraic_simplification",
+      "strategies_match": true,
+      "rule_correct": true,
+      "ml_correct": true,
+      "rule": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 11,
+        "original_operation_count": 11,
+        "instruction_reduction": 0,
+        "operation_reduction": 3,
+        "useful_improvement": 3,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "algebraic_simplification",
+        "applicable": true,
+        "failed": false,
+        "changed": true,
+        "original_instruction_count": 11,
+        "original_operation_count": 11,
+        "instruction_reduction": 0,
+        "operation_reduction": 3,
+        "useful_improvement": 3,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
+    }
+  ],
+  "data_quality": {
+    "parse_failures": [],
+    "feature_mismatches": []
+  },
+  "limitations": [
+    "Only 26 held-out samples were evaluated; every metric is preliminary.",
+    "The forest has no winning examples for strength_reduction, so the ML selector cannot emit it; a Rule-Based prediction of strength_reduction is outside the target vocabulary and counts as an error while being reported explicitly.",
+    "Labels come from the useful_improvement definition in optimizer.measure, so 'correct' means 'matches that definition'.",
+    "strength_reduction is a documented no-op, so runs selecting it record zero improvement by construction."
+  ],
+  "model_version": "rf-v1-b4ee0236dea17f02"
+}
