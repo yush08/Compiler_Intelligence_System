@@ -1,11 +1,12 @@
 {
   "generator": "experiments/generate_dataset.py",
   "dataset_seed": 20261005,
-  "program_count": 177,
+  "program_count": 239,
   "programs": [
     {
       "sample_id": "sample-0001",
       "generation_category": "constant_folding",
+      "family": "corpus:constant_folding",
       "source": "experiments/corpus.generate_program",
       "requested_size": 5,
       "replicate": 0,
@@ -14,6 +15,7 @@
     {
       "sample_id": "sample-0002",
       "generation_category": "constant_folding",
+      "family": "corpus:constant_folding",
       "source": "experiments/corpus.generate_program",
       "requested_size": 10,
       "replicate": 0,
@@ -22,6 +24,7 @@
     {
       "sample_id": "sample-0003",
       "generation_category": "constant_folding",
+      "family": "corpus:constant_folding",
       "source": "experiments/corpus.generate_program",
       "requested_size": 15,
       "replicate": 0,
@@ -30,6 +33,7 @@
     {
       "sample_id": "sample-0004",
       "generation_category": "constant_folding",
+      "family": "corpus:constant_folding",
       "source": "experiments/corpus.generate_program",
       "requested_size": 20,
       "replicate": 0,
@@ -38,6 +42,7 @@
     {
       "sample_id": "sample-0005",
       "generation_category": "constant_propagation",
+      "family": "corpus:constant_propagation",
       "source": "experiments/corpus.generate_program",
       "requested_size": 5,
       "replicate": 0,
@@ -46,6 +51,7 @@
     {
       "sample_id": "sample-0006",
       "generation_category": "constant_propagation",
+      "family": "corpus:constant_propagation",
       "source": "experiments/corpus.generate_program",
       "requested_size": 10,
       "replicate": 0,
@@ -54,6 +60,7 @@
     {
       "sample_id": "sample-0007",
       "generation_category": "constant_propagation",
+      "family": "corpus:constant_propagation",
       "source": "experiments/corpus.generate_program",
       "requested_size": 15,
       "replicate": 0,
@@ -62,6 +69,7 @@
     {
       "sample_id": "sample-0008",
       "generation_category": "constant_propagation",
+      "family": "corpus:constant_propagation",
       "source": "experiments/corpus.generate_program",
       "requested_size": 20,
       "replicate": 0,
@@ -70,6 +78,7 @@
     {
       "sample_id": "sample-0009",
       "generation_category": "common_subexpression",
+      "family": "corpus:common_subexpression",
       "source": "experiments/corpus.generate_program",
       "requested_size": 5,
       "replicate": 0,
@@ -78,6 +87,7 @@
     {
       "sample_id": "sample-0010",
       "generation_category": "common_subexpression",
+      "family": "corpus:common_subexpression",
       "source": "experiments/corpus.generate_program",
       "requested_size": 10,
       "replicate": 0,
@@ -86,6 +96,7 @@
     {
       "sample_id": "sample-0011",
       "generation_category": "common_subexpression",
+      "family": "corpus:common_subexpression",
       "source": "experiments/corpus.generate_program",
       "requested_size": 15,
       "replicate": 0,
@@ -94,6 +105,7 @@
     {
       "sample_id": "sample-0012",
       "generation_category": "common_subexpression",
+      "family": "corpus:common_subexpression",
       "source": "experiments/corpus.generate_program",
       "requested_size": 20,
       "replicate": 0,
@@ -102,6 +114,7 @@
     {
       "sample_id": "sample-0013",
       "generation_category": "dead_code_elimination",
+      "family": "corpus:dead_code_elimination",
       "source": "experiments/corpus.generate_program",
       "requested_size": 5,
       "replicate": 0,
@@ -110,6 +123,7 @@
     {
       "sample_id": "sample-0014",
       "generation_category": "dead_code_elimination",
+      "family": "corpus:dead_code_elimination",
       "source": "experiments/corpus.generate_program",
       "requested_size": 10,
       "replicate": 0,
@@ -118,6 +132,7 @@
     {
       "sample_id": "sample-0015",
       "generation_category": "dead_code_elimination",
+      "family": "corpus:dead_code_elimination",
       "source": "experiments/corpus.generate_program",
       "requested_size": 15,
       "replicate": 0,
@@ -126,6 +141,7 @@
     {
       "sample_id": "sample-0016",
       "generation_category": "dead_code_elimination",
+      "family": "corpus:dead_code_elimination",
       "source": "experiments/corpus.generate_program",
       "requested_size": 20,
       "replicate": 0,
@@ -134,6 +150,7 @@
     {
       "sample_id": "sample-0017",
       "generation_category": "algebraic_simplification",
+      "family": "corpus:algebraic_simplification",
       "source": "experiments/corpus.generate_program",
       "requested_size": 5,
       "replicate": 0,
@@ -142,6 +159,7 @@
     {
       "sample_id": "sample-0018",
       "generation_category": "algebraic_simplification",
+      "family": "corpus:algebraic_simplification",
       "source": "experiments/corpus.generate_program",
       "requested_size": 10,
       "replicate": 0,
@@ -150,6 +168,7 @@
     {
       "sample_id": "sample-0019",
       "generation_category": "algebraic_simplification",
+      "family": "corpus:algebraic_simplification",
       "source": "experiments/corpus.generate_program",
       "requested_size": 15,
       "replicate": 0,
@@ -158,6 +177,7 @@
     {
       "sample_id": "sample-0020",
       "generation_category": "algebraic_simplification",
+      "family": "corpus:algebraic_simplification",
       "source": "experiments/corpus.generate_program",
       "requested_size": 20,
       "replicate": 0,
@@ -166,6 +186,7 @@
     {
       "sample_id": "sample-0021",
       "generation_category": "strength_reduction",
+      "family": "corpus:strength_reduction",
       "source": "experiments/corpus.generate_program",
       "requested_size": 5,
       "replicate": 0,
@@ -174,6 +195,7 @@
     {
       "sample_id": "sample-0022",
       "generation_category": "strength_reduction",
+      "family": "corpus:strength_reduction",
       "source": "experiments/corpus.generate_program",
       "requested_size": 10,
       "replicate": 0,
@@ -182,6 +204,7 @@
     {
       "sample_id": "sample-0023",
       "generation_category": "strength_reduction",
+      "family": "corpus:strength_reduction",
       "source": "experiments/corpus.generate_program",
       "requested_size": 15,
       "replicate": 0,
@@ -190,6 +213,7 @@
     {
       "sample_id": "sample-0024",
       "generation_category": "strength_reduction",
+      "family": "corpus:strength_reduction",
       "source": "experiments/corpus.generate_program",
       "requested_size": 20,
       "replicate": 0,
@@ -198,6 +222,7 @@
     {
       "sample_id": "sample-0025",
       "generation_category": "mixed",
+      "family": "corpus:mixed",
       "source": "experiments/corpus.generate_program",
       "requested_size": 5,
       "replicate": 0,
@@ -206,6 +231,7 @@
     {
       "sample_id": "sample-0026",
       "generation_category": "mixed",
+      "family": "corpus:mixed",
       "source": "experiments/corpus.generate_program",
       "requested_size": 10,
       "replicate": 0,
@@ -214,6 +240,7 @@
     {
       "sample_id": "sample-0027",
       "generation_category": "mixed",
+      "family": "corpus:mixed",
       "source": "experiments/corpus.generate_program",
       "requested_size": 15,
       "replicate": 0,
@@ -222,6 +249,7 @@
     {
       "sample_id": "sample-0028",
       "generation_category": "mixed",
+      "family": "corpus:mixed",
       "source": "experiments/corpus.generate_program",
       "requested_size": 20,
       "replicate": 0,
@@ -230,6 +258,7 @@
     {
       "sample_id": "sample-0029",
       "generation_category": "repository",
+      "family": "repo:parser",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-constant-folding']",
       "requested_size": 3,
       "replicate": 0,
@@ -238,6 +267,7 @@
     {
       "sample_id": "sample-0030",
       "generation_category": "repository",
+      "family": "repo:parser",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-dead-code']",
       "requested_size": 2,
       "replicate": 0,
@@ -246,6 +276,7 @@
     {
       "sample_id": "sample-0031",
       "generation_category": "repository",
+      "family": "repo:parser",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-cse']",
       "requested_size": 3,
       "replicate": 0,
@@ -254,6 +285,7 @@
     {
       "sample_id": "sample-0032",
       "generation_category": "repository",
+      "family": "repo:parser",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-algebraic']",
       "requested_size": 3,
       "replicate": 0,
@@ -262,6 +294,7 @@
     {
       "sample_id": "sample-0033",
       "generation_category": "repository",
+      "family": "repo:parser",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/parser-mixed']",
       "requested_size": 6,
       "replicate": 0,
@@ -270,6 +303,7 @@
     {
       "sample_id": "sample-0034",
       "generation_category": "repository",
+      "family": "repo:frontend",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/frontend-constant-folding']",
       "requested_size": 5,
       "replicate": 0,
@@ -278,6 +312,7 @@
     {
       "sample_id": "sample-0035",
       "generation_category": "repository",
+      "family": "repo:frontend",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/frontend-cse']",
       "requested_size": 5,
       "replicate": 0,
@@ -286,6 +321,7 @@
     {
       "sample_id": "sample-0036",
       "generation_category": "repository",
+      "family": "repo:frontend",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/frontend-dead-code']",
       "requested_size": 6,
       "replicate": 0,
@@ -294,6 +330,7 @@
     {
       "sample_id": "sample-0037",
       "generation_category": "repository",
+      "family": "repo:test-api",
       "source": "experiments/corpus.REPOSITORY_PROGRAMS['repo/test-api-default']",
       "requested_size": 9,
       "replicate": 0,
@@ -302,6 +339,7 @@
     {
       "sample_id": "sample-0038",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 0,
@@ -310,6 +348,7 @@
     {
       "sample_id": "sample-0039",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 1,
@@ -318,6 +357,7 @@
     {
       "sample_id": "sample-0040",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 2,
@@ -326,6 +366,7 @@
     {
       "sample_id": "sample-0041",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 3,
@@ -334,6 +375,7 @@
     {
       "sample_id": "sample-0042",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 4,
@@ -342,6 +384,7 @@
     {
       "sample_id": "sample-0043",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 5,
@@ -350,6 +393,7 @@
     {
       "sample_id": "sample-0044",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 6,
@@ -358,6 +402,7 @@
     {
       "sample_id": "sample-0045",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 7,
@@ -366,6 +411,7 @@
     {
       "sample_id": "sample-0046",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 8,
@@ -374,6 +420,7 @@
     {
       "sample_id": "sample-0047",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 9,
@@ -382,6 +429,7 @@
     {
       "sample_id": "sample-0048",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 10,
@@ -390,6 +438,7 @@
     {
       "sample_id": "sample-0049",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 11,
@@ -398,6 +447,7 @@
     {
       "sample_id": "sample-0050",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 12,
@@ -406,6 +456,7 @@
     {
       "sample_id": "sample-0051",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 13,
@@ -414,6 +465,7 @@
     {
       "sample_id": "sample-0052",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 14,
@@ -422,6 +474,7 @@
     {
       "sample_id": "sample-0053",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 15,
@@ -430,6 +483,7 @@
     {
       "sample_id": "sample-0054",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 16,
@@ -438,6 +492,7 @@
     {
       "sample_id": "sample-0055",
       "generation_category": "constant_folding_live",
+      "family": "constant_folding_live",
       "source": "experiments/generate_dataset.constant_folding_live",
       "requested_size": 0,
       "replicate": 17,
@@ -446,6 +501,7 @@
     {
       "sample_id": "sample-0056",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 0,
@@ -454,6 +510,7 @@
     {
       "sample_id": "sample-0057",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 1,
@@ -462,6 +519,7 @@
     {
       "sample_id": "sample-0058",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 2,
@@ -470,6 +528,7 @@
     {
       "sample_id": "sample-0059",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 3,
@@ -478,6 +537,7 @@
     {
       "sample_id": "sample-0060",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 4,
@@ -486,6 +546,7 @@
     {
       "sample_id": "sample-0061",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 5,
@@ -494,6 +555,7 @@
     {
       "sample_id": "sample-0062",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 6,
@@ -502,6 +564,7 @@
     {
       "sample_id": "sample-0063",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 7,
@@ -510,6 +573,7 @@
     {
       "sample_id": "sample-0064",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 8,
@@ -518,6 +582,7 @@
     {
       "sample_id": "sample-0065",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 9,
@@ -526,6 +591,7 @@
     {
       "sample_id": "sample-0066",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 10,
@@ -534,6 +600,7 @@
     {
       "sample_id": "sample-0067",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 11,
@@ -542,6 +609,7 @@
     {
       "sample_id": "sample-0068",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 12,
@@ -550,6 +618,7 @@
     {
       "sample_id": "sample-0069",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 13,
@@ -558,6 +627,7 @@
     {
       "sample_id": "sample-0070",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 14,
@@ -566,6 +636,7 @@
     {
       "sample_id": "sample-0071",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 15,
@@ -574,6 +645,7 @@
     {
       "sample_id": "sample-0072",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 16,
@@ -582,6 +654,7 @@
     {
       "sample_id": "sample-0073",
       "generation_category": "constant_propagation_live",
+      "family": "constant_propagation_live",
       "source": "experiments/generate_dataset.constant_propagation_live",
       "requested_size": 0,
       "replicate": 17,
@@ -590,6 +663,7 @@
     {
       "sample_id": "sample-0074",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 0,
@@ -598,6 +672,7 @@
     {
       "sample_id": "sample-0075",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 1,
@@ -606,6 +681,7 @@
     {
       "sample_id": "sample-0076",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 2,
@@ -614,6 +690,7 @@
     {
       "sample_id": "sample-0077",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 3,
@@ -622,6 +699,7 @@
     {
       "sample_id": "sample-0078",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 4,
@@ -630,6 +708,7 @@
     {
       "sample_id": "sample-0079",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 5,
@@ -638,6 +717,7 @@
     {
       "sample_id": "sample-0080",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 6,
@@ -646,6 +726,7 @@
     {
       "sample_id": "sample-0081",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 7,
@@ -654,6 +735,7 @@
     {
       "sample_id": "sample-0082",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 8,
@@ -662,6 +744,7 @@
     {
       "sample_id": "sample-0083",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 9,
@@ -670,6 +753,7 @@
     {
       "sample_id": "sample-0084",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 10,
@@ -678,6 +762,7 @@
     {
       "sample_id": "sample-0085",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 11,
@@ -686,6 +771,7 @@
     {
       "sample_id": "sample-0086",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 12,
@@ -694,6 +780,7 @@
     {
       "sample_id": "sample-0087",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 13,
@@ -702,6 +789,7 @@
     {
       "sample_id": "sample-0088",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 14,
@@ -710,6 +798,7 @@
     {
       "sample_id": "sample-0089",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 15,
@@ -718,6 +807,7 @@
     {
       "sample_id": "sample-0090",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 16,
@@ -726,6 +816,7 @@
     {
       "sample_id": "sample-0091",
       "generation_category": "common_subexpression_live",
+      "family": "common_subexpression_live",
       "source": "experiments/generate_dataset.common_subexpression_live",
       "requested_size": 0,
       "replicate": 17,
@@ -734,6 +825,7 @@
     {
       "sample_id": "sample-0092",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 0,
@@ -742,6 +834,7 @@
     {
       "sample_id": "sample-0093",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 1,
@@ -750,6 +843,7 @@
     {
       "sample_id": "sample-0094",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 2,
@@ -758,6 +852,7 @@
     {
       "sample_id": "sample-0095",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 3,
@@ -766,6 +861,7 @@
     {
       "sample_id": "sample-0096",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 4,
@@ -774,6 +870,7 @@
     {
       "sample_id": "sample-0097",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 5,
@@ -782,6 +879,7 @@
     {
       "sample_id": "sample-0098",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 6,
@@ -790,6 +888,7 @@
     {
       "sample_id": "sample-0099",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 7,
@@ -798,6 +897,7 @@
     {
       "sample_id": "sample-0100",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 8,
@@ -806,6 +906,7 @@
     {
       "sample_id": "sample-0101",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 9,
@@ -814,6 +915,7 @@
     {
       "sample_id": "sample-0102",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 10,
@@ -822,6 +924,7 @@
     {
       "sample_id": "sample-0103",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 11,
@@ -830,6 +933,7 @@
     {
       "sample_id": "sample-0104",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 12,
@@ -838,6 +942,7 @@
     {
       "sample_id": "sample-0105",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 13,
@@ -846,6 +951,7 @@
     {
       "sample_id": "sample-0106",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 14,
@@ -854,6 +960,7 @@
     {
       "sample_id": "sample-0107",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 15,
@@ -862,6 +969,7 @@
     {
       "sample_id": "sample-0108",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 16,
@@ -870,6 +978,7 @@
     {
       "sample_id": "sample-0109",
       "generation_category": "algebraic_simplification_live",
+      "family": "algebraic_simplification_live",
       "source": "experiments/generate_dataset.algebraic_simplification_live",
       "requested_size": 0,
       "replicate": 17,
@@ -878,6 +987,7 @@
     {
       "sample_id": "sample-0110",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 0,
@@ -886,6 +996,7 @@
     {
       "sample_id": "sample-0111",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 1,
@@ -894,6 +1005,7 @@
     {
       "sample_id": "sample-0112",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 2,
@@ -902,6 +1014,7 @@
     {
       "sample_id": "sample-0113",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 3,
@@ -910,6 +1023,7 @@
     {
       "sample_id": "sample-0114",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 4,
@@ -918,6 +1032,7 @@
     {
       "sample_id": "sample-0115",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 5,
@@ -926,6 +1041,7 @@
     {
       "sample_id": "sample-0116",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 6,
@@ -934,6 +1050,7 @@
     {
       "sample_id": "sample-0117",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 7,
@@ -942,6 +1059,7 @@
     {
       "sample_id": "sample-0118",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 8,
@@ -950,6 +1068,7 @@
     {
       "sample_id": "sample-0119",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 9,
@@ -958,6 +1077,7 @@
     {
       "sample_id": "sample-0120",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 10,
@@ -966,6 +1086,7 @@
     {
       "sample_id": "sample-0121",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 11,
@@ -974,6 +1095,7 @@
     {
       "sample_id": "sample-0122",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 12,
@@ -982,6 +1104,7 @@
     {
       "sample_id": "sample-0123",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 13,
@@ -990,6 +1113,7 @@
     {
       "sample_id": "sample-0124",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 14,
@@ -998,6 +1122,7 @@
     {
       "sample_id": "sample-0125",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 15,
@@ -1006,6 +1131,7 @@
     {
       "sample_id": "sample-0126",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 16,
@@ -1014,6 +1140,7 @@
     {
       "sample_id": "sample-0127",
       "generation_category": "dead_code_live",
+      "family": "dead_code_live",
       "source": "experiments/generate_dataset.dead_code_live",
       "requested_size": 0,
       "replicate": 17,
@@ -1022,6 +1149,7 @@
     {
       "sample_id": "sample-0128",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 0,
@@ -1030,6 +1158,7 @@
     {
       "sample_id": "sample-0129",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 1,
@@ -1038,6 +1167,7 @@
     {
       "sample_id": "sample-0130",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 2,
@@ -1046,6 +1176,7 @@
     {
       "sample_id": "sample-0131",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 3,
@@ -1054,6 +1185,7 @@
     {
       "sample_id": "sample-0132",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 4,
@@ -1062,6 +1194,7 @@
     {
       "sample_id": "sample-0133",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 5,
@@ -1070,6 +1203,7 @@
     {
       "sample_id": "sample-0134",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 6,
@@ -1078,6 +1212,7 @@
     {
       "sample_id": "sample-0135",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 7,
@@ -1086,6 +1221,7 @@
     {
       "sample_id": "sample-0136",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 8,
@@ -1094,6 +1230,7 @@
     {
       "sample_id": "sample-0137",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 9,
@@ -1102,6 +1239,7 @@
     {
       "sample_id": "sample-0138",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 10,
@@ -1110,6 +1248,7 @@
     {
       "sample_id": "sample-0139",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 11,
@@ -1118,6 +1257,7 @@
     {
       "sample_id": "sample-0140",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 12,
@@ -1126,6 +1266,7 @@
     {
       "sample_id": "sample-0141",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 13,
@@ -1134,6 +1275,7 @@
     {
       "sample_id": "sample-0142",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 14,
@@ -1142,6 +1284,7 @@
     {
       "sample_id": "sample-0143",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 15,
@@ -1150,6 +1293,7 @@
     {
       "sample_id": "sample-0144",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 16,
@@ -1158,6 +1302,7 @@
     {
       "sample_id": "sample-0145",
       "generation_category": "strength_reduction_live",
+      "family": "strength_reduction_live",
       "source": "experiments/generate_dataset.strength_reduction_live",
       "requested_size": 0,
       "replicate": 17,
@@ -1165,255 +1310,845 @@
     },
     {
       "sample_id": "sample-0146",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 - 0\nv1 = in2 + in3\ng1 = v1 + 0\nv2 = in4 + in5\ng2 = v2 / 1\nv3 = in6 + in7\ng3 = v3 / 1\nv4 = in8 + in9\ng4 = v4 - 0\nv5 = in10 + in11\ng5 = v5 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0147",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 - 0\nv1 = in2 + in3\ng1 = v1 + 0\nv2 = in4 + in5\ng2 = v2 / 1\nv3 = in6 + in7\ng3 = v3 + 0\nv4 = in8 + in9\ng4 = v4 / 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0148",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 / 1\nv1 = in2 + in3\ng1 = v1 * 1\nv2 = in4 + in5\ng2 = v2 + 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0149",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 + 0\nv1 = in2 + in3\ng1 = v1 + 0\nv2 = in4 + in5\ng2 = v2 / 1\nv3 = in6 + in7\ng3 = v3 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0150",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 / 1\nv1 = in2 + in3\ng1 = v1 / 1\nv2 = in4 + in5\ng2 = v2 / 1\nv3 = in6 + in7\ng3 = v3 * 1\nv4 = in8 + in9\ng4 = v4 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0151",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 / 1\nv1 = in2 + in3\ng1 = v1 + 0\nv2 = in4 + in5\ng2 = v2 - 0\nv3 = in6 + in7\ng3 = v3 * 1\nv4 = in8 + in9\ng4 = v4 * 1\nv5 = in10 + in11\ng5 = v5 * 1\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0152",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 + 0\nv1 = in2 + in3\ng1 = v1 * 1\nv2 = in4 + in5\ng2 = v2 + 0\nv3 = in6 + in7\ng3 = v3 / 1\nv4 = in8 + in9\ng4 = v4 - 0\nv5 = in10 + in11\ng5 = v5 - 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + g4\nacc = acc + g5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0153",
+      "generation_category": "algebraic_simplification_live_b",
+      "family": "algebraic_simplification_live_b",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_b",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "v0 = in0 + in1\ng0 = v0 * 1\nv1 = in2 + in3\ng1 = v1 + 0\nv2 = in4 + in5\ng2 = v2 / 1\nv3 = in6 + in7\ng3 = v3 + 0\nacc = g0 + g1\nacc = acc + g2\nacc = acc + g3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0154",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "g0 = in0 + 0\nh0 = g0 / 1\ng1 = in1 + 0\nh1 = g1 * 1\ng2 = in2 + 0\nh2 = g2 / 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0155",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "g0 = in0 - 0\nh0 = g0 * 1\ng1 = in1 + 0\nh1 = g1 / 1\ng2 = in2 + 0\nh2 = g2 * 1\ng3 = in3 - 0\nh3 = g3 * 1\ng4 = in4 + 0\nh4 = g4 / 1\ng5 = in5 - 0\nh5 = g5 * 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + h3\nacc = acc + h4\nacc = acc + h5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0156",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "g0 = in0 + 0\nh0 = g0 * 1\ng1 = in1 - 0\nh1 = g1 * 1\ng2 = in2 - 0\nh2 = g2 * 1\ng3 = in3 - 0\nh3 = g3 * 1\ng4 = in4 - 0\nh4 = g4 / 1\ng5 = in5 - 0\nh5 = g5 / 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + h3\nacc = acc + h4\nacc = acc + h5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0157",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "g0 = in0 - 0\nh0 = g0 * 1\ng1 = in1 - 0\nh1 = g1 / 1\ng2 = in2 + 0\nh2 = g2 / 1\ng3 = in3 - 0\nh3 = g3 / 1\ng4 = in4 + 0\nh4 = g4 / 1\ng5 = in5 - 0\nh5 = g5 * 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + h3\nacc = acc + h4\nacc = acc + h5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0158",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "g0 = in0 - 0\nh0 = g0 * 1\ng1 = in1 + 0\nh1 = g1 / 1\ng2 = in2 + 0\nh2 = g2 / 1\ng3 = in3 - 0\nh3 = g3 * 1\ng4 = in4 + 0\nh4 = g4 * 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + h3\nacc = acc + h4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0159",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "g0 = in0 + 0\nh0 = g0 * 1\ng1 = in1 + 0\nh1 = g1 * 1\ng2 = in2 + 0\nh2 = g2 * 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0160",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "g0 = in0 - 0\nh0 = g0 * 1\ng1 = in1 + 0\nh1 = g1 * 1\ng2 = in2 - 0\nh2 = g2 / 1\ng3 = in3 - 0\nh3 = g3 / 1\ng4 = in4 - 0\nh4 = g4 * 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + h3\nacc = acc + h4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0161",
+      "generation_category": "algebraic_simplification_live_c",
+      "family": "algebraic_simplification_live_c",
+      "source": "experiments/generate_dataset.algebraic_simplification_live_c",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "g0 = in0 + 0\nh0 = g0 * 1\ng1 = in1 + 0\nh1 = g1 / 1\ng2 = in2 - 0\nh2 = g2 * 1\ng3 = in3 - 0\nh3 = g3 * 1\ng4 = in4 - 0\nh4 = g4 * 1\ng5 = in5 + 0\nh5 = g5 / 1\nacc = h0 + h1\nacc = acc + h2\nacc = acc + h3\nacc = acc + h4\nacc = acc + h5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0162",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "r0a = zin0_146a + zin0_389b\nr0b = zin0_389b + zin0_146a\nr0c = zin0_146a + zin0_389b\nr1a = zin1_854a + zin1_81b\nr1b = zin1_81b + zin1_854a\nr1c = zin1_854a + zin1_81b\nr2a = zin2_943a + zin2_842b\nr2b = zin2_842b + zin2_943a\nr2c = zin2_943a + zin2_842b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0163",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "r0a = zin0_875a * zin0_388b\nr0b = zin0_388b * zin0_875a\nr0c = zin0_875a * zin0_388b\nr1a = zin1_732a * zin1_354b\nr1b = zin1_354b * zin1_732a\nr1c = zin1_732a * zin1_354b\nr2a = zin2_365a * zin2_733b\nr2b = zin2_733b * zin2_365a\nr2c = zin2_365a * zin2_733b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0164",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "r0a = zin0_137a + zin0_154b\nr0b = zin0_154b + zin0_137a\nr0c = zin0_137a + zin0_154b\nr1a = zin1_805a + zin1_283b\nr1b = zin1_283b + zin1_805a\nr1c = zin1_805a + zin1_283b\nr2a = zin2_258a + zin2_896b\nr2b = zin2_896b + zin2_258a\nr2c = zin2_258a + zin2_896b\nr3a = zin3_721a + zin3_488b\nr3b = zin3_488b + zin3_721a\nr3c = zin3_721a + zin3_488b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r3c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0165",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "r0a = zin0_961a + zin0_443b\nr0b = zin0_443b + zin0_961a\nr0c = zin0_961a + zin0_443b\nr1a = zin1_153a + zin1_898b\nr1b = zin1_898b + zin1_153a\nr1c = zin1_153a + zin1_898b\nr2a = zin2_204a + zin2_557b\nr2b = zin2_557b + zin2_204a\nr2c = zin2_204a + zin2_557b\nr3a = zin3_694a + zin3_933b\nr3b = zin3_933b + zin3_694a\nr3c = zin3_694a + zin3_933b\nr4a = zin4_243a + zin4_142b\nr4b = zin4_142b + zin4_243a\nr4c = zin4_243a + zin4_142b\nr5a = zin5_451a + zin5_198b\nr5b = zin5_198b + zin5_451a\nr5c = zin5_451a + zin5_198b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r3c\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r4c\nacc = acc + r5a\nacc = acc + r5b\nacc = acc + r5c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0166",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "r0a = zin0_529a + zin0_250b\nr0b = zin0_250b + zin0_529a\nr0c = zin0_529a + zin0_250b\nr1a = zin1_348a + zin1_574b\nr1b = zin1_574b + zin1_348a\nr1c = zin1_348a + zin1_574b\nr2a = zin2_126a + zin2_475b\nr2b = zin2_475b + zin2_126a\nr2c = zin2_126a + zin2_475b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0167",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "r0a = zin0_750a * zin0_756b\nr0b = zin0_756b * zin0_750a\nr0c = zin0_750a * zin0_756b\nr1a = zin1_861a * zin1_64b\nr1b = zin1_64b * zin1_861a\nr1c = zin1_861a * zin1_64b\nr2a = zin2_332a * zin2_386b\nr2b = zin2_386b * zin2_332a\nr2c = zin2_332a * zin2_386b\nr3a = zin3_509a * zin3_366b\nr3b = zin3_366b * zin3_509a\nr3c = zin3_509a * zin3_366b\nr4a = zin4_80a * zin4_505b\nr4b = zin4_505b * zin4_80a\nr4c = zin4_80a * zin4_505b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r3c\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r4c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0168",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "r0a = zin0_727a * zin0_604b\nr0b = zin0_604b * zin0_727a\nr0c = zin0_727a * zin0_604b\nr1a = zin1_817a * zin1_615b\nr1b = zin1_615b * zin1_817a\nr1c = zin1_817a * zin1_615b\nr2a = zin2_770a * zin2_188b\nr2b = zin2_188b * zin2_770a\nr2c = zin2_770a * zin2_188b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0169",
+      "generation_category": "common_subexpression_live_b",
+      "family": "common_subexpression_live_b",
+      "source": "experiments/generate_dataset.common_subexpression_live_b",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "r0a = zin0_538a + zin0_346b\nr0b = zin0_346b + zin0_538a\nr0c = zin0_538a + zin0_346b\nr1a = zin1_428a + zin1_412b\nr1b = zin1_412b + zin1_428a\nr1c = zin1_428a + zin1_412b\nr2a = zin2_160a + zin2_995b\nr2b = zin2_995b + zin2_160a\nr2c = zin2_160a + zin2_995b\nr3a = zin3_524a + zin3_663b\nr3b = zin3_663b + zin3_524a\nr3c = zin3_524a + zin3_663b\nr4a = zin4_435a + zin4_602b\nr4b = zin4_602b + zin4_435a\nr4c = zin4_435a + zin4_602b\nacc = r0a + r0b\nacc = acc + r0c\nacc = acc + r1a\nacc = acc + r1b\nacc = acc + r1c\nacc = acc + r2a\nacc = acc + r2b\nacc = acc + r2c\nacc = acc + r3a\nacc = acc + r3b\nacc = acc + r3c\nacc = acc + r4a\nacc = acc + r4b\nacc = acc + r4c\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0170",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "d0 = yin0_44a + yin0_427b\ne0 = yin0_44a + yin0_427b\nf0 = d0 + e0\nd1 = yin1_165a + yin1_461b\ne1 = yin1_165a + yin1_461b\nf1 = d1 + e1\nd2 = yin2_688a + yin2_186b\ne2 = yin2_688a + yin2_186b\nf2 = d2 + e2\nd3 = yin3_294a + yin3_418b\ne3 = yin3_294a + yin3_418b\nf3 = d3 + e3\nd4 = yin4_707a + yin4_896b\ne4 = yin4_707a + yin4_896b\nf4 = d4 + e4\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0171",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "d0 = yin0_219a + yin0_130b\ne0 = yin0_219a + yin0_130b\nf0 = d0 + e0\nd1 = yin1_383a + yin1_755b\ne1 = yin1_383a + yin1_755b\nf1 = d1 + e1\nd2 = yin2_387a + yin2_649b\ne2 = yin2_387a + yin2_649b\nf2 = d2 + e2\nd3 = yin3_267a + yin3_44b\ne3 = yin3_267a + yin3_44b\nf3 = d3 + e3\nd4 = yin4_386a + yin4_615b\ne4 = yin4_386a + yin4_615b\nf4 = d4 + e4\nd5 = yin5_181a + yin5_721b\ne5 = yin5_181a + yin5_721b\nf5 = d5 + e5\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0172",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "d0 = yin0_6a + yin0_203b\ne0 = yin0_6a + yin0_203b\nf0 = d0 + e0\nd1 = yin1_274a + yin1_875b\ne1 = yin1_274a + yin1_875b\nf1 = d1 + e1\nd2 = yin2_135a + yin2_136b\ne2 = yin2_135a + yin2_136b\nf2 = d2 + e2\nd3 = yin3_725a + yin3_426b\ne3 = yin3_725a + yin3_426b\nf3 = d3 + e3\nd4 = yin4_910a + yin4_610b\ne4 = yin4_910a + yin4_610b\nf4 = d4 + e4\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0173",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "d0 = yin0_304a + yin0_831b\ne0 = yin0_304a + yin0_831b\nf0 = d0 + e0\nd1 = yin1_909a + yin1_583b\ne1 = yin1_909a + yin1_583b\nf1 = d1 + e1\nd2 = yin2_634a + yin2_492b\ne2 = yin2_634a + yin2_492b\nf2 = d2 + e2\nd3 = yin3_725a + yin3_177b\ne3 = yin3_725a + yin3_177b\nf3 = d3 + e3\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0174",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "d0 = yin0_321a + yin0_183b\ne0 = yin0_321a + yin0_183b\nf0 = d0 + e0\nd1 = yin1_611a + yin1_317b\ne1 = yin1_611a + yin1_317b\nf1 = d1 + e1\nd2 = yin2_800a + yin2_186b\ne2 = yin2_800a + yin2_186b\nf2 = d2 + e2\nd3 = yin3_49a + yin3_888b\ne3 = yin3_49a + yin3_888b\nf3 = d3 + e3\nd4 = yin4_591a + yin4_221b\ne4 = yin4_591a + yin4_221b\nf4 = d4 + e4\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0175",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "d0 = yin0_65a + yin0_999b\ne0 = yin0_65a + yin0_999b\nf0 = d0 + e0\nd1 = yin1_989a + yin1_551b\ne1 = yin1_989a + yin1_551b\nf1 = d1 + e1\nd2 = yin2_631a + yin2_657b\ne2 = yin2_631a + yin2_657b\nf2 = d2 + e2\nd3 = yin3_289a + yin3_240b\ne3 = yin3_289a + yin3_240b\nf3 = d3 + e3\nd4 = yin4_460a + yin4_3b\ne4 = yin4_460a + yin4_3b\nf4 = d4 + e4\nd5 = yin5_55a + yin5_426b\ne5 = yin5_55a + yin5_426b\nf5 = d5 + e5\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0176",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "d0 = yin0_132a + yin0_416b\ne0 = yin0_132a + yin0_416b\nf0 = d0 + e0\nd1 = yin1_261a + yin1_548b\ne1 = yin1_261a + yin1_548b\nf1 = d1 + e1\nd2 = yin2_308a + yin2_124b\ne2 = yin2_308a + yin2_124b\nf2 = d2 + e2\nacc = f0 + f1\nacc = acc + f2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0177",
+      "generation_category": "common_subexpression_live_c",
+      "family": "common_subexpression_live_c",
+      "source": "experiments/generate_dataset.common_subexpression_live_c",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "d0 = yin0_18a + yin0_399b\ne0 = yin0_18a + yin0_399b\nf0 = d0 + e0\nd1 = yin1_884a + yin1_139b\ne1 = yin1_884a + yin1_139b\nf1 = d1 + e1\nd2 = yin2_337a + yin2_992b\ne2 = yin2_337a + yin2_992b\nf2 = d2 + e2\nd3 = yin3_43a + yin3_713b\ne3 = yin3_43a + yin3_713b\nf3 = d3 + e3\nd4 = yin4_348a + yin4_349b\ne4 = yin4_348a + yin4_349b\nf4 = d4 + e4\nd5 = yin5_905a + yin5_199b\ne5 = yin5_905a + yin5_199b\nf5 = d5 + e5\nacc = f0 + f1\nacc = acc + f2\nacc = acc + f3\nacc = acc + f4\nacc = acc + f5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0178",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "q0_0 = 6 - 24\nq0_1 = q0_0 + 2\nq1_0 = 13 + 29\nq1_1 = q1_0 * 7\nq2_0 = 24 + 19\nq2_1 = q2_0 * 5\nq3_0 = 34 - 9\nq3_1 = q3_0 + 8\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + q3_0\nacc = acc + q3_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0179",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "q0_0 = 10 + 31\nq0_1 = q0_0 + 6\nq1_0 = 15 - 17\nq1_1 = q1_0 * 3\nq2_0 = 33 * 34\nq2_1 = q2_0 * 2\nq3_0 = 23 - 13\nq3_1 = q3_0 * 4\nq4_0 = 36 - 9\nq4_1 = q4_0 + 9\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + q3_0\nacc = acc + q3_1\nacc = acc + q4_0\nacc = acc + q4_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0180",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "q0_0 = 5 + 38\nq0_1 = q0_0 * 4\nq1_0 = 27 - 34\nq1_1 = q1_0 * 5\nq2_0 = 35 * 38\nq2_1 = q2_0 + 9\nq3_0 = 19 + 32\nq3_1 = q3_0 + 4\nq4_0 = 33 * 7\nq4_1 = q4_0 * 7\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + q3_0\nacc = acc + q3_1\nacc = acc + q4_0\nacc = acc + q4_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0181",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "q0_0 = 36 + 40\nq0_1 = q0_0 + 7\nq1_0 = 28 - 7\nq1_1 = q1_0 + 2\nq2_0 = 6 + 5\nq2_1 = q2_0 + 2\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0182",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "q0_0 = 39 + 14\nq0_1 = q0_0 * 8\nq1_0 = 17 * 3\nq1_1 = q1_0 * 7\nq2_0 = 17 * 20\nq2_1 = q2_0 * 8\nq3_0 = 34 - 37\nq3_1 = q3_0 * 8\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + q3_0\nacc = acc + q3_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0183",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "q0_0 = 9 + 19\nq0_1 = q0_0 + 9\nq1_0 = 32 - 25\nq1_1 = q1_0 * 2\nq2_0 = 8 + 9\nq2_1 = q2_0 + 3\nq3_0 = 6 + 4\nq3_1 = q3_0 * 7\nq4_0 = 14 + 33\nq4_1 = q4_0 + 3\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + q3_0\nacc = acc + q3_1\nacc = acc + q4_0\nacc = acc + q4_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0184",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "q0_0 = 32 - 40\nq0_1 = q0_0 + 6\nq1_0 = 27 - 27\nq1_1 = q1_0 * 7\nq2_0 = 29 * 2\nq2_1 = q2_0 * 9\nq3_0 = 22 - 12\nq3_1 = q3_0 + 8\nq4_0 = 8 - 39\nq4_1 = q4_0 * 4\nq5_0 = 36 * 5\nq5_1 = q5_0 * 6\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + q3_0\nacc = acc + q3_1\nacc = acc + q4_0\nacc = acc + q4_1\nacc = acc + q5_0\nacc = acc + q5_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0185",
+      "generation_category": "constant_folding_live_b",
+      "family": "constant_folding_live_b",
+      "source": "experiments/generate_dataset.constant_folding_live_b",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "q0_0 = 39 * 27\nq0_1 = q0_0 + 3\nq1_0 = 29 * 5\nq1_1 = q1_0 + 3\nq2_0 = 28 * 35\nq2_1 = q2_0 + 4\nq3_0 = 36 * 27\nq3_1 = q3_0 * 3\nq4_0 = 21 - 5\nq4_1 = q4_0 + 3\nq5_0 = 16 - 30\nq5_1 = q5_0 * 4\nacc = q0_0 + q0_1\nacc = acc + q1_0\nacc = acc + q1_1\nacc = acc + q2_0\nacc = acc + q2_1\nacc = acc + q3_0\nacc = acc + q3_1\nacc = acc + q4_0\nacc = acc + q4_1\nacc = acc + q5_0\nacc = acc + q5_1\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0186",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "w0 = 25\nx0 = w0 + in0a\ny0 = w0 * 3\nw1 = 10\nx1 = w1 + in1a\ny1 = w1 * 2\nw2 = 29\nx2 = w2 + in2a\ny2 = w2 * 3\nw3 = 25\nx3 = w3 + in3a\ny3 = w3 * 2\nw4 = 24\nx4 = w4 + in4a\ny4 = w4 * 4\nw5 = 24\nx5 = w5 + in5a\ny5 = w5 * 2\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + x3\nacc = acc + y3\nacc = acc + x4\nacc = acc + y4\nacc = acc + x5\nacc = acc + y5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0187",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "w0 = 18\nx0 = w0 + in0a\ny0 = w0 * 5\nw1 = 10\nx1 = w1 + in1a\ny1 = w1 * 7\nw2 = 26\nx2 = w2 + in2a\ny2 = w2 * 5\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0188",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "w0 = 26\nx0 = w0 + in0a\ny0 = w0 * 4\nw1 = 24\nx1 = w1 + in1a\ny1 = w1 * 5\nw2 = 2\nx2 = w2 + in2a\ny2 = w2 * 6\nw3 = 25\nx3 = w3 + in3a\ny3 = w3 * 3\nw4 = 10\nx4 = w4 + in4a\ny4 = w4 * 3\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + x3\nacc = acc + y3\nacc = acc + x4\nacc = acc + y4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0189",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "w0 = 24\nx0 = w0 + in0a\ny0 = w0 * 6\nw1 = 8\nx1 = w1 + in1a\ny1 = w1 * 3\nw2 = 10\nx2 = w2 + in2a\ny2 = w2 * 6\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0190",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "w0 = 1\nx0 = w0 + in0a\ny0 = w0 * 4\nw1 = 3\nx1 = w1 + in1a\ny1 = w1 * 5\nw2 = 6\nx2 = w2 + in2a\ny2 = w2 * 7\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0191",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "w0 = 9\nx0 = w0 + in0a\ny0 = w0 * 5\nw1 = 27\nx1 = w1 + in1a\ny1 = w1 * 5\nw2 = 9\nx2 = w2 + in2a\ny2 = w2 * 3\nw3 = 19\nx3 = w3 + in3a\ny3 = w3 * 5\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + x3\nacc = acc + y3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0192",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "w0 = 2\nx0 = w0 + in0a\ny0 = w0 * 7\nw1 = 7\nx1 = w1 + in1a\ny1 = w1 * 7\nw2 = 16\nx2 = w2 + in2a\ny2 = w2 * 4\nw3 = 12\nx3 = w3 + in3a\ny3 = w3 * 2\nw4 = 2\nx4 = w4 + in4a\ny4 = w4 * 7\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + x3\nacc = acc + y3\nacc = acc + x4\nacc = acc + y4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0193",
+      "generation_category": "constant_propagation_live_b",
+      "family": "constant_propagation_live_b",
+      "source": "experiments/generate_dataset.constant_propagation_live_b",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "w0 = 20\nx0 = w0 + in0a\ny0 = w0 * 6\nw1 = 29\nx1 = w1 + in1a\ny1 = w1 * 3\nw2 = 27\nx2 = w2 + in2a\ny2 = w2 * 7\nw3 = 16\nx3 = w3 + in3a\ny3 = w3 * 2\nacc = x0 + y0\nacc = acc + x1\nacc = acc + y1\nacc = acc + x2\nacc = acc + y2\nacc = acc + x3\nacc = acc + y3\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0194",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "u0 = 3\nv0 = u0 + u0\nu1 = 14\nv1 = u1 * u1\nu2 = 2\nv2 = u2 + u2\nacc = v0 + v1\nacc = acc + v2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0195",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "u0 = 8\nv0 = u0 * u0\nu1 = 17\nv1 = u1 + u1\nu2 = 15\nv2 = u2 + u2\nu3 = 19\nv3 = u3 * u3\nu4 = 7\nv4 = u4 + u4\nu5 = 18\nv5 = u5 + u5\nacc = v0 + v1\nacc = acc + v2\nacc = acc + v3\nacc = acc + v4\nacc = acc + v5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0196",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "u0 = 8\nv0 = u0 + u0\nu1 = 9\nv1 = u1 * u1\nu2 = 2\nv2 = u2 * u2\nu3 = 2\nv3 = u3 + u3\nu4 = 5\nv4 = u4 * u4\nacc = v0 + v1\nacc = acc + v2\nacc = acc + v3\nacc = acc + v4\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0197",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 3,
+      "tac_program": "u0 = 1\nv0 = u0 * u0\nu1 = 13\nv1 = u1 * u1\nu2 = 7\nv2 = u2 * u2\nu3 = 16\nv3 = u3 + u3\nu4 = 7\nv4 = u4 + u4\nu5 = 15\nv5 = u5 * u5\nacc = v0 + v1\nacc = acc + v2\nacc = acc + v3\nacc = acc + v4\nacc = acc + v5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0198",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 4,
+      "tac_program": "u0 = 10\nv0 = u0 * u0\nu1 = 17\nv1 = u1 * u1\nu2 = 17\nv2 = u2 + u2\nu3 = 6\nv3 = u3 + u3\nu4 = 1\nv4 = u4 * u4\nu5 = 18\nv5 = u5 * u5\nacc = v0 + v1\nacc = acc + v2\nacc = acc + v3\nacc = acc + v4\nacc = acc + v5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0199",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "u0 = 15\nv0 = u0 + u0\nu1 = 12\nv1 = u1 + u1\nu2 = 10\nv2 = u2 * u2\nacc = v0 + v1\nacc = acc + v2\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0200",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "u0 = 13\nv0 = u0 * u0\nu1 = 1\nv1 = u1 * u1\nu2 = 14\nv2 = u2 + u2\nu3 = 16\nv3 = u3 + u3\nu4 = 7\nv4 = u4 + u4\nu5 = 6\nv5 = u5 * u5\nacc = v0 + v1\nacc = acc + v2\nacc = acc + v3\nacc = acc + v4\nacc = acc + v5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0201",
+      "generation_category": "constant_propagation_live_c",
+      "family": "constant_propagation_live_c",
+      "source": "experiments/generate_dataset.constant_propagation_live_c",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "u0 = 5\nv0 = u0 + u0\nu1 = 13\nv1 = u1 + u1\nu2 = 15\nv2 = u2 + u2\nu3 = 4\nv3 = u3 * u3\nu4 = 16\nv4 = u4 * u4\nu5 = 12\nv5 = u5 * u5\nacc = v0 + v1\nacc = acc + v2\nacc = acc + v3\nacc = acc + v4\nacc = acc + v5\nacc = acc + ztail_input"
+    },
+    {
+      "sample_id": "sample-0202",
+      "generation_category": "dead_code_live_b",
+      "family": "dead_code_live_b",
+      "source": "experiments/generate_dataset.dead_code_live_b",
+      "requested_size": 0,
+      "replicate": 0,
+      "tac_program": "unused0 = in0 * in0\nunused1 = in1 * in1\nunused2 = in2 * in2\nunused3 = in3 * in3\nunused4 = in4 * in4\nunused5 = in5 * in5\nstored0 = in0 + zsrc0\nstored1 = in1 + zsrc1\nstored2 = in2 + zsrc2\nstored3 = in3 + zsrc3\nstored4 = in4 + zsrc4\nstored5 = in5 + zsrc5\nkept = stored0 + zseed\nkept = kept + stored1\nkept = kept + stored2\nkept = kept + stored3\nkept = kept + stored4\nkept = kept + stored5\nkept = kept + zseed"
+    },
+    {
+      "sample_id": "sample-0203",
+      "generation_category": "dead_code_live_b",
+      "family": "dead_code_live_b",
+      "source": "experiments/generate_dataset.dead_code_live_b",
+      "requested_size": 0,
+      "replicate": 1,
+      "tac_program": "unused0 = in0 * in0\nunused1 = in1 * in1\nunused2 = in2 * in2\nunused3 = in3 * in3\nunused4 = in4 * in4\nstored0 = in0 + zsrc0\nstored1 = in1 + zsrc1\nstored2 = in2 + zsrc2\nstored3 = in3 + zsrc3\nstored4 = in4 + zsrc4\nkept = stored0 + zseed\nkept = kept + stored1\nkept = kept + stored2\nkept = kept + stored3\nkept = kept + stored4\nkept = kept + zseed"
+    },
+    {
+      "sample_id": "sample-0204",
+      "generation_category": "dead_code_live_b",
+      "family": "dead_code_live_b",
+      "source": "experiments/generate_dataset.dead_code_live_b",
+      "requested_size": 0,
+      "replicate": 2,
+      "tac_program": "unused0 = in0 * in0\nunused1 = in1 * in1\nunused2 = in2 * in2\nunused3 = in3 * in3\nunused4 = in4 * in4\nunused5 = in5 * in5\nunused6 = in6 * in6\nstored0 = in0 + zsrc0\nstored1 = in1 + zsrc1\nstored2 = in2 + zsrc2\nstored3 = in3 + zsrc3\nstored4 = in4 + zsrc4\nstored5 = in5 + zsrc5\nstored6 = in6 + zsrc6\nkept = stored0 + zseed\nkept = kept + stored1\nkept = kept + stored2\nkept = kept + stored3\nkept = kept + stored4\nkept = kept + stored5\nkept = kept + stored6\nkept = kept + zseed"
+    },
+    {
+      "sample_id": "sample-0207",
+      "generation_category": "dead_code_live_b",
+      "family": "dead_code_live_b",
+      "source": "experiments/generate_dataset.dead_code_live_b",
+      "requested_size": 0,
+      "replicate": 5,
+      "tac_program": "unused0 = in0 * in0\nunused1 = in1 * in1\nunused2 = in2 * in2\nunused3 = in3 * in3\nunused4 = in4 * in4\nunused5 = in5 * in5\nunused6 = in6 * in6\nunused7 = in7 * in7\nstored0 = in0 + zsrc0\nstored1 = in1 + zsrc1\nstored2 = in2 + zsrc2\nstored3 = in3 + zsrc3\nstored4 = in4 + zsrc4\nstored5 = in5 + zsrc5\nstored6 = in6 + zsrc6\nstored7 = in7 + zsrc7\nkept = stored0 + zseed\nkept = kept + stored1\nkept = kept + stored2\nkept = kept + stored3\nkept = kept + stored4\nkept = kept + stored5\nkept = kept + stored6\nkept = kept + stored7\nkept = kept + zseed"
+    },
+    {
+      "sample_id": "sample-0208",
+      "generation_category": "dead_code_live_b",
+      "family": "dead_code_live_b",
+      "source": "experiments/generate_dataset.dead_code_live_b",
+      "requested_size": 0,
+      "replicate": 6,
+      "tac_program": "unused0 = in0 * in0\nunused1 = in1 * in1\nunused2 = in2 * in2\nunused3 = in3 * in3\nstored0 = in0 + zsrc0\nstored1 = in1 + zsrc1\nstored2 = in2 + zsrc2\nstored3 = in3 + zsrc3\nkept = stored0 + zseed\nkept = kept + stored1\nkept = kept + stored2\nkept = kept + stored3\nkept = kept + zseed"
+    },
+    {
+      "sample_id": "sample-0209",
+      "generation_category": "dead_code_live_b",
+      "family": "dead_code_live_b",
+      "source": "experiments/generate_dataset.dead_code_live_b",
+      "requested_size": 0,
+      "replicate": 7,
+      "tac_program": "unused0 = in0 * in0\nunused1 = in1 * in1\nunused2 = in2 * in2\nstored0 = in0 + zsrc0\nstored1 = in1 + zsrc1\nstored2 = in2 + zsrc2\nkept = stored0 + zseed\nkept = kept + stored1\nkept = kept + stored2\nkept = kept + zseed"
+    },
+    {
+      "sample_id": "sample-0210",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 0,
       "tac_program": "n = 13\ni = 0\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w56_2\nacc = acc + w55_0\ni = i + 1\nacc = acc + w31_1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0147",
+      "sample_id": "sample-0211",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 1,
       "tac_program": "n = 6\ni = 0\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + w39_2\nacc = acc + w52_1\nacc = acc + i\ni = i + 1\nacc = acc + w36_0\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0148",
+      "sample_id": "sample-0212",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 2,
       "tac_program": "n = 11\ni = 0\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w58_1\ni = i + 1\nacc = acc + w46_0\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0149",
+      "sample_id": "sample-0213",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 3,
       "tac_program": "n = 4\ni = 3\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w75_1\nacc = acc + w4_0\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0150",
+      "sample_id": "sample-0214",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 4,
       "tac_program": "n = 14\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0151",
+      "sample_id": "sample-0215",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 5,
       "tac_program": "n = 13\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + w10_0\nacc = acc + i\ni = i + 1\nacc = acc + w60_2\nacc = acc + w7_1\nacc = acc + w54_3\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0152",
+      "sample_id": "sample-0216",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 6,
       "tac_program": "n = 8\ni = 2\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0153",
+      "sample_id": "sample-0217",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 7,
       "tac_program": "n = 8\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0154",
+      "sample_id": "sample-0218",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 8,
       "tac_program": "n = 5\ni = 2\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w0_0\ni = i + 1\nacc = acc + w20_1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0155",
+      "sample_id": "sample-0219",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 9,
       "tac_program": "n = 14\ni = 1\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w2_1\nacc = acc + w59_0\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0156",
+      "sample_id": "sample-0220",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 10,
       "tac_program": "n = 2\ni = 3\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\ni = i + 1\nacc = acc + w70_2\nacc = acc + w42_1\nacc = acc + w98_0\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0157",
+      "sample_id": "sample-0221",
       "generation_category": "loops",
+      "family": "loops",
       "source": "experiments/generate_dataset.loops",
       "requested_size": 0,
       "replicate": 11,
       "tac_program": "n = 8\ni = 3\nacc = 0\nloop_head:\nif i >= n goto loop_end\nacc = acc + i\nacc = acc + w7_0\nacc = acc + w21_1\ni = i + 1\ngoto loop_head\nloop_end:\nresult = acc"
     },
     {
-      "sample_id": "sample-0158",
+      "sample_id": "sample-0222",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 0,
       "tac_program": "p0 = h + e\np1 = p0 + a\np2 = p1 + c\np3 = p2 + b\np4 = p3 + f\np5 = p4 + d\np5 = p5 + h"
     },
     {
-      "sample_id": "sample-0159",
+      "sample_id": "sample-0223",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 1,
       "tac_program": "p0 = b + f\np1 = p0 + h\np2 = p1 + d\np2 = p2 + b"
     },
     {
-      "sample_id": "sample-0160",
+      "sample_id": "sample-0224",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 2,
       "tac_program": "p0 = d + f\np1 = p0 + e\np1 = p1 + d"
     },
     {
-      "sample_id": "sample-0161",
+      "sample_id": "sample-0225",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 3,
       "tac_program": "p0 = g + b\np1 = p0 + d\np2 = p1 + h\np3 = p2 + c\np3 = p3 + g"
     },
     {
-      "sample_id": "sample-0162",
+      "sample_id": "sample-0226",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 4,
       "tac_program": "p0 = e + c\np1 = p0 + d\np1 = p1 + e"
     },
     {
-      "sample_id": "sample-0163",
+      "sample_id": "sample-0227",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 5,
       "tac_program": "p0 = h + a\np1 = p0 + g\np2 = p1 + e\np3 = p2 + f\np3 = p3 + h"
     },
     {
-      "sample_id": "sample-0164",
+      "sample_id": "sample-0228",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 6,
       "tac_program": "p0 = e + b\np1 = p0 + c\np1 = p1 + e"
     },
     {
-      "sample_id": "sample-0165",
+      "sample_id": "sample-0229",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 7,
       "tac_program": "p0 = h + a\np1 = p0 + e\np2 = p1 + d\np3 = p2 + b\np4 = p3 + g\np5 = p4 + f\np6 = p5 + c\np7 = p6 + h\np7 = p7 + h"
     },
     {
-      "sample_id": "sample-0166",
+      "sample_id": "sample-0230",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 8,
       "tac_program": "p0 = g + a\np1 = p0 + e\np2 = p1 + h\np3 = p2 + f\np4 = p3 + d\np5 = p4 + c\np6 = p5 + b\np6 = p6 + g"
     },
     {
-      "sample_id": "sample-0167",
+      "sample_id": "sample-0231",
       "generation_category": "no_opportunity",
+      "family": "no_opportunity",
       "source": "experiments/generate_dataset.no_opportunity",
       "requested_size": 0,
       "replicate": 9,
       "tac_program": "p0 = a + b\np1 = p0 + e\np2 = p1 + d\np3 = p2 + h\np4 = p3 + g\np4 = p4 + a"
     },
     {
-      "sample_id": "sample-0168",
+      "sample_id": "sample-0232",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 0,
       "tac_program": "t1 = t0 + in1\nt2 = 16 + 16\nt3 = t2 + t2\nt4 = 47 + 21\nt5 = 27 + 45\nt6 = t5 + in6\nt7 = t6 + in7\nt8 = t7 + t7\nt9 = t8 + 0\nt10 = 48 + 2\nt10 = t10 + t10"
     },
     {
-      "sample_id": "sample-0169",
+      "sample_id": "sample-0233",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 1,
       "tac_program": "t1 = t0 * 1\nt2 = t1 * 3\nt3 = t2 + in3\nt4 = t3 + in4\nt5 = t4 * 7\nt6 = t5 * 1\nt6 = t6 + t6"
     },
     {
-      "sample_id": "sample-0170",
+      "sample_id": "sample-0234",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 2,
       "tac_program": "t1 = t0 * 1\nt2 = 15 + 45\nt3 = t2 * 1\nt4 = t3 + t3\nt5 = t4 * 6\nt6 = t5 + 0\nt7 = t6 + 0\nt7 = t7 + t7"
     },
     {
-      "sample_id": "sample-0171",
+      "sample_id": "sample-0235",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 3,
       "tac_program": "t1 = t0 + t0\nt2 = t1 + 0\nt3 = 10 + 25\nt4 = t3 + in4\nt5 = t4 * 8\nt6 = t5 * 1\nt7 = t6 + t6\nt8 = t7 * 7\nt9 = t8 * 3\nt9 = t9 + t9"
     },
     {
-      "sample_id": "sample-0172",
+      "sample_id": "sample-0236",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 4,
       "tac_program": "t1 = t0 * 1\nt2 = t1 * 1\nt3 = 29 + 29\nt4 = t3 * 2\nt5 = t4 + t4\nt6 = t5 * 6\nt7 = t6 + in7\nt7 = t7 + t7"
     },
     {
-      "sample_id": "sample-0173",
+      "sample_id": "sample-0237",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 5,
       "tac_program": "t1 = t0 + t0\nt2 = t1 + in2\nt3 = t2 * 3\nt4 = t3 * 5\nt5 = t4 + 0\nt5 = t5 + t5"
     },
     {
-      "sample_id": "sample-0174",
+      "sample_id": "sample-0238",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 6,
       "tac_program": "t1 = t0 + in1\nt2 = 40 + 44\nt3 = t2 + t2\nt4 = t3 + 0\nt5 = t4 * 2\nt6 = t5 * 1\nt7 = t6 * 3\nt8 = t7 + t7\nt8 = t8 + t8"
     },
     {
-      "sample_id": "sample-0175",
+      "sample_id": "sample-0239",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 7,
       "tac_program": "t1 = t0 * 1\nt2 = t1 + t1\nt3 = t2 + t2\nt4 = t3 + in4\nt5 = t4 + 0\nt6 = t5 * 6\nt7 = t6 + in7\nt8 = t7 + in8\nt9 = t8 + 0\nt10 = t9 + t9\nt10 = t10 + t10"
     },
     {
-      "sample_id": "sample-0176",
+      "sample_id": "sample-0240",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 8,
       "tac_program": "t1 = t0 * 1\nt2 = t1 + t1\nt3 = t2 + 0\nt4 = t3 * 8\nt5 = t4 + t4\nt6 = t5 + in6\nt6 = t6 + t6"
     },
     {
-      "sample_id": "sample-0177",
+      "sample_id": "sample-0241",
       "generation_category": "temporaries",
+      "family": "temporaries",
       "source": "experiments/generate_dataset.temporaries",
       "requested_size": 0,
       "replicate": 9,

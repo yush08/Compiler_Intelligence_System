@@ -1,6 +1,6 @@
 {
-  "model_version": "rf-v1-b4ee0236dea17f02",
-  "generated_at": "2026-10-12T16:59:49+00:00",
+  "model_version": "rf-v1-fe522e93a82b959e",
+  "generated_at": "2026-10-16T16:19:27+00:00",
   "held_out_split": "test",
   "primary_metric": "macro_f1",
   "target_classes": [
@@ -18,13 +18,13 @@
     "dead_code_elimination"
   ],
   "sample_counts": {
-    "train": 124,
-    "validation": 27,
-    "test": 26
+    "train": 151,
+    "validation": 44,
+    "test": 44
   },
   "splits": {
     "train": {
-      "evaluated_samples": 124,
+      "evaluated_samples": 151,
       "labels": [
         "constant_folding",
         "constant_propagation",
@@ -32,15 +32,15 @@
         "dead_code_elimination",
         "algebraic_simplification"
       ],
-      "accuracy": 0.951613,
-      "macro_f1": 0.942359,
-      "weighted_f1": 0.952507,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
       "per_class": {
         "constant_folding": {
           "precision": 1.0,
           "recall": 1.0,
           "f1": 1.0,
-          "support": 35,
+          "support": 36,
           "evaluated": true
         },
         "constant_propagation": {
@@ -51,30 +51,30 @@
           "evaluated": true
         },
         "common_subexpression": {
-          "precision": 0.823529,
+          "precision": 1.0,
           "recall": 1.0,
-          "f1": 0.903226,
-          "support": 14,
+          "f1": 1.0,
+          "support": 18,
           "evaluated": true
         },
         "dead_code_elimination": {
           "precision": 1.0,
-          "recall": 0.866667,
-          "f1": 0.928571,
-          "support": 45,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 60,
           "evaluated": true
         },
         "algebraic_simplification": {
-          "precision": 0.785714,
+          "precision": 1.0,
           "recall": 1.0,
-          "f1": 0.88,
-          "support": 11,
+          "f1": 1.0,
+          "support": 18,
           "evaluated": true
         }
       },
       "confusion_matrix": [
         [
-          35,
+          36,
           0,
           0,
           0,
@@ -90,23 +90,23 @@
         [
           0,
           0,
-          14,
+          18,
           0,
           0
         ],
         [
           0,
           0,
-          3,
-          39,
-          3
+          0,
+          60,
+          0
         ],
         [
           0,
           0,
           0,
           0,
-          11
+          18
         ]
       ],
       "confusion_matrix_labels": [
@@ -122,7 +122,7 @@
           "precision": 1.0,
           "recall": 1.0,
           "f1-score": 1.0,
-          "support": 35.0
+          "support": 36.0
         },
         "constant_propagation": {
           "precision": 1.0,
@@ -131,22 +131,22 @@
           "support": 19.0
         },
         "common_subexpression": {
-          "precision": 0.823529,
+          "precision": 1.0,
           "recall": 1.0,
-          "f1-score": 0.903226,
-          "support": 14.0
+          "f1-score": 1.0,
+          "support": 18.0
         },
         "dead_code_elimination": {
           "precision": 1.0,
-          "recall": 0.866667,
-          "f1-score": 0.928571,
-          "support": 45.0
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 60.0
         },
         "algebraic_simplification": {
-          "precision": 0.785714,
+          "precision": 1.0,
           "recall": 1.0,
-          "f1-score": 0.88,
-          "support": 11.0
+          "f1-score": 1.0,
+          "support": 18.0
         }
       },
       "absent_classes": [],
@@ -154,28 +154,28 @@
       "true_outside_vocabulary": [],
       "actual_distribution": {
         "by_class": {
-          "constant_folding": 35,
+          "constant_folding": 36,
           "constant_propagation": 19,
-          "common_subexpression": 14,
-          "dead_code_elimination": 45,
-          "algebraic_simplification": 11
+          "common_subexpression": 18,
+          "dead_code_elimination": 60,
+          "algebraic_simplification": 18
         },
         "outside_vocabulary": {}
       },
       "predicted_distribution": {
         "by_class": {
-          "constant_folding": 35,
+          "constant_folding": 36,
           "constant_propagation": 19,
-          "common_subexpression": 17,
-          "dead_code_elimination": 39,
-          "algebraic_simplification": 14
+          "common_subexpression": 18,
+          "dead_code_elimination": 60,
+          "algebraic_simplification": 18
         },
         "outside_vocabulary": {}
       },
-      "samples": 124
+      "samples": 151
     },
     "validation": {
-      "evaluated_samples": 27,
+      "evaluated_samples": 44,
       "labels": [
         "constant_folding",
         "constant_propagation",
@@ -183,21 +183,21 @@
         "dead_code_elimination",
         "algebraic_simplification"
       ],
-      "accuracy": 1.0,
-      "macro_f1": 1.0,
-      "weighted_f1": 1.0,
+      "accuracy": 0.431818,
+      "macro_f1": 0.432727,
+      "weighted_f1": 0.393388,
       "per_class": {
         "constant_folding": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "support": 5,
+          "precision": 0.24,
+          "recall": 0.75,
+          "f1": 0.363636,
+          "support": 8,
           "evaluated": true
         },
         "constant_propagation": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
+          "precision": 0.142857,
+          "recall": 0.125,
+          "f1": 0.133333,
           "support": 8,
           "evaluated": true
         },
@@ -205,56 +205,56 @@
           "precision": 1.0,
           "recall": 1.0,
           "f1": 1.0,
-          "support": 2,
+          "support": 8,
           "evaluated": true
         },
         "dead_code_elimination": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "support": 8,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 12,
           "evaluated": true
         },
         "algebraic_simplification": {
           "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "support": 4,
+          "recall": 0.5,
+          "f1": 0.666667,
+          "support": 8,
           "evaluated": true
         }
       },
       "confusion_matrix": [
         [
-          5,
-          0,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          8,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
+          6,
           2,
           0,
+          0,
           0
         ],
         [
+          7,
+          1,
           0,
+          0,
+          0
+        ],
+        [
           0,
           0,
           8,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0,
+          0,
           0
         ],
         [
           0,
-          0,
+          4,
           0,
           0,
           4
@@ -270,34 +270,34 @@
       "confusion_matrix_note": "Rows/columns follow the target vocabulary in order.",
       "classification_report": {
         "constant_folding": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 5.0
+          "precision": 0.24,
+          "recall": 0.75,
+          "f1-score": 0.363636,
+          "support": 8.0
         },
         "constant_propagation": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
+          "precision": 0.142857,
+          "recall": 0.125,
+          "f1-score": 0.133333,
           "support": 8.0
         },
         "common_subexpression": {
           "precision": 1.0,
           "recall": 1.0,
           "f1-score": 1.0,
-          "support": 2.0
+          "support": 8.0
         },
         "dead_code_elimination": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 8.0
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 12.0
         },
         "algebraic_simplification": {
           "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 4.0
+          "recall": 0.5,
+          "f1-score": 0.666667,
+          "support": 8.0
         }
       },
       "absent_classes": [],
@@ -305,28 +305,28 @@
       "true_outside_vocabulary": [],
       "actual_distribution": {
         "by_class": {
-          "constant_folding": 5,
+          "constant_folding": 8,
           "constant_propagation": 8,
-          "common_subexpression": 2,
-          "dead_code_elimination": 8,
-          "algebraic_simplification": 4
+          "common_subexpression": 8,
+          "dead_code_elimination": 12,
+          "algebraic_simplification": 8
         },
         "outside_vocabulary": {}
       },
       "predicted_distribution": {
         "by_class": {
-          "constant_folding": 5,
-          "constant_propagation": 8,
-          "common_subexpression": 2,
-          "dead_code_elimination": 8,
+          "constant_folding": 25,
+          "constant_propagation": 7,
+          "common_subexpression": 8,
+          "dead_code_elimination": 0,
           "algebraic_simplification": 4
         },
         "outside_vocabulary": {}
       },
-      "samples": 27
+      "samples": 44
     },
     "test": {
-      "evaluated_samples": 26,
+      "evaluated_samples": 44,
       "labels": [
         "constant_folding",
         "constant_propagation",
@@ -334,49 +334,56 @@
         "dead_code_elimination",
         "algebraic_simplification"
       ],
-      "accuracy": 1.0,
-      "macro_f1": 1.0,
-      "weighted_f1": 1.0,
+      "accuracy": 0.454545,
+      "macro_f1": 0.411276,
+      "weighted_f1": 0.43374,
       "per_class": {
         "constant_folding": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "support": 6,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 10,
           "evaluated": true
         },
         "constant_propagation": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "support": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 8,
           "evaluated": true
         },
         "common_subexpression": {
-          "precision": 1.0,
+          "precision": 0.444444,
           "recall": 1.0,
-          "f1": 1.0,
-          "support": 2,
+          "f1": 0.615385,
+          "support": 8,
           "evaluated": true
         },
         "dead_code_elimination": {
           "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "support": 6,
+          "recall": 0.4,
+          "f1": 0.571429,
+          "support": 5,
           "evaluated": true
         },
         "algebraic_simplification": {
           "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "support": 8,
+          "recall": 0.769231,
+          "f1": 0.869565,
+          "support": 13,
           "evaluated": true
         }
       },
       "confusion_matrix": [
         [
-          6,
+          0,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          8,
           0,
           0,
           0,
@@ -384,31 +391,24 @@
         ],
         [
           0,
-          4,
           0,
+          8,
           0,
           0
         ],
         [
-          0,
-          0,
+          1,
           2,
           0,
+          2,
           0
         ],
         [
+          3,
           0,
           0,
           0,
-          6,
-          0
-        ],
-        [
-          0,
-          0,
-          0,
-          0,
-          8
+          10
         ]
       ],
       "confusion_matrix_labels": [
@@ -421,34 +421,34 @@
       "confusion_matrix_note": "Rows/columns follow the target vocabulary in order.",
       "classification_report": {
         "constant_folding": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 6.0
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 10.0
         },
         "constant_propagation": {
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 4.0
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
         },
         "common_subexpression": {
-          "precision": 1.0,
+          "precision": 0.444444,
           "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 2.0
+          "f1-score": 0.615385,
+          "support": 8.0
         },
         "dead_code_elimination": {
           "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 6.0
+          "recall": 0.4,
+          "f1-score": 0.571429,
+          "support": 5.0
         },
         "algebraic_simplification": {
           "precision": 1.0,
-          "recall": 1.0,
-          "f1-score": 1.0,
-          "support": 8.0
+          "recall": 0.769231,
+          "f1-score": 0.869565,
+          "support": 13.0
         }
       },
       "absent_classes": [],
@@ -456,25 +456,25 @@
       "true_outside_vocabulary": [],
       "actual_distribution": {
         "by_class": {
-          "constant_folding": 6,
-          "constant_propagation": 4,
-          "common_subexpression": 2,
-          "dead_code_elimination": 6,
-          "algebraic_simplification": 8
+          "constant_folding": 10,
+          "constant_propagation": 8,
+          "common_subexpression": 8,
+          "dead_code_elimination": 5,
+          "algebraic_simplification": 13
         },
         "outside_vocabulary": {}
       },
       "predicted_distribution": {
         "by_class": {
-          "constant_folding": 6,
-          "constant_propagation": 4,
-          "common_subexpression": 2,
-          "dead_code_elimination": 6,
-          "algebraic_simplification": 8
+          "constant_folding": 12,
+          "constant_propagation": 2,
+          "common_subexpression": 18,
+          "dead_code_elimination": 2,
+          "algebraic_simplification": 10
         },
         "outside_vocabulary": {}
       },
-      "samples": 26
+      "samples": 44
     }
   },
   "tuning_note": "The selected configuration was chosen on the validation split, so validation metrics are mildly optimistic. The test split was used exactly once, for final evaluation.",
@@ -484,16 +484,16 @@
     "weighted_f1": "support-weighted mean of per-class F1"
   },
   "limitations": [
-    "177 programs total, 124 used for training: every reported metric is preliminary and generalization to unseen TAC programs is not established.",
-    "The corpus is generator-derived: 15 of the 17 generation categories carry exactly one winning label, and every category present in the test split also appears in the training split. A high test score therefore shows that the forest learned the generator's opportunity patterns - it is not evidence that the model generalizes to arbitrary handwritten TAC.",
-    "Held-out category coverage is incomplete: 4 of the 17 generation categories (algebraic_simplification, common_subexpression, dead_code_elimination, no_opportunity) contribute zero test samples, so those generation patterns are never evaluated directly. All five target labels still appear in the test split with support between 2 and 8, but per-category behaviour on those four is unmeasured.",
-    "num_dead_stmts is the strongest predictor (SHAP rank 1). It is a static liveness count computed from the instruction stream, not the output of running the dead-code pass, but it does directly measure the opportunity that dead_code_elimination exploits.",
-    "Classes are imbalanced (59 vs 18 in the largest/smallest class), so macro-F1 is the primary metric rather than accuracy.",
+    "239 programs total, 151 used for training, 44 for validation and 44 held out: every reported metric is preliminary and generalization to arbitrary handwritten TAC is not established.",
+    "The corpus is generator-derived and the split is GROUPED by generation family (27 templates): the 5 families in the test split are absent from training by construction (overlap with train: 0). A high test score therefore shows the forest learned the generator's opportunity patterns well enough to carry them to unseen templates - it is not evidence that the model generalizes to handwritten TAC. Split balance used only measured labels and family sizes, never features or model output.",
+    "Every target label appears in all three splits, but test support ranges from 5 to 13 samples per class, so per-class recall on the test split is unstable and the confusion matrix is sparse.",
+    "num_dead_stmts is a static liveness count computed from the instruction stream, not the output of running the dead-code pass, though it does directly measure the opportunity that dead_code_elimination exploits.",
+    "Classes are imbalanced (77 vs 34 in the largest/smallest class), so macro-F1 is the primary metric rather than accuracy.",
     "strength_reduction has no winning examples, so it is absent from the target vocabulary and the model can never predict it.",
     "strength_reduction is currently a documented no-op in the engine, which is why it never wins a label.",
-    "The 10 no_opportunity programs all share the tie-break label chosen when every pass scores zero, so part of the learned mapping reproduces the deterministic tie rule rather than an optimization insight.",
+    "28 of the 239 programs have all-zero measurements for every pass, so their label is the deterministic tie rule rather than an optimization insight; part of the learned mapping reproduces that rule.",
     "Ground-truth labels are defined by optimizer.measure's useful_improvement (statement reduction + operation reduction), so 'correct' means 'agrees with that definition', not 'provably optimal'.",
-    "Only 26 held-out test samples exist, so the confusion matrix is sparse and per-class recall on the test split is unstable (support ranges from 2 to 8).",
-    "Validation metrics are reported for the configuration selected on that same split, so they are mildly optimistic; the test split is untouched."
+    "Only 44 held-out test samples exist, so the confusion matrix is sparse and per-class metrics remain preliminary.",
+    "Validation metrics are reported for the configuration selected on that same split, so they are mildly optimistic; the test split is used exactly once, for final evaluation."
   ]
 }
