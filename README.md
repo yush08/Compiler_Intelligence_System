@@ -24,7 +24,6 @@ An academic project that takes **Three-Address Code (TAC)**, inspects its struct
 14. [Dataset and ML setup](#14-dataset-and-ml-setup)
 15. [Testing and verification](#15-testing-and-verification)
 16. [Metrics and evaluation](#16-metrics-and-evaluation)
-17. [References and project information](#17-references-and-project-information)
 
 ---
 
@@ -846,11 +845,3 @@ Execution outcome on the test split (each selector's chosen pass applied once to
 **How to reproduce:** `python -m backend.ml.train`, then `GET /api/ml/metrics` + `GET /api/ml/comparison` (or the Evaluation page). The train-split scores are in-sample (hyperparameters were chosen on validation, not test) — treat them as such. On this corpus and split the ML selector does **not** beat the rules; that result is reported, not hidden.
 
 ---
-
-## 17. References and project information
-
-- **Repository:** `https://github.com/yush08/Compiler_Intelligence_System.git` (this working tree is based on commit `3b8b7b8`, with additional uncommitted work preserved as-is).
-- **In-repo documentation:** `dataset/METHOD.md` (dataset/split method), `frontend/README.md` (legacy UI), `COMPLETION_REPORT.md`, `PHASE1_SUMMARY.txt` (historical phase reports).
-- **Key design references in code:** `backend/optimizer/engine.py` (convergence vocabulary and outcome definitions), `backend/optimizer/correctness.py` (what "equivalent" means and why it is evidence, not proof), `backend/ml/train.py` (training protocol and emitted limitations), `dataset/METHOD.md` (grouped split rationale).
-- **External tools/docs:** [FastAPI](https://fastapi.tiangolo.com/), [Uvicorn](https://www.uvicorn.org/), [scikit-learn](https://scikit-learn.org/), [SHAP](https://shap.readthedocs.io/), [Vite](https://vite.dev/), [React](https://react.dev/), [pnpm](https://pnpm.io/), [pytest](https://docs.pytest.org/).
-- No contributor list is published beyond the repository's Git history.
