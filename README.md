@@ -900,22 +900,7 @@ Never `git reset`, `git clean` or discard working-tree changes as a troubleshoot
 
 ---
 
-## 19. Future improvements
-
-*(Not implemented — explicitly separated from Features.)*
-
-- Wire the Workbench Feedback tab through a schema that accepts `selector: "feedback"` (or route the tab to `/api/compare`).
-- Extend the TAC grammar (function calls, arrays, richer control flow) and the checker's input-vector strategy accordingly.
-- Add real data-flow analysis (liveness, available expressions) to strengthen DCE/CSE and feed new features to both selectors.
-- Give Strength Reduction enough loop context to rewrite code honestly — or retire the strategy.
-- Cross-validation, calibration and confidence intervals for the ML model; more training data from more families.
-- Evaluate on a larger, externally recognised benchmark corpus.
-- Use the installed charting stack for richer visualizations on Evaluation/ML Insights.
-- Publish `scikit-learn`/`joblib`/`shap` in `requirements.txt` (or an `ml` extras file) once dependency versions are pinned.
-
----
-
-## 20. References and project information
+## 19. References and project information
 
 - **Repository:** `https://github.com/yush08/Compiler_Intelligence_System.git` (this working tree is based on commit `3b8b7b8`, with additional uncommitted work preserved as-is).
 - **In-repo documentation:** `dataset/METHOD.md` (dataset/split method), `frontend/README.md` (legacy UI), `COMPLETION_REPORT.md`, `PHASE1_SUMMARY.txt` (historical phase reports).
