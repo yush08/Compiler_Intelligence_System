@@ -2,7 +2,7 @@
 
 An academic project that takes **Three-Address Code (TAC)**, inspects its structure, decides which compiler optimization is most useful for that specific program, applies it under a semantic acceptance gate, and measures exactly how much the program improved — then compares a **Rule-Based selector** against a **trained Random Forest (ML) selector** on the same input, honestly and with reproducible numbers.
 
-**Implemented today:** a FastAPI backend over a real TAC parser, an 8-feature extractor, six optimization passes, three selection modes (Rule-Based, ML, Feedback-Guided), a bounded iterative engine with controlled fallback and per-attempt semantic checking, a before/after diff and pass-accounting pipeline, a generated 239-program labelled dataset, a deterministic training/evaluation pipeline with SHAP explainability, and a React + TypeScript UI with seven screens. Everything documented in [Features](#4-features) is working code with tests behind it.
+**Implemented today:** a FastAPI backend over a real TAC parser, an 8-feature extractor, six optimization passes, three selection modes (Rule-Based, ML, Feedback-Guided), a bounded iterative engine with controlled fallback and per-attempt semantic checking, a before/after diff and pass-accounting pipeline, a generated 241-program labelled dataset, a deterministic training/evaluation pipeline with SHAP explainability, and a React + TypeScript UI with seven screens. Everything documented in [Features](#4-features) is working code with tests behind it.
 
 ---
 
@@ -99,7 +99,7 @@ Each **iteration** is exactly one executed pass attempt. A *selection round* can
 | Bounded semantic checker (interpreter-based acceptance) | **Implemented and tested** — evidence over tested inputs, not a proof |
 | Diff, metrics, pass accounting, comparison payloads | **Implemented and tested** |
 | FastAPI (16 routes), Swagger at `/docs` | **Implemented and tested** |
-| Generated dataset (239 programs), deterministic grouped split | **Implemented, reproducible** |
+| Generated dataset (241 programs), deterministic grouped split | **Implemented, reproducible** |
 | RandomForest selector + training/evaluation/SHAP pipeline | **Implemented** — model quality is preliminary (see [Metrics and evaluation](#16-metrics-and-evaluation)) |
 | React UI (7 screens) | **Implemented** |
 | Feedback-Guided selector | **Implemented engine-side and reachable through `/api/compare`**; the Workbench tab that posts `selector: "feedback"` to `/api/simulate` is rejected by the request schema (`422`) — see [Limitations](#18-limitations) |
@@ -322,7 +322,7 @@ flowchart TD
     end
 
     subgraph ML["ML subsystem (backend/ml/)"]
-        GEN["experiments/generate_dataset.py<br/>seed 20261005, 239 programs"]
+        GEN["experiments/generate_dataset.py<br/>seed 20261005, 241 programs"]
         TRAIN["python -m backend.ml.train<br/>RandomForest + SHAP, 18-config validation grid"]
         ART["artifacts/ml/<br/>model.joblib + metadata/evaluation/<br/>comparison/feature_importance JSON"]
     end
@@ -387,7 +387,7 @@ Compiler_Intelligence_System/            (git: https://github.com/yush08/Compile
 │   └── optimizer/    engine (loop/fallback/acceptance), measure, diff, correctness
 ├── tests/            pytest suite (15 test modules + conftest.py) — see Testing
 ├── experiments/      corpus.py, generate_dataset.py (seeded), run_experiments.py
-├── dataset/          raw/ · processed/ (239×46 CSV + JSON) · metadata/ (summary, splits, validation) · METHOD.md
+├── dataset/          raw/ · processed/ (241×46 CSV + JSON) · metadata/ (summary, splits, validation) · METHOD.md
 ├── artifacts/ml/     model.joblib + metadata/evaluation/comparison/feature_importance/
 │                     confusion_matrix/classification_report JSON  (generated — never hand-edited)
 ├── report/data/      per_program.csv, results.json from experiments/run_experiments.py
@@ -723,17 +723,17 @@ python experiments/generate_dataset.py --samples 20 --out .\dataset-smoke   # sm
 ```
 
 - Seeded (`DATASET_SEED = 20261005`); re-running produces byte-identical files.
-- `239` unique TAC programs across **25 generation categories** grouped into **27 families** (one family = one template).
+- `241` unique TAC programs across **25 generation categories** grouped into **27 families** (one family = one template).
 - Labels (`best_strategy`) are **measured**: run all six passes, argmax of `useful_improvement`, ties → `STRATEGY_TIE_ORDER`. No hand-written labels.
 - Validation: parse round-trip, non-negative counts, percentages in `[0,100]`, duplicate detection, label coverage, family-split integrity (report: `dataset/metadata/validation_report.json`).
-- Deterministic **grouped split** by family (151 / 44 / 44 = 63.2 / 18.4 / 18.4 %; target was 70/15/15 — recorded honestly), stratified so all five labels appear in every split. Full method: `dataset/METHOD.md` + `splits.json`.
+- Deterministic **grouped split** by family (151 / 45 / 45 = 62.7 / 18.7 / 18.7 %; target was 70/15/15 — recorded honestly), stratified so all five labels appear in every split. Full method: `dataset/METHOD.md` + `splits.json`.
 
 Layout:
 
 ```text
 dataset/
 ├── raw/tac_programs.json                    programs + generation category/family
-├── processed/optimization_dataset.csv       239 rows × 46 columns, 0 nulls (pandas-friendly)
+├── processed/optimization_dataset.csv       241 rows × 46 columns, 0 nulls (pandas-friendly)
 ├── processed/optimization_dataset.json      same records + schema hints
 └── metadata/
     ├── summary.json                         label counts, distributions, feature ranges, coverage
@@ -752,14 +752,14 @@ python -m backend.ml.train          # from the repo root, ML packages installed
 ```
 
 - Deterministic: seed `20261005`, `n_estimators=300`, **18-config** grid selected on **validation macro-F1 only** (the test split is touched exactly once, at the end), final forest fitted on the training split only.
-- Selected config (current artifact): `max_depth=8`, `min_samples_leaf=4`, no class weighting; `model_version = rf-v1-fe522e93a82b959e`.
+- Selected config (current artifact): `max_depth=8`, `min_samples_leaf=4`, no class weighting; `model_version = rf-v1-c80226c5cd00be28`.
 - Writes seven artifacts to `artifacts/ml/`: `model.joblib`, `metadata.json`, `evaluation.json`, `feature_importance.json`, `comparison.json`, `confusion_matrix.json`, `classification_report.json`.
 - Runtime: ~30 s on the reference machine; re-running is safe (same inputs → same model; the running server picks the new artifact up by mtime without restart).
 
 ### Evaluation and inspection
 
 - Embedded in training; read live via `GET /api/ml/metrics`, `GET /api/ml/comparison`, `GET /api/ml/feature-importance` or the **Evaluation**/**ML Insights** pages.
-- Current numbers (read from `artifacts/ml/` on 2026-10-18 — see [Metrics and evaluation](#16-metrics-and-evaluation) for the table and caveats).
+- Current numbers (read from `artifacts/ml/` on 2026-10-20 — see [Metrics and evaluation](#16-metrics-and-evaluation) for the table and caveats).
 - There is **no** standalone `evaluate` command; evaluation is part of training (`backend/ml/evaluate.py` provides `classification_metrics` / `aggregate_outcome` used there).
 
 ### Missing artifacts / dataset
@@ -774,7 +774,7 @@ python -m backend.ml.train          # from the repo root, ML packages installed
 
 ## 15. Testing and verification
 
-All commands verified in this environment (2026-10-18).
+All commands verified in this environment (2026-10-20).
 
 | Check | Directory | Command | Success looks like |
 |---|---|---|---|
@@ -787,7 +787,7 @@ All commands verified in this environment (2026-10-18).
 | Integration verification | `artifacts/compiler-intelligence` | `node verify-integration.mjs` | prints `PASS`/`FAIL` lines with no `FAIL`. **Requires the backend on `127.0.0.1:8000`,** and its source references this machine's absolute paths (`D:/PROJECTS/front/...`, `D:/PROJECTS/compiler/...`) — on other layouts the file paths must be adjusted |
 | Live smoke of the API | any | `Invoke-RestMethod http://127.0.0.1:8000/api/health` | the health JSON |
 
-**Suite coverage** (15 modules + `conftest.py`, whose session fixture trains the model once against the real `artifacts/ml/`):
+**Suite coverage** (16 modules + `conftest.py`, whose session fixture trains the model once against the real `artifacts/ml/`):
 
 - All six optimizations, feature extraction, rule-based scoring, parser/IR.
 - Iterative optimizer: outcomes, fallback attribution, cycle/iteration guards, stop-reason honesty, per-attempt feature re-measurement, faculty-program battery with interpreter-established expected outputs (never hardcoded).
@@ -797,6 +797,8 @@ All commands verified in this environment (2026-10-18).
 - ML package: training determinism, prediction, SHAP explanation, evaluation, corpus comparison.
 - Dataset generator + dataset service + optimization matrix + complexity report.
 - API: all routes including error policy (`400`/`422`/`503`, `available:false` reads) via TestClient.
+
+**Total: 362 tests** (verified 2026-10-20).
 
 ---
 
@@ -821,27 +823,27 @@ All commands verified in this environment (2026-10-18).
 
 ### Dataset (verified)
 
-- 239 rows × 46 columns, 0 nulls, 239 distinct programs; 25 categories, 27 families; splits 151/44/44 (63.2/18.4/18.4 %), all five labels in every split, test families never seen in training.
+- 241 rows × 46 columns, 0 nulls, 241 distinct programs; 25 categories, 27 families; splits 151/45/45 (62.7/18.7/18.7 %), all five labels in every split, test families never seen in training.
 - Label distribution as in [§14](#14-dataset-and-ml-setup); `strength_reduction = 0` by construction.
 
-### Model evaluation (current artifacts, read 2026-10-18)
+### Model evaluation (current artifacts, read 2026-10-20)
 
-Held-out metrics (n = 44 test programs from 5 unseen families; primary metric = macro-F1):
+Held-out metrics (n = 45 test programs from 5 unseen families; primary metric = macro-F1):
 
 | Split | Accuracy | Macro-F1 | Weighted-F1 |
 |---|---|---|---|
 | Train (n=151, in-sample) | 1.0000 | 1.0000 | 1.0000 |
-| Validation (n=44) | 0.4318 | 0.4327 | 0.3934 |
-| **Test (n=44, touched once)** | **0.4545** | **0.4113** | **0.4337** |
+| Validation (n=45) | 0.4222 | 0.4306 | 0.3827 |
+| **Test (n=45, touched once)** | **0.4444** | **0.4067** | **0.4200** |
 
-Rule-Based selector on the *same* test programs: accuracy 0.6818, macro-F1 0.6058. The two selectors disagree on 12 of 44 programs.
+Rule-Based selector on the *same* test programs: accuracy 0.6889, macro-F1 0.6104. The two selectors disagree on 13 of 45 programs.
 
 Execution outcome on the test split (each selector's chosen pass applied once to an independent copy of the same original TAC):
 
 | Selector | Mean `useful_improvement` | Programs improved | Program wins |
 |---|---|---|---|
-| Rule-Based | 2.295 | 23/44 (52.3 %) | **2** |
-| ML | 2.250 | 21/44 (47.7 %) | 0 |
+| Rule-Based | 2.289 | 23/45 (51.1 %) | **2** |
+| ML | 2.267 | 21/45 (46.7 %) | 0 |
 | — | — | ties | **42** → overall winner **rule_based** |
 
 **How to reproduce:** `python -m backend.ml.train`, then `GET /api/ml/metrics` + `GET /api/ml/comparison` (or the Evaluation page). The train-split scores are in-sample (hyperparameters were chosen on validation, not test) — treat them as such. On this corpus and split the ML selector does **not** beat the rules; that result is reported, not hidden.
@@ -881,7 +883,7 @@ Never `git reset`, `git clean` or discard working-tree changes as a troubleshoot
 - **Semantic correctness is bounded evidence.** The checker executes **3 deterministic input vectors** with a **100 000-step limit** and compares printed outputs + observed variables. `equivalent` means "agreed on the tested inputs" — **not** a proof of semantic equivalence over all inputs. Nothing in the system should be read as formal verification.
 - **Strength Reduction is a no-op** by design (no loop-carrying information): it never rewrites, always measures 0, has 0 dataset labels, and is excluded from the model's classes.
 - **Algebraic Simplification** covers a fixed identity list only (`x+0`, `x*1`, `x-0`, `x/1`, `x*0`).
-- **Selection is rules + one Random Forest.** No deep learning, ensembles, or cross-validation. The model is preliminary: 151 training samples, evaluated once on 44 programs from 5 unseen families; test macro-F1 **0.4113** vs the rule selector's **0.6058** on the same programs (earlier random splits that shared templates with training were optimistic and are not reported). See `train.py`'s emitted `limitations`.
+- **Selection is rules + one Random Forest.** No deep learning, ensembles, or cross-validation. The model is preliminary: 151 training samples, evaluated once on 45 programs from 5 unseen families; test macro-F1 **0.4067** vs the rule selector's **0.6104** on the same programs (earlier random splits that shared templates with training were optimistic and are not reported). See `train.py`'s emitted `limitations`.
 - **SHAP scope:** explanations reconstruct the *predicted class* probability (TreeExplainer returns per-class contributions), values are in probability space (not log-odds), and `predict_proba` values are **not calibrated** — the payload says so.
 - **Runtime numbers are single-run, machine-dependent observations** (`runtime_ms`), not benchmarks; the complexity endpoint's repeated batches are in-request wall-clock observations on the serving machine, explicitly labelled as such.
 - **Optimization may not improve a program.** `useful_improvement` can be 0 (neutral rewrites) and operation reduction can be negative; convergence can legitimately be "nothing eligible".
@@ -915,7 +917,7 @@ Never `git reset`, `git clean` or discard working-tree changes as a troubleshoot
 
 ## 20. References and project information
 
-- **Repository:** `https://github.com/yush08/Compiler_Intelligence_System.git` (this working tree is based on commit `45dfe46`, with additional uncommitted work preserved as-is).
+- **Repository:** `https://github.com/yush08/Compiler_Intelligence_System.git` (this working tree is based on commit `3b8b7b8`, with additional uncommitted work preserved as-is).
 - **In-repo documentation:** `dataset/METHOD.md` (dataset/split method), `frontend/README.md` (legacy UI), `COMPLETION_REPORT.md`, `PHASE1_SUMMARY.txt` (historical phase reports).
 - **Key design references in code:** `backend/optimizer/engine.py` (convergence vocabulary and outcome definitions), `backend/optimizer/correctness.py` (what "equivalent" means and why it is evidence, not proof), `backend/ml/train.py` (training protocol and emitted limitations), `dataset/METHOD.md` (grouped split rationale).
 - **External tools/docs:** [FastAPI](https://fastapi.tiangolo.com/), [Uvicorn](https://www.uvicorn.org/), [scikit-learn](https://scikit-learn.org/), [SHAP](https://shap.readthedocs.io/), [Vite](https://vite.dev/), [React](https://react.dev/), [pnpm](https://pnpm.io/), [pytest](https://docs.pytest.org/).
