@@ -173,8 +173,13 @@ def dataset_summary() -> dict:
             "column": SPLIT_COLUMN,
             "note": (
                 "Partition assigned by the generator and never reassigned, so "
-                "the held-out test split stays held out."
+                "the held-out test split stays held out. Splits are grouped "
+                "by generation family: one family = one program template, and "
+                "a whole family lives in exactly one split, so no template "
+                "appears in both training and test data."
             ),
+            "grouped_by": "family" if "family" in df.columns else None,
+            "family_count": int(df["family"].nunique()) if "family" in df.columns else None,
         },
         "missing_values": {
             "total": validated.get("total_missing_values", 0),
@@ -215,6 +220,8 @@ def dataset_samples(
             | filtered[TAC_COLUMN].astype(str).str.lower().str.contains(query, regex=False)
             | filtered[TARGET_COLUMN].astype(str).str.lower().str.contains(query, regex=False)
         )
+        if "family" in filtered.columns:
+            mask = mask | filtered["family"].astype(str).str.lower().str.contains(query, regex=False)
         filtered = filtered[mask]
 
     filtered = filtered.sort_values(ID_COLUMN, kind="mergesort")
@@ -232,12 +239,14 @@ def dataset_samples(
             {
                 "sample_id": row[ID_COLUMN],
                 "generation_category": row.get("generation_category"),
+                "family": row.get("family"),
                 "split": row[SPLIT_COLUMN],
                 "best_strategy": row[TARGET_COLUMN],
                 # Stored measurement of that winner. It equals the largest
-                # `<strategy>_useful_improvement` across the six passes for all
-                # 177 rows, i.e. the same quantity the detail endpoint reports
-                # as `best_useful_improvement`.
+                # `<strategy>_useful_improvement` across the six passes for
+                # every row (verified by the generator's validation), i.e.
+                # the same quantity the detail endpoint reports as
+                # `best_useful_improvement`.
                 "best_reduction": _number(row.get("best_reduction")),
                 "instruction_count": int(row.get("num_statements", 0)),
                 "line_count": len(lines),
@@ -329,6 +338,7 @@ def dataset_sample(sample_id: str) -> dict:
         "available": True,
         "sample_id": row[ID_COLUMN],
         "generation_category": row.get("generation_category"),
+        "family": row.get("family"),
         "split": row[SPLIT_COLUMN],
         "instruction_count": int(row.get("num_statements", 0)),
         "tac_lines": tac_text.splitlines(),

@@ -24,6 +24,7 @@ class Instruction:
     GOTO = "goto"
     IF = "if"
     UMINUS = "uminus"  # unary minus
+    PRINT = "print"  # observable output: prints the value of its operand
 
     def __init__(
         self,
@@ -63,11 +64,18 @@ class Instruction:
             # `self.opcode` is the literal "if", not the relational operator.
             relop = self.relop or "?"
             return f"if {self.arg1} {relop} {self.arg2} goto {self.result}"
+        elif self.opcode == self.PRINT:
+            # Observable output; defines nothing, reads one operand.
+            return f"print {self.arg1}"
         else:
             return f"{self.result} = {self.arg1} {self.opcode} {self.arg2}"
 
     def is_assignment(self) -> bool:
         return self.opcode == self.ASSIGN
+
+    def is_print(self) -> bool:
+        """True for the observable-output instruction ``print x``."""
+        return self.opcode == self.PRINT
 
     def is_binary_op(self) -> bool:
         return self.opcode in {

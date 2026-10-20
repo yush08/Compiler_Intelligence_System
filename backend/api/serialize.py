@@ -38,6 +38,9 @@ def instruction_to_line(instr: Instruction) -> str:
         return f"if {instr.arg1} {relop} {instr.arg2} goto {instr.result}"
     if op == Instruction.UMINUS:
         return f"{instr.result} = -{instr.arg1}"
+    if op == Instruction.PRINT:
+        # Observable output: defines nothing, reads one operand.
+        return f"print {instr.arg1}"
     if op in OP_SYMBOLS:
         return f"{instr.result} = {instr.arg1} {OP_SYMBOLS[op]} {instr.arg2}"
     return str(instr)

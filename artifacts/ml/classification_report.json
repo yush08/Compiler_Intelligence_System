@@ -1,6 +1,6 @@
 {
-  "model_version": "rf-v1-fe522e93a82b959e",
-  "generated_at": "2026-10-16T16:19:27+00:00",
+  "model_version": "rf-v1-c80226c5cd00be28",
+  "generated_at": "2026-10-20T16:50:02+00:00",
   "splits": {
     "train": {
       "constant_folding": {
@@ -41,9 +41,9 @@
     },
     "validation": {
       "constant_folding": {
-        "precision": 0.24,
+        "precision": 0.230769,
         "recall": 0.75,
-        "f1": 0.363636,
+        "f1": 0.352941,
         "support": 8,
         "evaluated": true
       },
@@ -65,7 +65,7 @@
         "precision": 0.0,
         "recall": 0.0,
         "f1": 0.0,
-        "support": 12,
+        "support": 13,
         "evaluated": true
       },
       "algebraic_simplification": {
@@ -81,7 +81,7 @@
         "precision": 0.0,
         "recall": 0.0,
         "f1": 0.0,
-        "support": 10,
+        "support": 11,
         "evaluated": true
       },
       "constant_propagation": {
@@ -92,9 +92,9 @@
         "evaluated": true
       },
       "common_subexpression": {
-        "precision": 0.444444,
+        "precision": 0.421053,
         "recall": 1.0,
-        "f1": 0.615385,
+        "f1": 0.592593,
         "support": 8,
         "evaluated": true
       },

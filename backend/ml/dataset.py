@@ -69,6 +69,10 @@ LEAKY_COLUMNS = frozenset(
         ID_COLUMN,
         TAC_COLUMN,
         "generation_category",
+        # The generation family identifies the program TEMPLATE, which is
+        # exactly the provenance information a grouped split is built from;
+        # it must never become a model input.
+        "family",
         "source",
         "best_reduction",
         "best_instruction_reduction",

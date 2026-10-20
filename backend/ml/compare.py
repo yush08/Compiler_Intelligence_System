@@ -23,12 +23,14 @@ from __future__ import annotations
 
 from copy import deepcopy
 from datetime import datetime, timezone
+from time import perf_counter
 
 from ..api.pipeline import parse_source
 from ..api.pipeline import _feedback_guided_selector
 from ..api.serialize import STRATEGY_DISPLAY, tac_to_lines, tac_to_source
 from ..features.extractor import extract_features
 from ..optimizer.diff import tac_diff
+from ..optimizer.correctness import check_semantic_equivalence
 from ..optimizer.engine import OPTIMIZATION_FUNCTIONS, run_iterative_optimization
 from ..optimizer.measure import measure_pass, operation_count, work_remaining
 from ..scoring.rule_based import rule_based_strategy_scores, select_strategy, strategy_reason
@@ -54,6 +56,7 @@ __all__ = [
     "TIE",
     "RULE_WINS",
     "ML_WINS",
+    "FEEDBACK_WINS",
 ]
 
 TIE = "tie"
@@ -487,8 +490,44 @@ def run_useful_improvement(original_tac, run: dict) -> int:
     return int(measure_pass(original_tac, run["final_tac"])["useful_improvement"])
 
 
-def _run_block(original_tac, run: dict) -> dict:
-    """Common shape for one selector's executed run in the compare screen."""
+def _correctness_block(original_tac, final_tac: dict) -> dict:
+    """Run the bounded semantic checker and shape its verdict for the UI.
+
+    Returns the checker's status verbatim (``equivalent`` /
+    ``not_equivalent`` / ``inconclusive``) with its detail string and the
+    variables that were actually compared.  An unexpected checker failure is
+    reported as ``inconclusive`` rather than being swallowed or promoted to a
+    pass, so a bug in the checker can never masquerade as "the optimizer was
+    right."
+    """
+    from ..optimizer.correctness import check_semantic_equivalence
+
+    try:
+        verdict = check_semantic_equivalence(original_tac, final_tac)
+    except Exception as exc:  # noqa: BLE001 - checker bugs must not claim success
+        return {
+            "status": "inconclusive",
+            "note": f"Checker raised {type(exc).__name__}: {exc}",
+            "observed_vars": [],
+            "outputs_compared": False,
+        }
+    return {
+        "status": verdict["status"],
+        "note": verdict["detail"],
+        "observed_vars": verdict["observed_vars"],
+        "outputs_compared": verdict.get("outputs_compared", False),
+    }
+
+
+def _run_block(original_tac, run: dict, runtime_ms: float | None = None) -> dict:
+    """Common shape for one selector's executed run in the compare screen.
+
+    ``runtime_ms`` is the wall-clock time this single run took, measured by
+    the caller with ``time.perf_counter`` around exactly that run; ``None``
+    means the arm never executed and no time is claimed.  Pass counts are
+    derived from the same history the trace renders, so they can never
+    disagree with it.
+    """
     from .evaluate import aggregate_outcome
 
     iterations = []
@@ -501,6 +540,17 @@ def _run_block(original_tac, run: dict) -> dict:
                 "selected_strategy": item.get("selected_strategy"),
                 "strategy_name": STRATEGY_DISPLAY.get(item.get("selected_strategy"), item.get("selected_strategy")),
                 "selector": item.get("selector"),
+                # Selection vs execution (§2.7): what the selector predicted
+                # for this program state, what the engine actually ran, and
+                # whether that run was the prediction or a controlled
+                # fallback attempt.  The outcome names what the pass really
+                # did (applied_useful / applied_changed / executed_no_change /
+                # rejected / failed / unsupported).
+                "predicted_strategy": item.get("predicted_strategy"),
+                "origin": item.get("origin"),
+                "outcome": item.get("outcome"),
+                "rejection_reason": item.get("rejection_reason"),
+                "correctness_note": item.get("correctness_note"),
                 "rule_scores": item.get("scores"),
                 "rule_selected_strategy": item.get("rule_selected_strategy"),
                 "ml_predicted_strategy": item.get("ml_predicted_strategy"),
@@ -540,6 +590,26 @@ def _run_block(original_tac, run: dict) -> dict:
         "final_operation_count": operation_count(run["final_tac"]),
         "changed": run["total_iterations"] > 0
         and tac_to_source(original_tac) != tac_to_source(run["final_tac"]),
+        # Optimization-metrics accounting (§7): attempted vs actually changed
+        # vs accepted, all read from the same history shown in the trace.
+        "passes_attempted": len(iterations),
+        "passes_changed": sum(1 for item in iterations if item.get("changed")),
+        "passes_unchanged": sum(1 for item in iterations if not item.get("changed")),
+        "passes_accepted": sum(1 for item in iterations if item.get("accepted")),
+        # Attempts the semantic acceptance check rejected (kept out of the
+        # final program) and attempts made by the controlled fallback rather
+        # than the selector's own prediction.
+        "passes_rejected": sum(1 for item in iterations if item.get("outcome") == "rejected"),
+        "fallback_attempts": sum(1 for item in iterations if item.get("origin") == "fallback"),
+        "runtime_ms": runtime_ms,
+        # Semantic validation (§P9 regression): the final program is executed
+        # against the original under backend.tac.interpreter and compared on
+        # the values of every variable the optimized program still reads, plus
+        # termination behavior.  "equivalent" is bounded evidence over the
+        # checker's input vectors - never a claim of correctness for all
+        # inputs; see backend.optimizer.correctness for the exact contract.
+        "correctness_checked": True,
+        "correctness": _correctness_block(original_tac, run["final_tac"]),
     }
 
 
@@ -586,14 +656,25 @@ def compare_source(source: str, max_iterations: int = 20, include_shap: bool = T
     # other's mutations. All carry the shared context so each timeline shows
     # what the *other* selectors would have chosen at that same point.
     shared_context = _comparison_iteration_context(include_shap)
+    # One-time warm-up (first module imports, first model prediction, first
+    # SHAP background) runs BEFORE any arm is timed, so the arm that happens
+    # to run first does not absorb setup costs the other arms skip.  Nothing
+    # here is measured: each runtime_ms below still covers exactly one engine
+    # run (feature extraction + selection + passes), and correctness checking
+    # happens later, outside every timing.
+    shared_context(tac, features, rule_strategy)
+    # Wall-clock time of each run, measured around exactly that run.
+    rule_t0 = perf_counter()
     rule_run = run_iterative_optimization(
         deepcopy(tac),
         max_iterations=max_iterations,
         iteration_context=shared_context,
         selector_name="rule",
     )
+    rule_runtime_ms = round((perf_counter() - rule_t0) * 1000, 3)
 
     if ml_available:
+        ml_t0 = perf_counter()
         ml_run = run_iterative_optimization(
             deepcopy(tac),
             max_iterations=max_iterations,
@@ -601,17 +682,19 @@ def compare_source(source: str, max_iterations: int = 20, include_shap: bool = T
             iteration_context=shared_context,
             selector_name="ml",
         )
+        ml_runtime_ms = round((perf_counter() - ml_t0) * 1000, 3)
         ml_block = {
             "available": True,
             "strategy": ml_strategy,
             "reason": None,
-            **_run_block(tac, ml_run),
+            **_run_block(tac, ml_run, runtime_ms=ml_runtime_ms),
         }
         ml_block["ml_probabilities"] = ml_result.get("probabilities")
         ml_block["predicted_probability"] = ml_result.get("predicted_probability")
         ml_block["model_version"] = ml_result.get("model_version")
 
         # Feedback-Guided ML run
+        fb_t0 = perf_counter()
         feedback_run = run_iterative_optimization(
             deepcopy(tac),
             max_iterations=max_iterations,
@@ -619,11 +702,12 @@ def compare_source(source: str, max_iterations: int = 20, include_shap: bool = T
             iteration_context=shared_context,
             selector_name="feedback",
         )
+        feedback_runtime_ms = round((perf_counter() - fb_t0) * 1000, 3)
         feedback_block = {
             "available": True,
             "strategy": None,  # No single strategy - varies per iteration
             "reason": None,
-            **_run_block(tac, feedback_run),
+            **_run_block(tac, feedback_run, runtime_ms=feedback_runtime_ms),
         }
         feedback_block["ml_probabilities"] = ml_result.get("probabilities")
         feedback_block["predicted_probability"] = ml_result.get("predicted_probability")
@@ -649,6 +733,22 @@ def compare_source(source: str, max_iterations: int = 20, include_shap: bool = T
             "original_operation_count": operation_count(tac),
             "final_operation_count": operation_count(tac),
             "changed": False,
+            # Never-executed arm: no passes, no measured time, no claims.
+            "passes_attempted": 0,
+            "passes_changed": 0,
+            "passes_unchanged": 0,
+            "passes_accepted": 0,
+            "runtime_ms": None,
+            "correctness_checked": False,
+            "correctness": {
+                "status": "not_run",
+                "note": (
+                    "This arm did not run, so no time, no pass counts and no "
+                    "semantic check are reported for it."
+                ),
+                "observed_vars": [],
+                "outputs_compared": False,
+            },
         }
         feedback_run = None
         feedback_block = {
@@ -670,6 +770,22 @@ def compare_source(source: str, max_iterations: int = 20, include_shap: bool = T
             "original_operation_count": operation_count(tac),
             "final_operation_count": operation_count(tac),
             "changed": False,
+            # Never-executed arm: no passes, no measured time, no claims.
+            "passes_attempted": 0,
+            "passes_changed": 0,
+            "passes_unchanged": 0,
+            "passes_accepted": 0,
+            "runtime_ms": None,
+            "correctness_checked": False,
+            "correctness": {
+                "status": "not_run",
+                "note": (
+                    "This arm did not run, so no time, no pass counts and no "
+                    "semantic check are reported for it."
+                ),
+                "observed_vars": [],
+                "outputs_compared": False,
+            },
         }
 
     rule_block = {
@@ -678,7 +794,7 @@ def compare_source(source: str, max_iterations: int = 20, include_shap: bool = T
         "strategy_name": STRATEGY_DISPLAY.get(rule_strategy, rule_strategy),
         "rationale": strategy_reason(tac, rule_strategy),
         "scores": {k: round(float(v), 4) for k, v in rule_scores.items()},
-        **_run_block(tac, rule_run),
+        **_run_block(tac, rule_run, runtime_ms=rule_runtime_ms),
     }
 
     # Add attempted candidates to feedback block for traceability
@@ -699,27 +815,38 @@ def compare_source(source: str, max_iterations: int = 20, include_shap: bool = T
     ml_gain = ml_block["useful_improvement"] if ml_block["available"] else None
     feedback_gain = feedback_block["useful_improvement"] if feedback_block["available"] else None
 
-    # Determine winner among all three
-    gains = {
-        "rule_based": rule_gain,
-        "ml": ml_gain if ml_gain is not None else -1,
-        "feedback": feedback_gain if feedback_gain is not None else -1,
-    }
-    max_gain = max(gains.values())
-    winners = [k for k, v in gains.items() if v == max_gain]
-
-    if len(winners) > 1:
-        winner = TIE
-        winner_note = "Multiple selectors produced the same measured improvement."
-    elif winners[0] == "rule_based":
-        winner = RULE_WINS
-        winner_note = "Rule-Based removed more work overall."
-    elif winners[0] == "ml":
-        winner = ML_WINS
-        winner_note = "ML removed more work overall."
+    if not ml_available:
+        # ML (and therefore Feedback-Guided ML) never ran, so there is only
+        # one measured outcome: naming Rule-Based the "winner" would be
+        # winning a race with a single runner. The blocks above already
+        # report the unavailability explicitly, so no winner is declared.
+        winner = None
+        winner_note = (
+            "ML is unavailable, so only the Rule-Based outcome was measured — "
+            "no winner is declared."
+        )
     else:
-        winner = FEEDBACK_WINS
-        winner_note = "Feedback-Guided ML removed more work overall."
+        # Determine winner among all three
+        gains = {
+            "rule_based": rule_gain,
+            "ml": ml_gain if ml_gain is not None else -1,
+            "feedback": feedback_gain if feedback_gain is not None else -1,
+        }
+        max_gain = max(gains.values())
+        winners = [k for k, v in gains.items() if v == max_gain]
+
+        if len(winners) > 1:
+            winner = TIE
+            winner_note = "Multiple selectors produced the same measured improvement."
+        elif winners[0] == "rule_based":
+            winner = RULE_WINS
+            winner_note = "Rule-Based removed more work overall."
+        elif winners[0] == "ml":
+            winner = ML_WINS
+            winner_note = "ML removed more work overall."
+        else:
+            winner = FEEDBACK_WINS
+            winner_note = "Feedback-Guided ML removed more work overall."
 
     agreement = _agreement_block(
         tac, ml_available, rule_run, ml_run, feedback_run, rule_strategy, ml_strategy

@@ -20,6 +20,7 @@ Supports:
 - Labels: identifier followed by colon
 - Goto: goto label
 - Conditional if: if condition goto label
+- Observable output: print x   (and print 42)
 """
 
 import re
@@ -39,6 +40,7 @@ def parse_tac(source: str) -> TAC:
         L1:                 (label)
         goto L2             (unconditional jump)
         if x > 0 goto L1   (conditional jump)
+        print result        (observable output of a variable or literal)
     """
     tac = TAC()
     lines = source.split("\n")
@@ -85,6 +87,17 @@ def _parse_line(line: str) -> Instruction | None:
             arg2=arg2,
             relop=op,
         )
+
+    # Observable output: "print result" or "print 42".
+    # This used to fall through to `return None`, i.e. the line was silently
+    # dropped, which is why an optimizer could delete everything a program
+    # computed "for" its output: the output statement was never in the TAC.
+    print_match = re.match(
+        r"^print\s+([A-Za-z_][A-Za-z0-9_]*|-?\d+(?:\.\d+)?)\s*$",
+        line,
+    )
+    if print_match:
+        return Instruction(Instruction.PRINT, arg1=print_match.group(1))
 
     # Assignment: "result = arg1 op arg2" or "result = value"
     assign_match = re.match(

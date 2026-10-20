@@ -212,17 +212,119 @@ def test_split_is_a_disjoint_partition_of_the_records(tmp_path):
     import json
 
     _small(tmp_path)
-    splits = json.loads(
+    payload = json.loads(
         (tmp_path / "metadata" / "splits.json").read_text(encoding="utf-8")
-    )["splits"]
+    )
+    splits = payload["splits"]
 
     ids = splits["train"] + splits["validation"] + splits["test"]
     assert len(ids) == 20
     assert len(set(ids)) == 20, "a sample appeared in more than one split"
-    # 70/15/15 of 20 -> 14 / 3 / 3
-    assert len(splits["train"]) == 14
-    assert len(splits["validation"]) == 3
-    assert len(splits["test"]) == 3
+    # The split is GROUPED by generation family: families move as blocks, so
+    # exact 70/15/15 counts are not asserted here - all three splits must be
+    # non-empty, the family guarantee must hold, and the pre-registered
+    # method must travel with the data (the shipped dataset's actual ratios
+    # are asserted against the target in test_dataset_ml.py).
+    assert all(splits[name] for name in ("train", "validation", "test"))
+    assert payload["grouped_by"] == "family"
+    assert payload["families_intact"] is True
+    assert payload["method"]
+    assert set(payload["target_ratios"]) == {"train", "validation", "test"}
+    assert payload["family_count"] >= 10  # stride sample still spans families
+
+    # Family integrity is enforced at generation time: the validation report
+    # (same records, same run) must agree and must have passed.
+    report = json.loads(
+        (tmp_path / "metadata" / "validation_report.json").read_text(encoding="utf-8")
+    )
+    assert report["passed"] is True, report["errors"]
+    assert report["family_count"] == payload["family_count"]
+
+
+def _synthetic_records(spec):
+    """family -> {label: count} -> flat record list (measured-label shaped)."""
+    records = []
+    number = 0
+    for family, label_counts in spec.items():
+        for label, count in label_counts.items():
+            for _ in range(count):
+                number += 1
+                records.append(
+                    {
+                        "sample_id": f"synthetic-{number:03d}",
+                        "family": family,
+                        "best_strategy": label,
+                    }
+                )
+    return records
+
+
+def test_assign_splits_deals_whole_families_with_documented_fallbacks():
+    from generate_dataset import assign_splits
+
+    spec = {
+        "f_cf_a": {"constant_folding": 10},
+        "f_cf_b": {"constant_folding": 8},
+        "f_cf_c": {"constant_folding": 8},
+        "f_cp_a": {"constant_propagation": 18},
+        "f_cp_b": {"constant_propagation": 8},
+        "f_cp_c": {"constant_propagation": 8},
+        "f_dce_a": {"dead_code_elimination": 1},
+        "f_dce_b": {"dead_code_elimination": 6},
+        "f_dce_c": {"dead_code_elimination": 4},
+        "f_dce_d": {"dead_code_elimination": 4},
+        "f_alone": {"algebraic_simplification": 5},
+        "f_cse_a": {"common_subexpression": 3},
+        "f_cse_b": {"common_subexpression": 3},
+    }
+    records = _synthetic_records(spec)
+    splits = assign_splits(records, seed=12345)
+
+    # Complete, disjoint partition.
+    ids = splits["train"] + splits["validation"] + splits["test"]
+    assert len(ids) == len(records)
+    assert len(set(ids)) == len(records)
+
+    # Family integrity: every record of a family shares one split.
+    family_splits = {}
+    for record in records:
+        family_splits.setdefault(record["family"], set()).add(record["split"])
+    assert all(len(names) == 1 for names in family_splits.values()), family_splits
+
+    split_of = {record["sample_id"]: record["split"] for record in records}
+
+    def splits_for(label):
+        return {
+            split_of[record["sample_id"]]
+            for record in records
+            if record["best_strategy"] == label
+        }
+
+    # Labels with >= 3 families reach all three splits.
+    for label in (
+        "constant_folding",
+        "constant_propagation",
+        "dead_code_elimination",
+    ):
+        assert splits_for(label) == {"train", "validation", "test"}, label
+    # Documented fallbacks: 1 family -> train only; 2 families -> train+test.
+    assert splits_for("algebraic_simplification") == {"train"}
+    assert splits_for("common_subexpression") == {"train", "test"}
+
+    # Size-aware dealing: the big CP family lands in train, the two small
+    # ones cover validation and test (target = 15% of the group).
+    cp_family_of = {}
+    for record in records:
+        if record["best_strategy"] == "constant_propagation":
+            cp_family_of[record["family"]] = record["split"]
+    assert cp_family_of["f_cp_a"] == "train"
+    assert {cp_family_of["f_cp_b"], cp_family_of["f_cp_c"]} == {
+        "validation",
+        "test",
+    }
+
+    # Determinism: the same seed on the same spec reproduces the assignment.
+    assert assign_splits(_synthetic_records(spec), seed=12345) == splits
 
 
 def test_strength_reduction_is_reported_as_a_honest_zero(tmp_path):

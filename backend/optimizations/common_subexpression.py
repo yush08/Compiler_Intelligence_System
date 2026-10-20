@@ -29,6 +29,17 @@ def common_subexpression_elimination(tac: TAC) -> TAC:
     temporary holding its result) is redefined. Without that invalidation the
     rewrite was unsound: `t1 = a + b / a = 5 / t2 = a + b` became
     `t2 = t1`, which computes with the old `a`.
+
+    The cache is also cleared at every label, for the same must-property
+    reason constant propagation clears its environment: inside a label-free
+    stretch the only way to re-execute an earlier instruction is to re-enter
+    the stretch, and re-entry can only happen through a label.  Across a
+    label, a back edge can bring different operand values to a later
+    occurrence than the ones the cached temporary holds:
+    `t = a + b / loop: u = a + b / a = a + 1 / if u < 100 goto loop` became
+    `u = t` - a stale value every iteration, freezing `u` and turning a
+    terminating loop into an infinite one.  Checked by
+    tests/test_semantic_preservation.py.
     """
     if not tac.instructions:
         return tac
@@ -38,6 +49,12 @@ def common_subexpression_elimination(tac: TAC) -> TAC:
     expr_map = {}  # signature -> result temp
 
     for instr in tac.instructions:
+        if instr.opcode == Instruction.LABEL:
+            # Join point: cached expressions are only valid within this
+            # label-free stretch.  Keep the label verbatim.
+            expr_map.clear()
+            result_tac.add(instr)
+            continue
         new_instr, created_sig = _cse_instruction(instr, expr_map)
         result_tac.add(new_instr if new_instr else instr)
         _invalidate(expr_map, instr.result, created_sig)

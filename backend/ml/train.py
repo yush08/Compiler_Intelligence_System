@@ -20,11 +20,18 @@ What it does
    comparison.
 
 The final model is deliberately *not* refitted on train+validation: keeping it
-trained on exactly the 124 training rows means every reported metric describes
+trained on exactly the training split means every reported metric describes
 the artifact that was saved, with no train/validation ambiguity.
 
 Reproducibility: a single fixed seed drives the split, the grid search and the
 forest, so two runs on the same dataset produce byte-identical artifacts.
+
+The split itself comes from the generator and is GROUPED by generation family
+(one program template = one family, families never straddle splits), so the
+held-out test split contains whole templates the model has never seen.  Every
+number in the printed and stored limitations list is computed from the actual
+dataset and split at training time via :func:`limitations` - no count is
+hard-coded, so the disclosure cannot go stale when the dataset changes.
 """
 
 from __future__ import annotations
@@ -42,6 +49,7 @@ import pandas as pd
 from ..features.extractor import FEATURE_KEYS
 from .dataset import (
     DEFAULT_DATASET_PATH,
+    STRATEGIES,
     TARGET_COLUMN,
     discover_target_classes,
     feature_matrix,
@@ -51,7 +59,7 @@ from .dataset import (
 )
 from .evaluate import classification_metrics
 
-__all__ = ["train", "DEFAULT_SEED", "MODEL_VERSION_PREFIX"]
+__all__ = ["train", "limitations", "DEFAULT_SEED", "MODEL_VERSION_PREFIX"]
 
 DEFAULT_SEED = 20261005
 MODEL_VERSION_PREFIX = "rf-v1"
@@ -59,8 +67,8 @@ MODEL_VERSION_PREFIX = "rf-v1"
 # Trees only reduce variance; more of them cannot overfit. Not worth tuning.
 N_ESTIMATORS = 300
 
-# A small fixed grid - not a random or Bayesian search. The dataset has 124
-# training rows, so anything larger would be fitting noise.
+# A small fixed grid - not a random or Bayesian search. The training split has
+# only a few hundred rows, so anything larger would be fitting noise.
 GRID = [
     {"max_depth": depth, "min_samples_leaf": leaf, "class_weight": weight}
     for depth in (None, 8, 12)
@@ -68,42 +76,121 @@ GRID = [
     for weight in (None, "balanced")
 ]
 
-LIMITATIONS = [
-    "177 programs total, 124 used for training: every reported metric is "
-    "preliminary and generalization to unseen TAC programs is not established.",
-    "The corpus is generator-derived: 15 of the 17 generation categories carry "
-    "exactly one winning label, and every category present in the test split "
-    "also appears in the training split. A high test score therefore shows "
-    "that the forest learned the generator's opportunity patterns - it is not "
-    "evidence that the model generalizes to arbitrary handwritten TAC.",
-    "Held-out category coverage is incomplete: 4 of the 17 generation "
-    "categories (algebraic_simplification, common_subexpression, "
-    "dead_code_elimination, no_opportunity) contribute zero test samples, so "
-    "those generation patterns are never evaluated directly. All five target "
-    "labels still appear in the test split with support between 2 and 8, but "
-    "per-category behaviour on those four is unmeasured.",
-    "num_dead_stmts is the strongest predictor (SHAP rank 1). It is a static "
-    "liveness count computed from the instruction stream, not the output of "
-    "running the dead-code pass, but it does directly measure the opportunity "
-    "that dead_code_elimination exploits.",
-    "Classes are imbalanced (59 vs 18 in the largest/smallest class), so "
-    "macro-F1 is the primary metric rather than accuracy.",
-    "strength_reduction has no winning examples, so it is absent from the "
-    "target vocabulary and the model can never predict it.",
-    "strength_reduction is currently a documented no-op in the engine, which "
-    "is why it never wins a label.",
-    "The 10 no_opportunity programs all share the tie-break label chosen when "
-    "every pass scores zero, so part of the learned mapping reproduces the "
-    "deterministic tie rule rather than an optimization insight.",
-    "Ground-truth labels are defined by optimizer.measure's "
-    "useful_improvement (statement reduction + operation reduction), so "
-    "'correct' means 'agrees with that definition', not 'provably optimal'.",
-    "Only 26 held-out test samples exist, so the confusion matrix is sparse "
-    "and per-class recall on the test split is unstable (support ranges from "
-    "2 to 8).",
-    "Validation metrics are reported for the configuration selected on that "
-    "same split, so they are mildly optimistic; the test split is untouched.",
-]
+
+def limitations(df, frames, labels: list[str]) -> list[str]:
+    """Honest disclosure computed from THIS dataset and THESE splits.
+
+    Every count here is derived from the actual data at training time, so the
+    statement cannot drift out of sync with the artifact the way a hard-coded
+    list does when the corpus is regenerated.
+    """
+    n_total = int(len(df))
+    n_train = int(len(frames["train"]))
+    n_val = int(len(frames["validation"]))
+    n_test = int(len(frames["test"]))
+
+    # --- grouped split facts ------------------------------------------------
+    has_families = "family" in df.columns
+    family_count = int(df["family"].nunique()) if has_families else 0
+    train_families = set(frames["train"]["family"]) if has_families else set()
+    val_families = set(frames["validation"]["family"]) if has_families else set()
+    test_families = set(frames["test"]["family"]) if has_families else set()
+    leaked_to_val = sorted(val_families & train_families)
+    leaked_to_test = sorted(test_families & train_families)
+    unseen_test_families = sorted(test_families - train_families)
+
+    # --- label coverage per split -----------------------------------------
+    test_support = frames["test"][TARGET_COLUMN].value_counts()
+    val_labels = set(frames["validation"][TARGET_COLUMN])
+    train_labels = set(frames["train"][TARGET_COLUMN])
+    missing_from_val = [name for name in labels if name not in val_labels]
+    missing_from_test = [name for name in labels if name not in set(test_support.index)]
+    supports = [int(test_support.get(name, 0)) for name in labels]
+
+    # --- class imbalance ----------------------------------------------------
+    counts = df[TARGET_COLUMN].value_counts()
+    largest = int(counts.max()) if len(counts) else 0
+    smallest = int(counts.min()) if len(counts) else 0
+
+    # --- programs labelled by the all-zero tie rule ------------------------
+    measurement_columns = [f"{name}_useful_improvement" for name in STRATEGIES]
+    tie_labelled = None
+    if all(column in df.columns for column in measurement_columns):
+        tie_labelled = int((df[measurement_columns] == 0).all(axis=1).sum())
+
+    items = [
+        f"{n_total} programs total, {n_train} used for training, {n_val} for "
+        f"validation and {n_test} held out: every reported metric is "
+        "preliminary and generalization to arbitrary handwritten TAC is not "
+        "established.",
+        f"The corpus is generator-derived and the split is GROUPED by "
+        f"generation family ({family_count} templates): the "
+        f"{len(unseen_test_families)} families in the test split are absent "
+        f"from training by construction (overlap with train: "
+        f"{len(leaked_to_test)}). A high test score therefore shows the "
+        f"forest learned the generator's opportunity patterns well enough to "
+        "carry them to unseen templates - it is not evidence that the model "
+        "generalizes to handwritten TAC. Split balance used only measured "
+        "labels and family sizes, never features or model output.",
+    ]
+
+    if missing_from_test or missing_from_val:
+        gaps = []
+        if missing_from_val:
+            gaps.append(f"validation is missing {', '.join(missing_from_val)}")
+        if missing_from_test:
+            gaps.append(f"test is missing {', '.join(missing_from_test)}")
+        items.append(
+            "Not every label reached every split because a label with fewer "
+            "than three generation families cannot cover three splits: "
+            + "; ".join(gaps)
+            + ". Those labels are therefore not evaluated on that split."
+        )
+    else:
+        items.append(
+            "Every target label appears in all three splits, but test "
+            f"support ranges from {min(supports)} to {max(supports)} samples "
+            "per class, so per-class recall on the test split is unstable "
+            "and the confusion matrix is sparse."
+        )
+
+    items += [
+        "num_dead_stmts is a static liveness count computed from the "
+        "instruction stream, not the output of running the dead-code pass, "
+        "though it does directly measure the opportunity that "
+        "dead_code_elimination exploits.",
+        f"Classes are imbalanced ({largest} vs {smallest} in the "
+        "largest/smallest class), so macro-F1 is the primary metric rather "
+        "than accuracy.",
+    ]
+
+    if "strength_reduction" not in labels:
+        items += [
+            "strength_reduction has no winning examples, so it is absent "
+            "from the target vocabulary and the model can never predict it.",
+            "strength_reduction is currently a documented no-op in the "
+            "engine, which is why it never wins a label.",
+        ]
+
+    if tie_labelled:
+        items.append(
+            f"{tie_labelled} of the {n_total} programs have all-zero "
+            "measurements for every pass, so their label is the "
+            "deterministic tie rule rather than an optimization insight; "
+            "part of the learned mapping reproduces that rule."
+        )
+
+    items += [
+        "Ground-truth labels are defined by optimizer.measure's "
+        "useful_improvement (statement reduction + operation reduction), so "
+        "'correct' means 'agrees with that definition', not 'provably optimal'.",
+        f"Only {n_test} held-out test samples exist, so the confusion "
+        "matrix is sparse and per-class metrics remain preliminary.",
+        "Validation metrics are reported for the configuration selected on "
+        "that same split, so they are mildly optimistic; the test split is "
+        "used exactly once, for final evaluation.",
+    ]
+    return items
 
 
 def _file_sha256(path: Path) -> str:
@@ -293,6 +380,10 @@ def train(
         + ", ".join(f"{name}={len(frame)}" for name, frame in frames.items())
     )
 
+    # Everything below (metadata, evaluation, printed report) discloses the
+    # SAME computed facts about this exact dataset and split.
+    disclosure = limitations(df, frames, labels)
+
     # --- 2. inputs ---------------------------------------------------------
     X_all, y_all = feature_matrix(df)
     X_train, y_train = feature_matrix(frames["train"])
@@ -395,7 +486,7 @@ def train(
             ],
             "selected": best["config"],
         },
-        "limitations": LIMITATIONS,
+        "limitations": disclosure,
         "training_command": "python -m backend.ml.train",
     }
 
@@ -436,7 +527,7 @@ def train(
             "macro_f1": "unweighted mean of per-class F1; primary metric under imbalance",
             "weighted_f1": "support-weighted mean of per-class F1",
         },
-        "limitations": LIMITATIONS,
+        "limitations": disclosure,
     }
 
     confusion = {
@@ -556,7 +647,7 @@ def train(
     say("")
     say("Limitations")
     say("-" * 78)
-    for limitation in LIMITATIONS:
+    for limitation in disclosure:
         say(f"  - {limitation}")
 
     say("")

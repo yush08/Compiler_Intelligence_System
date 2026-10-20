@@ -36,8 +36,8 @@ pytestmark = requires_ml
 def test_dataset_validation_passes(ml_artifacts):
     report = ds.validate_dataset(ds.load_dataset())
     assert report["passed"] is True, report["errors"]
-    assert report["rows"] == 177
-    assert report["columns"] == 45
+    assert report["rows"] == 241
+    assert report["columns"] == 46
 
 
 def test_feature_order_is_identical_everywhere():
@@ -93,7 +93,7 @@ def test_feature_matrix_is_restricted_to_the_eight_columns():
     df = ds.load_dataset()
     X, y = ds.feature_matrix(df)
     assert list(X.columns) == FEATURE_KEYS
-    assert X.shape == (177, 8)
+    assert X.shape == (241, 8)
     assert set(y.unique()) <= set(ds.STRATEGIES)
 
 
@@ -228,7 +228,11 @@ def test_predict_probabilities_are_a_valid_distribution(ml_artifacts):
     assert result["available"] is True
     assert result["predicted_strategy"] in result["classes"]
     total = sum(result["probabilities"].values())
-    assert abs(total - 1.0) < 1e-6, total
+    # The API rounds each probability to 6 decimals for display, so the sum can
+    # drift by up to ~5e-6 (6 classes x 5e-7 rounding). 1e-6 was tighter than
+    # that rounding can satisfy; 1e-5 checks the distribution without failing on
+    # a display artifact.
+    assert abs(total - 1.0) < 1e-5, total
     assert result["predicted_probability"] == pytest.approx(
         max(result["probabilities"].values()), abs=1e-9
     )

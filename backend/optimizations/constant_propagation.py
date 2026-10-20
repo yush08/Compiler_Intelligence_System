@@ -19,6 +19,18 @@ def constant_propagation(tac: TAC) -> TAC:
     environment in a separate pre-pass and then applied it in a second pass,
     so a *later* redefinition of a variable overwrote the value an *earlier*
     read had to see: `a = 10 / x = a / a = 99` propagated 99 into `x`.
+
+    The environment is a *must* fact: "every path reaching this instruction
+    has x == 5".  A forward pass establishes that fact exactly while control
+    can only arrive by straight-line fall-through, which holds inside a
+    label-free stretch - jumps can only target labels, so every join point in
+    the program is a label instruction.  The environment is therefore cleared
+    at every label.  Without that reset the fact was carried across joins and
+    loops, and a constant bound before a label was propagated into code that
+    a different path (or a later loop iteration) reached with a different
+    value: `i = 0 / loop: i = i + 1 / if i < 10 goto loop` became
+    `i = 1 / loop: i = 1 / ...`, turning a terminating loop into an infinite
+    one.  Checked by tests/test_semantic_preservation.py.
     """
     if not tac.instructions:
         return tac
@@ -27,6 +39,13 @@ def constant_propagation(tac: TAC) -> TAC:
     result_tac = TAC()
 
     for instr in tac.instructions:
+        if instr.opcode == Instruction.LABEL:
+            # Join point: control may arrive here from several paths (or a
+            # back edge), so no constant binding survives into the stretch
+            # that follows.  The label itself is kept verbatim.
+            const_env.clear()
+            result_tac.add(instr)
+            continue
         new_instr = _propagate_instruction(instr, const_env)
         applied = new_instr if new_instr else instr
         result_tac.add(applied)

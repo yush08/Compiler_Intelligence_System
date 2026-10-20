@@ -1,7 +1,7 @@
 {
   "available": true,
   "split": "test",
-  "evaluated_samples": 44,
+  "evaluated_samples": 45,
   "target_classes": [
     "constant_folding",
     "constant_propagation",
@@ -9,7 +9,7 @@
     "dead_code_elimination",
     "algebraic_simplification"
   ],
-  "generated_at": "2026-10-16T16:19:35+00:00",
+  "generated_at": "2026-10-20T16:50:12+00:00",
   "methodology": {
     "prediction": "Each selector's decision is compared with the stored best_strategy label. The label is never used as either selector's prediction.",
     "optimization": "Each selector's chosen strategy is applied once to an independent deepcopy of the same original TAC and measured with optimizer.measure.measure_pass.",
@@ -19,7 +19,7 @@
   },
   "prediction": {
     "rule_based": {
-      "evaluated_samples": 44,
+      "evaluated_samples": 45,
       "labels": [
         "constant_folding",
         "constant_propagation",
@@ -27,15 +27,15 @@
         "dead_code_elimination",
         "algebraic_simplification"
       ],
-      "accuracy": 0.681818,
-      "macro_f1": 0.605846,
-      "weighted_f1": 0.63736,
+      "accuracy": 0.688889,
+      "macro_f1": 0.610421,
+      "weighted_f1": 0.64186,
       "per_class": {
         "constant_folding": {
-          "precision": 0.416667,
+          "precision": 0.44,
           "recall": 1.0,
-          "f1": 0.588235,
-          "support": 10,
+          "f1": 0.611111,
+          "support": 11,
           "evaluated": true
         },
         "constant_propagation": {
@@ -69,7 +69,7 @@
       },
       "confusion_matrix": [
         [
-          10,
+          11,
           0,
           0,
           0,
@@ -114,10 +114,10 @@
       "confusion_matrix_note": "Rows/columns follow the target vocabulary in order.",
       "classification_report": {
         "constant_folding": {
-          "precision": 0.416667,
+          "precision": 0.44,
           "recall": 1.0,
-          "f1-score": 0.588235,
-          "support": 10.0
+          "f1-score": 0.611111,
+          "support": 11.0
         },
         "constant_propagation": {
           "precision": 0.0,
@@ -149,7 +149,7 @@
       "true_outside_vocabulary": [],
       "actual_distribution": {
         "by_class": {
-          "constant_folding": 10,
+          "constant_folding": 11,
           "constant_propagation": 8,
           "common_subexpression": 8,
           "dead_code_elimination": 5,
@@ -159,7 +159,7 @@
       },
       "predicted_distribution": {
         "by_class": {
-          "constant_folding": 24,
+          "constant_folding": 25,
           "constant_propagation": 0,
           "common_subexpression": 8,
           "dead_code_elimination": 2,
@@ -169,7 +169,7 @@
       }
     },
     "ml": {
-      "evaluated_samples": 44,
+      "evaluated_samples": 45,
       "labels": [
         "constant_folding",
         "constant_propagation",
@@ -177,15 +177,15 @@
         "dead_code_elimination",
         "algebraic_simplification"
       ],
-      "accuracy": 0.454545,
-      "macro_f1": 0.411276,
-      "weighted_f1": 0.43374,
+      "accuracy": 0.444444,
+      "macro_f1": 0.406717,
+      "weighted_f1": 0.42005,
       "per_class": {
         "constant_folding": {
           "precision": 0.0,
           "recall": 0.0,
           "f1": 0.0,
-          "support": 10,
+          "support": 11,
           "evaluated": true
         },
         "constant_propagation": {
@@ -196,9 +196,9 @@
           "evaluated": true
         },
         "common_subexpression": {
-          "precision": 0.444444,
+          "precision": 0.421053,
           "recall": 1.0,
-          "f1": 0.615385,
+          "f1": 0.592593,
           "support": 8,
           "evaluated": true
         },
@@ -221,7 +221,7 @@
         [
           0,
           0,
-          10,
+          11,
           0,
           0
         ],
@@ -267,7 +267,7 @@
           "precision": 0.0,
           "recall": 0.0,
           "f1-score": 0.0,
-          "support": 10.0
+          "support": 11.0
         },
         "constant_propagation": {
           "precision": 0.0,
@@ -276,9 +276,9 @@
           "support": 8.0
         },
         "common_subexpression": {
-          "precision": 0.444444,
+          "precision": 0.421053,
           "recall": 1.0,
-          "f1-score": 0.615385,
+          "f1-score": 0.592593,
           "support": 8.0
         },
         "dead_code_elimination": {
@@ -299,7 +299,7 @@
       "true_outside_vocabulary": [],
       "actual_distribution": {
         "by_class": {
-          "constant_folding": 10,
+          "constant_folding": 11,
           "constant_propagation": 8,
           "common_subexpression": 8,
           "dead_code_elimination": 5,
@@ -311,7 +311,7 @@
         "by_class": {
           "constant_folding": 12,
           "constant_propagation": 2,
-          "common_subexpression": 18,
+          "common_subexpression": 19,
           "dead_code_elimination": 2,
           "algebraic_simplification": 10
         },
@@ -319,22 +319,22 @@
       }
     },
     "same_prediction_count": 32,
-    "disagreement_count": 12
+    "disagreement_count": 13
   },
   "optimization": {
     "rule_based": {
-      "programs": 44,
-      "mean_instruction_reduction": 0.136364,
-      "mean_operation_reduction": 2.159091,
-      "mean_useful_improvement": 2.295455,
+      "programs": 45,
+      "mean_instruction_reduction": 0.133333,
+      "mean_operation_reduction": 2.111111,
+      "mean_useful_improvement": 2.244444,
       "improved_programs": 23,
-      "improved_pct": 52.2727,
-      "unchanged_programs": 21,
-      "unchanged_pct": 47.7273,
+      "improved_pct": 51.1111,
+      "unchanged_programs": 22,
+      "unchanged_pct": 48.8889,
       "regressed_programs": 0,
       "failed_programs": 0,
       "strategy_distribution": {
-        "constant_folding": 24,
+        "constant_folding": 25,
         "algebraic_simplification": 10,
         "common_subexpression": 8,
         "dead_code_elimination": 2
@@ -351,8 +351,8 @@
           "improved_programs": 8
         },
         "constant_folding": {
-          "programs": 24,
-          "mean_useful_improvement": 0.125,
+          "programs": 25,
+          "mean_useful_improvement": 0.12,
           "improved_programs": 3
         },
         "dead_code_elimination": {
@@ -363,18 +363,18 @@
       }
     },
     "ml": {
-      "programs": 44,
-      "mean_instruction_reduction": 0.136364,
-      "mean_operation_reduction": 2.113636,
-      "mean_useful_improvement": 2.25,
+      "programs": 45,
+      "mean_instruction_reduction": 0.133333,
+      "mean_operation_reduction": 2.066667,
+      "mean_useful_improvement": 2.2,
       "improved_programs": 21,
-      "improved_pct": 47.7273,
-      "unchanged_programs": 23,
-      "unchanged_pct": 52.2727,
+      "improved_pct": 46.6667,
+      "unchanged_programs": 24,
+      "unchanged_pct": 53.3333,
       "regressed_programs": 0,
       "failed_programs": 0,
       "strategy_distribution": {
-        "common_subexpression": 18,
+        "common_subexpression": 19,
         "constant_folding": 12,
         "algebraic_simplification": 10,
         "constant_propagation": 2,
@@ -387,8 +387,8 @@
           "improved_programs": 10
         },
         "common_subexpression": {
-          "programs": 18,
-          "mean_useful_improvement": 2.222222,
+          "programs": 19,
+          "mean_useful_improvement": 2.105263,
           "improved_programs": 8
         },
         "constant_folding": {
@@ -411,12 +411,12 @@
     "program_wins": {
       "rule_based": 2,
       "ml": 0,
-      "tie": 42
+      "tie": 43
     },
     "overall_winner": "rule_based",
     "overall_note": "Rule-Based achieved a higher mean useful improvement.",
     "same_strategy_programs": 32,
-    "different_strategy_programs": 12
+    "different_strategy_programs": 13
   },
   "per_program": [
     {
@@ -1958,6 +1958,41 @@
         "reduction_percentage": 40.0
       },
       "program_winner": "tie"
+    },
+    {
+      "sample_id": "sample-0243",
+      "category": "no_opportunity",
+      "ground_truth": "constant_folding",
+      "rule_strategy": "constant_folding",
+      "ml_strategy": "common_subexpression",
+      "strategies_match": false,
+      "rule_correct": true,
+      "ml_correct": false,
+      "rule": {
+        "strategy": "constant_folding",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 3,
+        "original_operation_count": 3,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "ml": {
+        "strategy": "common_subexpression",
+        "applicable": true,
+        "failed": false,
+        "changed": false,
+        "original_instruction_count": 3,
+        "original_operation_count": 3,
+        "instruction_reduction": 0,
+        "operation_reduction": 0,
+        "useful_improvement": 0,
+        "reduction_percentage": 0.0
+      },
+      "program_winner": "tie"
     }
   ],
   "data_quality": {
@@ -1965,10 +2000,10 @@
     "feature_mismatches": []
   },
   "limitations": [
-    "Only 44 held-out samples were evaluated; every metric is preliminary.",
+    "Only 45 held-out samples were evaluated; every metric is preliminary.",
     "The forest has no winning examples for strength_reduction, so the ML selector cannot emit it; a Rule-Based prediction of strength_reduction is outside the target vocabulary and counts as an error while being reported explicitly.",
     "Labels come from the useful_improvement definition in optimizer.measure, so 'correct' means 'matches that definition'.",
     "strength_reduction is a documented no-op, so runs selecting it record zero improvement by construction."
   ],
-  "model_version": "rf-v1-fe522e93a82b959e"
+  "model_version": "rf-v1-c80226c5cd00be28"
 }

@@ -14,8 +14,8 @@
   },
   "counts": {
     "train": 151,
-    "validation": 44,
-    "test": 44
+    "validation": 45,
+    "test": 45
   },
   "family_count": 27,
   "families_intact": true,
@@ -44,13 +44,13 @@
       "common_subexpression_live_b": 8,
       "constant_folding_live_b": 8,
       "constant_propagation_live_b": 8,
-      "loops": 12
+      "loops": 13
     },
     "test": {
       "algebraic_simplification_live_b": 8,
       "common_subexpression_live_c": 8,
       "constant_propagation_live_c": 8,
-      "no_opportunity": 10,
+      "no_opportunity": 11,
       "temporaries": 10
     }
   },
@@ -277,7 +277,8 @@
       "sample-0218",
       "sample-0219",
       "sample-0220",
-      "sample-0221"
+      "sample-0221",
+      "sample-0242"
     ],
     "test": [
       "sample-0146",
@@ -323,7 +324,8 @@
       "sample-0238",
       "sample-0239",
       "sample-0240",
-      "sample-0241"
+      "sample-0241",
+      "sample-0243"
     ]
   }
 }

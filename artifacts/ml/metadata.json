@@ -5,9 +5,9 @@
     "min_samples_leaf": 4
   },
   "dataset_file": "optimization_dataset.csv",
-  "dataset_fingerprint": "fe522e93a82b959e",
-  "dataset_rows": 239,
-  "dataset_sha256": "fe78ad513922dc3c21d8199bb7046485c5e83e42e565e5ba52b273bd5f585732",
+  "dataset_fingerprint": "c80226c5cd00be28",
+  "dataset_rows": 241,
+  "dataset_sha256": "a0d557b91888004a93bf36b3df952f15cb5915ba13b049a68ad9521f61d42f1f",
   "feature_names": [
     "num_statements",
     "num_constants",
@@ -20,16 +20,16 @@
   ],
   "held_out_split": "test",
   "limitations": [
-    "239 programs total, 151 used for training, 44 for validation and 44 held out: every reported metric is preliminary and generalization to arbitrary handwritten TAC is not established.",
+    "241 programs total, 151 used for training, 45 for validation and 45 held out: every reported metric is preliminary and generalization to arbitrary handwritten TAC is not established.",
     "The corpus is generator-derived and the split is GROUPED by generation family (27 templates): the 5 families in the test split are absent from training by construction (overlap with train: 0). A high test score therefore shows the forest learned the generator's opportunity patterns well enough to carry them to unseen templates - it is not evidence that the model generalizes to handwritten TAC. Split balance used only measured labels and family sizes, never features or model output.",
     "Every target label appears in all three splits, but test support ranges from 5 to 13 samples per class, so per-class recall on the test split is unstable and the confusion matrix is sparse.",
     "num_dead_stmts is a static liveness count computed from the instruction stream, not the output of running the dead-code pass, though it does directly measure the opportunity that dead_code_elimination exploits.",
-    "Classes are imbalanced (77 vs 34 in the largest/smallest class), so macro-F1 is the primary metric rather than accuracy.",
+    "Classes are imbalanced (78 vs 34 in the largest/smallest class), so macro-F1 is the primary metric rather than accuracy.",
     "strength_reduction has no winning examples, so it is absent from the target vocabulary and the model can never predict it.",
     "strength_reduction is currently a documented no-op in the engine, which is why it never wins a label.",
-    "28 of the 239 programs have all-zero measurements for every pass, so their label is the deterministic tie rule rather than an optimization insight; part of the learned mapping reproduces that rule.",
+    "29 of the 241 programs have all-zero measurements for every pass, so their label is the deterministic tie rule rather than an optimization insight; part of the learned mapping reproduces that rule.",
     "Ground-truth labels are defined by optimizer.measure's useful_improvement (statement reduction + operation reduction), so 'correct' means 'agrees with that definition', not 'provably optimal'.",
-    "Only 44 held-out test samples exist, so the confusion matrix is sparse and per-class metrics remain preliminary.",
+    "Only 45 held-out test samples exist, so the confusion matrix is sparse and per-class metrics remain preliminary.",
     "Validation metrics are reported for the configuration selected on that same split, so they are mildly optimistic; the test split is used exactly once, for final evaluation."
   ],
   "model_classes": [
@@ -40,7 +40,7 @@
     "dead_code_elimination"
   ],
   "model_type": "RandomForestClassifier",
-  "model_version": "rf-v1-fe522e93a82b959e",
+  "model_version": "rf-v1-c80226c5cd00be28",
   "n_estimators": 300,
   "primary_metric": "macro_f1",
   "seed": 20261005,
@@ -51,8 +51,8 @@
     "dead_code_elimination",
     "algebraic_simplification"
   ],
-  "test_samples": 44,
-  "trained_at": "2026-10-16T16:19:27+00:00",
+  "test_samples": 45,
+  "trained_at": "2026-10-20T16:50:02+00:00",
   "training_command": "python -m backend.ml.train",
   "training_samples": 151,
   "tuning": {
@@ -63,7 +63,7 @@
           "max_depth": 8,
           "min_samples_leaf": 4
         },
-        "validation_macro_f1": 0.432727
+        "validation_macro_f1": 0.430588
       },
       {
         "config": {
@@ -71,7 +71,7 @@
           "max_depth": 12,
           "min_samples_leaf": 4
         },
-        "validation_macro_f1": 0.432727
+        "validation_macro_f1": 0.430588
       },
       {
         "config": {
@@ -79,7 +79,7 @@
           "max_depth": null,
           "min_samples_leaf": 4
         },
-        "validation_macro_f1": 0.432727
+        "validation_macro_f1": 0.430588
       },
       {
         "config": {
@@ -87,7 +87,7 @@
           "max_depth": 8,
           "min_samples_leaf": 4
         },
-        "validation_macro_f1": 0.420577
+        "validation_macro_f1": 0.418158
       },
       {
         "config": {
@@ -95,7 +95,7 @@
           "max_depth": 8,
           "min_samples_leaf": 1
         },
-        "validation_macro_f1": 0.420577
+        "validation_macro_f1": 0.418158
       },
       {
         "config": {
@@ -103,7 +103,7 @@
           "max_depth": 12,
           "min_samples_leaf": 4
         },
-        "validation_macro_f1": 0.420577
+        "validation_macro_f1": 0.418158
       },
       {
         "config": {
@@ -111,7 +111,7 @@
           "max_depth": 12,
           "min_samples_leaf": 1
         },
-        "validation_macro_f1": 0.420577
+        "validation_macro_f1": 0.418158
       },
       {
         "config": {
@@ -119,7 +119,7 @@
           "max_depth": null,
           "min_samples_leaf": 4
         },
-        "validation_macro_f1": 0.420577
+        "validation_macro_f1": 0.418158
       },
       {
         "config": {
@@ -127,7 +127,7 @@
           "max_depth": null,
           "min_samples_leaf": 1
         },
-        "validation_macro_f1": 0.420577
+        "validation_macro_f1": 0.418158
       },
       {
         "config": {
@@ -135,7 +135,7 @@
           "max_depth": 8,
           "min_samples_leaf": 2
         },
-        "validation_macro_f1": 0.398095
+        "validation_macro_f1": 0.395556
       },
       {
         "config": {
@@ -143,7 +143,7 @@
           "max_depth": 8,
           "min_samples_leaf": 1
         },
-        "validation_macro_f1": 0.398095
+        "validation_macro_f1": 0.395556
       },
       {
         "config": {
@@ -151,7 +151,7 @@
           "max_depth": 12,
           "min_samples_leaf": 2
         },
-        "validation_macro_f1": 0.398095
+        "validation_macro_f1": 0.395556
       },
       {
         "config": {
@@ -159,7 +159,7 @@
           "max_depth": 12,
           "min_samples_leaf": 1
         },
-        "validation_macro_f1": 0.398095
+        "validation_macro_f1": 0.395556
       },
       {
         "config": {
@@ -167,7 +167,7 @@
           "max_depth": null,
           "min_samples_leaf": 2
         },
-        "validation_macro_f1": 0.398095
+        "validation_macro_f1": 0.395556
       },
       {
         "config": {
@@ -175,7 +175,7 @@
           "max_depth": null,
           "min_samples_leaf": 1
         },
-        "validation_macro_f1": 0.398095
+        "validation_macro_f1": 0.395556
       },
       {
         "config": {
@@ -183,7 +183,7 @@
           "max_depth": 8,
           "min_samples_leaf": 2
         },
-        "validation_macro_f1": 0.376257
+        "validation_macro_f1": 0.374118
       },
       {
         "config": {
@@ -191,7 +191,7 @@
           "max_depth": 12,
           "min_samples_leaf": 2
         },
-        "validation_macro_f1": 0.376257
+        "validation_macro_f1": 0.374118
       },
       {
         "config": {
@@ -199,7 +199,7 @@
           "max_depth": null,
           "min_samples_leaf": 2
         },
-        "validation_macro_f1": 0.376257
+        "validation_macro_f1": 0.374118
       }
     ],
     "candidates": 18,
@@ -210,5 +210,5 @@
     },
     "strategy": "fixed grid, selected by validation macro-F1"
   },
-  "validation_samples": 44
+  "validation_samples": 45
 }

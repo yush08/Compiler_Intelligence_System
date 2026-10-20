@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from backend.api.serialize import instruction_to_line, tac_to_lines
 from backend.features.extractor import extract_features
-from backend.optimizer.engine import OPTIMIZATION_FUNCTIONS, run_iterative_optimization
+from backend.optimizer.engine import OPTIMIZATION_FUNCTIONS, PASS_OUTCOMES, run_iterative_optimization
 from backend.optimizations.algebraic_simplification import algebraic_simplification
 from backend.optimizations.common_subexpression import common_subexpression_elimination
 from backend.optimizations.constant_folding import constant_folding
@@ -362,6 +362,12 @@ def test_selection_is_argmax_with_deterministic_tie_break():
 
 
 def test_engine_terminates_and_never_grows_the_tac():
+    stop_reasons = {
+        "no_further_useful_improvement",
+        "no_instruction_reduction",
+        "max_iterations_reached",
+        "no_applicable_optimization",
+    }
     for source in (
         "t1 = 5 + 3\nt2 = a + b\nt2 = a + b\nunused = 999\nt3 = t1 + 0",
         "L1:\nif i < n goto L2\ngoto L1\nL2:",
@@ -373,13 +379,30 @@ def test_engine_terminates_and_never_grows_the_tac():
         assert len(result["history"]) <= 20
         counts = [len(tac)] + [h["after_count"] for h in result["history"]]
         assert all(after <= before for before, after in zip(counts, counts[1:]))
-        # a zero-improvement step must end the loop, never be followed by more
-        improvements = [h["improvement"] for h in result["history"]]
-        for index, improvement in enumerate(improvements):
-            if improvement == 0:
-                assert index == len(improvements) - 1, (
-                    "engine kept running after a pass that changed nothing"
-                )
+        # Every attempt is classified with a documented outcome, and a
+        # zero-improvement step no longer ends the run by itself: the
+        # controlled fallback may execute the next eligible strategy. What
+        # must hold instead (§2/§3/§4): no strategy runs twice on the same
+        # unchanged program state, the run stops on a documented condition,
+        # and only the final attempt names that stop reason.
+        for item in result["history"]:
+            assert item["outcome"] in PASS_OUTCOMES
+        seen_state = None
+        tried_on_state = set()
+        for item in result["history"]:
+            state = "\n".join(tac_to_lines(item["tac_before"]))
+            if state != seen_state:
+                seen_state = state
+                tried_on_state = set()
+            assert item["selected_strategy"] not in tried_on_state, (
+                "engine retried a strategy on an unchanged program state"
+            )
+            tried_on_state.add(item["selected_strategy"])
+        assert result["stop_reason"] in stop_reasons
+        assert all(item["stop_reason"] is None for item in result["history"][:-1])
+        # The final attempt's continuation flag must agree with the reported
+        # stop reason: exhaustion says False, only the safety cap says True.
+        assert (result["stop_reason"] == "max_iterations_reached") is result["history"][-1]["will_continue"]
 
 
 def test_every_pass_keeps_tac_reparsable():

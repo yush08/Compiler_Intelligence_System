@@ -14,6 +14,7 @@ and the caller must say "no transformation" rather than inventing an effect.
 from __future__ import annotations
 
 import difflib
+import re
 
 from ..api.serialize import tac_to_lines
 
@@ -23,6 +24,55 @@ __all__ = ["tac_diff", "tac_diff_text", "render_tac", "source_to_text"]
 def render_tac(tac) -> list[str]:
     """Render a TAC as source lines (shared with the API serializer)."""
     return tac_to_lines(tac)
+
+
+def _result_name(line: str) -> str | None:
+    """Result target of a rendered statement (``t6 = 42`` -> ``t6``), else ``None``.
+
+    Non-assignment lines (``print``, labels, jumps, conditions) have no result
+    target and are paired positionally instead.
+    """
+    match = re.match(r"([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=)", line)
+    return match.group(1) if match else None
+
+
+def _replace_pairs(before: list[str], after: list[str]) -> list[tuple[int, int]]:
+    """``(before_offset, after_offset)`` modified pairs for one replace block.
+
+    Statements are first matched by result target so a rewritten statement
+    pairs with its own after-line no matter where difflib placed the block.
+    Positional order inside a replace block is an LCS-alignment artifact: for
+    the combined diff of a fold plus earlier deletions it would claim that
+    ``unused = 999`` was modified into ``t6 = 42`` while the real fold pair
+    (``t6 = 20 + 22`` -> ``t6 = 42``) was reported as a deletion - the counts
+    stay correct but the attribution misleads (constant propagation and
+    folding shift every following line).  Leftover lines pair in program
+    order, preserving the red/green rewrite rendering for statements whose
+    result target itself changed.
+
+    The number of pairs is always ``min(len(before), len(after))``: every
+    name-matched pair consumes one line from each side, and the leftovers pair
+    positionally over what remains (``m + min(nb - m, na - m) == min(nb, na)``),
+    so this re-pairing can never change added/removed/modified/unchanged
+    counts - only *which* line is shown as modified.
+    """
+    pairs: list[tuple[int, int]] = []
+    used_after: set[int] = set()
+    for b, line in enumerate(before):
+        name = _result_name(line)
+        if name is None:
+            continue
+        for a, candidate in enumerate(after):
+            if a not in used_after and _result_name(candidate) == name:
+                used_after.add(a)
+                pairs.append((b, a))
+                break
+    paired_before = {b for b, _ in pairs}
+    leftover_before = [b for b in range(len(before)) if b not in paired_before]
+    leftover_after = [a for a in range(len(after)) if a not in used_after]
+    pairs.extend(zip(leftover_before, leftover_after))
+    pairs.sort()
+    return pairs
 
 
 def tac_diff(before, after) -> dict:
@@ -60,42 +110,55 @@ def tac_diff(before, after) -> dict:
                     }
                 )
         elif tag == "replace":
-            # Pair the overlapping range as modified lines so a rewrite renders
-            # as one red/green pair rather than an unrelated delete+insert.
-            overlap = min(i2 - i1, j2 - j1)
-            for offset in range(overlap):
-                entries.append(
-                    {
-                        "op": "replace",
-                        "status": "modified",
-                        "before_text": before_lines[i1 + offset],
-                        "after_text": after_lines[j1 + offset],
-                        "before_index": i1 + offset,
-                        "after_index": j1 + offset,
-                    }
-                )
-            for offset in range(overlap, i2 - i1):
-                entries.append(
-                    {
-                        "op": "delete",
-                        "status": "removed",
-                        "before_text": before_lines[i1 + offset],
-                        "after_text": None,
-                        "before_index": i1 + offset,
-                        "after_index": None,
-                    }
-                )
-            for offset in range(overlap, j2 - j1):
-                entries.append(
-                    {
-                        "op": "insert",
-                        "status": "added",
-                        "before_text": None,
-                        "after_text": after_lines[j1 + offset],
-                        "before_index": None,
-                        "after_index": j1 + offset,
-                    }
-                )
+            # Pair the block's lines as modified so a rewrite renders as one
+            # red/green pair rather than an unrelated delete+insert. Pairing is
+            # result-target aware (_replace_pairs) so the pair shown is the
+            # statement that actually changed - not a positional LCS artifact
+            # that happens to line up because earlier deletions shifted rows.
+            # Entries are emitted in original-program order (each before-line
+            # appears exactly once, modified or deleted, where it was), so a
+            # diff panel reads top to bottom like the input it came from.
+            block_before = before_lines[i1:i2]
+            block_after = after_lines[j1:j2]
+            pairs = _replace_pairs(block_before, block_after)
+            after_for_before = {b: a for b, a in pairs}
+            paired_after = {a for _, a in pairs}
+            for offset in range(len(block_before)):
+                paired = after_for_before.get(offset)
+                if paired is not None:
+                    entries.append(
+                        {
+                            "op": "replace",
+                            "status": "modified",
+                            "before_text": block_before[offset],
+                            "after_text": block_after[paired],
+                            "before_index": i1 + offset,
+                            "after_index": j1 + paired,
+                        }
+                    )
+                else:
+                    entries.append(
+                        {
+                            "op": "delete",
+                            "status": "removed",
+                            "before_text": block_before[offset],
+                            "after_text": None,
+                            "before_index": i1 + offset,
+                            "after_index": None,
+                        }
+                    )
+            for offset in range(len(block_after)):
+                if offset not in paired_after:
+                    entries.append(
+                        {
+                            "op": "insert",
+                            "status": "added",
+                            "before_text": None,
+                            "after_text": block_after[offset],
+                            "before_index": None,
+                            "after_index": j1 + offset,
+                        }
+                    )
         elif tag == "delete":
             for offset in range(i2 - i1):
                 entries.append(

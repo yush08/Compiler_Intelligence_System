@@ -220,6 +220,18 @@ def explain_prediction(features: dict, top_k: int = 8) -> dict:
         "explainer": "TreeExplainer",
         "predicted_class": predicted_class,
         "predicted_class_index": predicted_index,
+        # Explicit statement of the scale every number below lives on, so the
+        # UI never has to imply whether these are probabilities, raw scores
+        # or log-odds.
+        "output_scale": {
+            "space": "probability",
+            "range": "0-1",
+            "note": (
+                "Output scale: the probability, the base value and every SHAP "
+                "contribution are in probability space for the predicted class "
+                "(0 to 1) - not log-odds and not a raw decision-function score."
+            ),
+        },
         "probabilities": {
             classes[i]: round(float(probabilities[i]), 6) for i in range(min(n_classes, len(probabilities)))
         },

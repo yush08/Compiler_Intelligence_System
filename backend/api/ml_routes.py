@@ -38,6 +38,7 @@ from ..ml.schemas import (
     PredictResponse,
 )
 from . import dataset_service
+from . import matrix_service
 from .pipeline import TacParseError
 
 router = APIRouter(prefix="/api")
@@ -120,7 +121,45 @@ def ml_comparison() -> dict:
             "optimization": {},
             "per_program": [],
         }
+
+    # Recompute the optimization aggregates from the per-program measurements
+    # stored in this same file. The inputs are the saved measurements (never
+    # re-executed here), so the numbers stay file-backed while always matching
+    # the current aggregate_outcome implementation - including its
+    # per-strategy breakdown.
+    from ..ml.evaluate import aggregate_outcome
+
+    per_program = payload.get("per_program") or []
+    rule_rows = [row.get("rule") for row in per_program if row.get("rule")]
+    ml_rows = [row.get("ml") for row in per_program if row.get("ml")]
+    if rule_rows and ml_rows:
+        optimization = dict(payload.get("optimization") or {})
+        optimization["rule_based"] = aggregate_outcome(rule_rows)
+        optimization["ml"] = aggregate_outcome(ml_rows)
+        optimization["aggregation_note"] = (
+            "Aggregated by backend.ml.evaluate.aggregate_outcome from the "
+            "per-program measurements saved in comparison.json; nothing is "
+            "re-executed when this endpoint is read."
+        )
+        payload = {**payload, "optimization": optimization}
     return payload
+
+
+@router.get("/ml/complexity")
+def ml_complexity() -> dict:
+    """Theoretical complexity with real parameters + measured latency/sizes.
+
+    Theoretical bounds (rules, trees, depth, features) are kept strictly
+    apart from measured wall-clock and byte figures; every measured block
+    carries the method that produced it, and anything unmeasurable reports
+    ``available: false`` with a reason.
+    """
+    from ..ml.complexity import complexity_report
+
+    try:
+        return complexity_report()
+    except Exception:
+        raise HTTPException(status_code=500, detail="Complexity report unavailable.") from None
 
 
 @router.get("/ml/feature-importance", response_model=FeatureImportanceResponse)
@@ -182,6 +221,7 @@ def ml_explain(request: ExplainRequest) -> dict:
         "explainer": explanation.get("explainer"),
         "predicted_class": explanation.get("predicted_class"),
         "predicted_class_index": explanation.get("predicted_class_index"),
+        "output_scale": explanation.get("output_scale"),
         "probabilities": prediction.get("probabilities") or explanation.get("probabilities") or {},
         "base_value": explanation.get("base_value"),
         "contributions": explanation.get("contributions") or [],
@@ -269,3 +309,23 @@ def dataset_sample(sample_id: str) -> dict:
     if not result.get("available"):
         raise HTTPException(status_code=404, detail=result.get("reason", "Sample not found."))
     return result
+
+
+@router.get("/optimization-matrix")
+def optimization_matrix(
+    page: int = Query(default=1, ge=1),
+    size: int = Query(default=10, ge=1, le=50),
+    q: str = Query(default="", max_length=200),
+    split: str | None = Query(default=None, pattern="^(train|validation|test)$"),
+) -> dict:
+    """Per-pass measurements for every technique on real dataset programs.
+
+    Each cell executes one optimization pass on an independent copy of the
+    program's original TAC (never chained onto another pass's output), so the
+    matrix compares the six techniques on a common input with the project's
+    shared measurement convention.
+    """
+    try:
+        return matrix_service.optimization_matrix(page=page, size=size, q=q, split=split)
+    except Exception:
+        raise HTTPException(status_code=500, detail="Optimization matrix unavailable.") from None

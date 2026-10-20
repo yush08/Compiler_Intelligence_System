@@ -199,6 +199,7 @@ def aggregate_outcome(rows: list[dict]) -> dict:
             "regressed_programs": 0,
             "failed_programs": 0,
             "strategy_distribution": {},
+            "per_strategy": {},
         }
 
     n = len(rows)
@@ -216,6 +217,28 @@ def aggregate_outcome(rows: list[dict]) -> dict:
         key = r.get("strategy") or "unknown"
         distribution[key] = distribution.get(key, 0) + 1
 
+    # Per-strategy measured outcomes: for the strategies the selector actually
+    # executed, how much work each one removed on average. Strategies the
+    # selector never chose are absent - not zero - so "never used" is not
+    # confused with "used and measured 0".
+    per_strategy: dict = {}
+    for r in rows:
+        key = r.get("strategy") or "unknown"
+        bucket = per_strategy.setdefault(key, {"programs": 0, "useful_sum": 0, "improved_programs": 0})
+        useful = int(r.get("useful_improvement", 0) or 0)
+        bucket["programs"] += 1
+        bucket["useful_sum"] += useful
+        if useful > 0 and not r.get("failed"):
+            bucket["improved_programs"] += 1
+    per_strategy = {
+        key: {
+            "programs": value["programs"],
+            "mean_useful_improvement": round(value["useful_sum"] / value["programs"], 6),
+            "improved_programs": value["improved_programs"],
+        }
+        for key, value in sorted(per_strategy.items())
+    }
+
     def _mean(key: str) -> float:
         return round(sum(float(r.get(key, 0) or 0) for r in rows) / n, 6)
 
@@ -231,4 +254,5 @@ def aggregate_outcome(rows: list[dict]) -> dict:
         "regressed_programs": len(regressed),
         "failed_programs": len(failed),
         "strategy_distribution": dict(sorted(distribution.items(), key=lambda kv: (-kv[1], kv[0]))),
+        "per_strategy": per_strategy,
     }

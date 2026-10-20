@@ -1,7 +1,7 @@
 {
   "generator": "experiments/generate_dataset.py",
   "dataset_seed": 20261005,
-  "total_samples": 239,
+  "total_samples": 241,
   "duplicates_dropped": 2,
   "family_count": 27,
   "families_intact": true,
@@ -25,19 +25,19 @@
   ],
   "label_rule": "best_strategy = argmax useful_improvement across the six passes; useful_improvement = (statement reduction) + (operation reduction); ties broken by ['constant_folding', 'constant_propagation', 'common_subexpression', 'dead_code_elimination', 'algebraic_simplification', 'strength_reduction']",
   "label_distribution": {
-    "constant_folding": 54,
+    "constant_folding": 55,
     "constant_propagation": 35,
     "common_subexpression": 34,
-    "dead_code_elimination": 77,
+    "dead_code_elimination": 78,
     "algebraic_simplification": 39,
     "strength_reduction": 0
   },
   "label_distribution_pct": {
-    "constant_folding": 22.59,
-    "constant_propagation": 14.64,
-    "common_subexpression": 14.23,
-    "dead_code_elimination": 32.22,
-    "algebraic_simplification": 16.32,
+    "constant_folding": 22.82,
+    "constant_propagation": 14.52,
+    "common_subexpression": 14.11,
+    "dead_code_elimination": 32.37,
+    "algebraic_simplification": 16.18,
     "strength_reduction": 0.0
   },
   "generation_category_distribution": {
@@ -59,9 +59,9 @@
     "dead_code_elimination": 4,
     "dead_code_live": 18,
     "dead_code_live_b": 6,
-    "loops": 12,
+    "loops": 13,
     "mixed": 4,
-    "no_opportunity": 10,
+    "no_opportunity": 11,
     "repository": 9,
     "strength_reduction": 4,
     "strength_reduction_live": 18,

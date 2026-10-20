@@ -1,6 +1,6 @@
 {
-  "model_version": "rf-v1-fe522e93a82b959e",
-  "generated_at": "2026-10-16T16:19:27+00:00",
+  "model_version": "rf-v1-c80226c5cd00be28",
+  "generated_at": "2026-10-20T16:50:02+00:00",
   "held_out_split": "test",
   "primary_metric": "macro_f1",
   "target_classes": [
@@ -19,8 +19,8 @@
   ],
   "sample_counts": {
     "train": 151,
-    "validation": 44,
-    "test": 44
+    "validation": 45,
+    "test": 45
   },
   "splits": {
     "train": {
@@ -175,7 +175,7 @@
       "samples": 151
     },
     "validation": {
-      "evaluated_samples": 44,
+      "evaluated_samples": 45,
       "labels": [
         "constant_folding",
         "constant_propagation",
@@ -183,14 +183,14 @@
         "dead_code_elimination",
         "algebraic_simplification"
       ],
-      "accuracy": 0.431818,
-      "macro_f1": 0.432727,
-      "weighted_f1": 0.393388,
+      "accuracy": 0.422222,
+      "macro_f1": 0.430588,
+      "weighted_f1": 0.382745,
       "per_class": {
         "constant_folding": {
-          "precision": 0.24,
+          "precision": 0.230769,
           "recall": 0.75,
-          "f1": 0.363636,
+          "f1": 0.352941,
           "support": 8,
           "evaluated": true
         },
@@ -212,7 +212,7 @@
           "precision": 0.0,
           "recall": 0.0,
           "f1": 0.0,
-          "support": 12,
+          "support": 13,
           "evaluated": true
         },
         "algebraic_simplification": {
@@ -246,7 +246,7 @@
           0
         ],
         [
-          12,
+          13,
           0,
           0,
           0,
@@ -270,9 +270,9 @@
       "confusion_matrix_note": "Rows/columns follow the target vocabulary in order.",
       "classification_report": {
         "constant_folding": {
-          "precision": 0.24,
+          "precision": 0.230769,
           "recall": 0.75,
-          "f1-score": 0.363636,
+          "f1-score": 0.352941,
           "support": 8.0
         },
         "constant_propagation": {
@@ -291,7 +291,7 @@
           "precision": 0.0,
           "recall": 0.0,
           "f1-score": 0.0,
-          "support": 12.0
+          "support": 13.0
         },
         "algebraic_simplification": {
           "precision": 1.0,
@@ -308,14 +308,14 @@
           "constant_folding": 8,
           "constant_propagation": 8,
           "common_subexpression": 8,
-          "dead_code_elimination": 12,
+          "dead_code_elimination": 13,
           "algebraic_simplification": 8
         },
         "outside_vocabulary": {}
       },
       "predicted_distribution": {
         "by_class": {
-          "constant_folding": 25,
+          "constant_folding": 26,
           "constant_propagation": 7,
           "common_subexpression": 8,
           "dead_code_elimination": 0,
@@ -323,10 +323,10 @@
         },
         "outside_vocabulary": {}
       },
-      "samples": 44
+      "samples": 45
     },
     "test": {
-      "evaluated_samples": 44,
+      "evaluated_samples": 45,
       "labels": [
         "constant_folding",
         "constant_propagation",
@@ -334,15 +334,15 @@
         "dead_code_elimination",
         "algebraic_simplification"
       ],
-      "accuracy": 0.454545,
-      "macro_f1": 0.411276,
-      "weighted_f1": 0.43374,
+      "accuracy": 0.444444,
+      "macro_f1": 0.406717,
+      "weighted_f1": 0.42005,
       "per_class": {
         "constant_folding": {
           "precision": 0.0,
           "recall": 0.0,
           "f1": 0.0,
-          "support": 10,
+          "support": 11,
           "evaluated": true
         },
         "constant_propagation": {
@@ -353,9 +353,9 @@
           "evaluated": true
         },
         "common_subexpression": {
-          "precision": 0.444444,
+          "precision": 0.421053,
           "recall": 1.0,
-          "f1": 0.615385,
+          "f1": 0.592593,
           "support": 8,
           "evaluated": true
         },
@@ -378,7 +378,7 @@
         [
           0,
           0,
-          10,
+          11,
           0,
           0
         ],
@@ -424,7 +424,7 @@
           "precision": 0.0,
           "recall": 0.0,
           "f1-score": 0.0,
-          "support": 10.0
+          "support": 11.0
         },
         "constant_propagation": {
           "precision": 0.0,
@@ -433,9 +433,9 @@
           "support": 8.0
         },
         "common_subexpression": {
-          "precision": 0.444444,
+          "precision": 0.421053,
           "recall": 1.0,
-          "f1-score": 0.615385,
+          "f1-score": 0.592593,
           "support": 8.0
         },
         "dead_code_elimination": {
@@ -456,7 +456,7 @@
       "true_outside_vocabulary": [],
       "actual_distribution": {
         "by_class": {
-          "constant_folding": 10,
+          "constant_folding": 11,
           "constant_propagation": 8,
           "common_subexpression": 8,
           "dead_code_elimination": 5,
@@ -468,13 +468,13 @@
         "by_class": {
           "constant_folding": 12,
           "constant_propagation": 2,
-          "common_subexpression": 18,
+          "common_subexpression": 19,
           "dead_code_elimination": 2,
           "algebraic_simplification": 10
         },
         "outside_vocabulary": {}
       },
-      "samples": 44
+      "samples": 45
     }
   },
   "tuning_note": "The selected configuration was chosen on the validation split, so validation metrics are mildly optimistic. The test split was used exactly once, for final evaluation.",
@@ -484,16 +484,16 @@
     "weighted_f1": "support-weighted mean of per-class F1"
   },
   "limitations": [
-    "239 programs total, 151 used for training, 44 for validation and 44 held out: every reported metric is preliminary and generalization to arbitrary handwritten TAC is not established.",
+    "241 programs total, 151 used for training, 45 for validation and 45 held out: every reported metric is preliminary and generalization to arbitrary handwritten TAC is not established.",
     "The corpus is generator-derived and the split is GROUPED by generation family (27 templates): the 5 families in the test split are absent from training by construction (overlap with train: 0). A high test score therefore shows the forest learned the generator's opportunity patterns well enough to carry them to unseen templates - it is not evidence that the model generalizes to handwritten TAC. Split balance used only measured labels and family sizes, never features or model output.",
     "Every target label appears in all three splits, but test support ranges from 5 to 13 samples per class, so per-class recall on the test split is unstable and the confusion matrix is sparse.",
     "num_dead_stmts is a static liveness count computed from the instruction stream, not the output of running the dead-code pass, though it does directly measure the opportunity that dead_code_elimination exploits.",
-    "Classes are imbalanced (77 vs 34 in the largest/smallest class), so macro-F1 is the primary metric rather than accuracy.",
+    "Classes are imbalanced (78 vs 34 in the largest/smallest class), so macro-F1 is the primary metric rather than accuracy.",
     "strength_reduction has no winning examples, so it is absent from the target vocabulary and the model can never predict it.",
     "strength_reduction is currently a documented no-op in the engine, which is why it never wins a label.",
-    "28 of the 239 programs have all-zero measurements for every pass, so their label is the deterministic tie rule rather than an optimization insight; part of the learned mapping reproduces that rule.",
+    "29 of the 241 programs have all-zero measurements for every pass, so their label is the deterministic tie rule rather than an optimization insight; part of the learned mapping reproduces that rule.",
     "Ground-truth labels are defined by optimizer.measure's useful_improvement (statement reduction + operation reduction), so 'correct' means 'agrees with that definition', not 'provably optimal'.",
-    "Only 44 held-out test samples exist, so the confusion matrix is sparse and per-class metrics remain preliminary.",
+    "Only 45 held-out test samples exist, so the confusion matrix is sparse and per-class metrics remain preliminary.",
     "Validation metrics are reported for the configuration selected on that same split, so they are mildly optimistic; the test split is used exactly once, for final evaluation."
   ]
 }

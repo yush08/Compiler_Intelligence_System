@@ -131,7 +131,6 @@ def strategy_reason(tac, selected: str | None = None) -> str:
     """
     features = extract_features(tac)
 
-    scores = rule_based_strategy_scores(tac)
     if selected is None:
         selected = select_strategy(tac)
 

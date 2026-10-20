@@ -22,7 +22,12 @@ Outputs (relative to the repository root)
     dataset/processed/optimization_dataset.json
     dataset/metadata/summary.json             distributions and statistics
     dataset/metadata/validation_report.json   quality-check results
-    dataset/metadata/splits.json              deterministic 70/15/15 split
+    dataset/metadata/splits.json              grouped family split (70/15/15)
+
+Splits are GROUPED by generation family: one family = one program template
+(e.g. every ``constant_propagation_live`` replicate belongs to the same
+family), so no template ever appears in two splits.  See ``assign_splits``
+and ``dataset/METHOD.md`` for the full, pre-registered method.
 """
 
 from __future__ import annotations
@@ -58,7 +63,6 @@ from backend.tac.parser import parse_tac  # noqa: E402
 # --- configuration -----------------------------------------------------------
 
 DATASET_SEED = 20261005
-TARGET_SIZE = 180
 
 FEATURE_KEYS = [
     "num_statements",
@@ -95,6 +99,13 @@ CORPUS_SIZES = [5, 10, 15, 20]
 CORPUS_REPLICATES = [0]
 LIVE_PER_CATEGORY = 18
 EXTRA_PER_CATEGORY = {"loops": 12, "no_opportunity": 10, "temporaries": 10}
+
+# Second-generation templates (VARIANT_BUILDERS below): same measured
+# labelling discipline, different program shapes.  They exist so every
+# opportunity class ends up with at least THREE whole families - enough to
+# give train, validation and test one untouched family per class without
+# ever cutting a template in half.
+VARIANT_PER_CATEGORY = 8
 
 
 # --- program builders for categories the corpus does not cover ---------------
@@ -300,6 +311,148 @@ LIVE_BUILDERS = {
 }
 
 
+# --- second-generation ("variant") families ---------------------------------
+#
+# A grouped split moves whole families, so a class whose only template lands
+# in one split can be present in at most one of train/validation/test.  These
+# builders add structurally DIFFERENT templates for the same opportunities so
+# each class has at least three families to deal across the three splits.
+# Every builder keeps the same discipline as the originals: exactly one kind
+# of opportunity, everything it produces consumed, no label decided anywhere
+# but by measurement (if a variant measures to a different winner, the
+# splitter follows the measurement).
+
+
+def _fold_live_b(rng: random.Random) -> str:
+    """Chained folds: each result feeds the next operation, so folding must
+    resolve a two-step dependency rather than a single literal expression."""
+    k = rng.randint(3, 6)
+    lines = []
+    produced = []
+    for i in range(k):
+        a, b = rng.randint(1, 40), rng.randint(1, 40)
+        lines.append(f"q{i}_0 = {a} {rng.choice(['+', '-', '*'])} {b}")
+        lines.append(f"q{i}_1 = q{i}_0 {rng.choice(['+', '*'])} {rng.randint(2, 9)}")
+        produced.extend([f"q{i}_0", f"q{i}_1"])
+    return "\n".join(lines + _consume(produced))
+
+
+def _propagate_live_b(rng: random.Random) -> str:
+    """One constant definition with two different readers - propagation must
+    substitute it in both places before either operation can be resolved."""
+    k = rng.randint(3, 6)
+    lines = []
+    produced = []
+    for i in range(k):
+        lines.append(f"w{i} = {rng.randint(1, 30)}")
+        lines.append(f"x{i} = w{i} + in{i}a")
+        lines.append(f"y{i} = w{i} * {rng.randint(2, 7)}")
+        produced.extend([f"x{i}", f"y{i}"])
+    return "\n".join(lines + _consume(produced))
+
+
+def _propagate_live_c(rng: random.Random) -> str:
+    """A constant used twice inside ONE operation (`u + u`), so substitution
+    has to rewrite both operands of the same instruction."""
+    k = rng.randint(3, 6)
+    lines = []
+    produced = []
+    for i in range(k):
+        lines.append(f"u{i} = {rng.randint(1, 20)}")
+        if rng.random() < 0.5:
+            lines.append(f"v{i} = u{i} + u{i}")
+        else:
+            lines.append(f"v{i} = u{i} * u{i}")
+        produced.append(f"v{i}")
+    return "\n".join(lines + _consume(produced))
+
+
+def _cse_live_b(rng: random.Random) -> str:
+    """The same expression written THREE times, with swapped operands in some
+    copies, so elimination has to recognise both exact and commuted repeats."""
+    k = rng.randint(3, 6)
+    operator = rng.choice(["+", "*"])
+    lines = []
+    produced = []
+    for i in range(k):
+        u = f"zin{i}_{rng.randint(0, 999)}a"
+        v = f"zin{i}_{rng.randint(0, 999)}b"
+        lines.append(f"r{i}a = {u} {operator} {v}")
+        lines.append(f"r{i}b = {v} {operator} {u}")
+        lines.append(f"r{i}c = {u} {operator} {v}")
+        produced.extend([f"r{i}a", f"r{i}b", f"r{i}c"])
+    return "\n".join(lines + _consume(produced))
+
+
+def _cse_live_c(rng: random.Random) -> str:
+    """Duplicates whose result is combined by a third statement - removing
+    the redundant copy must not break the consumer that reads both."""
+    k = rng.randint(3, 6)
+    lines = []
+    produced = []
+    for i in range(k):
+        u = f"yin{i}_{rng.randint(0, 999)}a"
+        v = f"yin{i}_{rng.randint(0, 999)}b"
+        lines.append(f"d{i} = {u} + {v}")
+        lines.append(f"e{i} = {u} + {v}")
+        lines.append(f"f{i} = d{i} + e{i}")
+        produced.append(f"f{i}")
+    return "\n".join(lines + _consume(produced))
+
+
+def _algebraic_live_b(rng: random.Random) -> str:
+    """Identities applied to a COMPUTED value, so the identity can only be
+    recognised after the operand is understood to be a normal variable."""
+    k = rng.randint(3, 6)
+    templates = ["{v} * 1", "{v} + 0", "{v} - 0", "{v} / 1"]
+    lines = []
+    produced = []
+    for i in range(k):
+        lines.append(f"v{i} = in{2 * i} + in{2 * i + 1}")
+        lines.append(f"g{i} = " + rng.choice(templates).format(v=f"v{i}"))
+        produced.append(f"g{i}")
+    return "\n".join(lines + _consume(produced))
+
+
+def _algebraic_live_c(rng: random.Random) -> str:
+    """Identities CHAINED together: the second identity only becomes visible
+    once the first one has been simplified away."""
+    k = rng.randint(3, 6)
+    lines = []
+    produced = []
+    for i in range(k):
+        lines.append(f"g{i} = in{i} {rng.choice(['+ 0', '- 0'])}")
+        lines.append(f"h{i} = g{i} {rng.choice(['* 1', '/ 1'])}")
+        produced.append(f"h{i}")
+    return "\n".join(lines + _consume(produced))
+
+
+def _dead_live_b(rng: random.Random) -> str:
+    """Half dead, half live: clearly dead computations next to a live chain
+    that reads every `stored` value, so only the unread half may go."""
+    k = rng.randint(3, 9)
+    lines = [f"unused{i} = in{i} * in{i}" for i in range(k)]
+    lines += [f"stored{i} = in{i} + zsrc{i}" for i in range(k)]
+    lines.append(f"kept = stored0 + zseed")
+    for i in range(1, k):
+        lines.append(f"kept = kept + stored{i}")
+    # Self reference: `kept` is read here, so the live chain survives.
+    lines.append(f"kept = kept + zseed")
+    return "\n".join(lines)
+
+
+VARIANT_BUILDERS = {
+    "constant_folding_live_b": _fold_live_b,
+    "constant_propagation_live_b": _propagate_live_b,
+    "constant_propagation_live_c": _propagate_live_c,
+    "common_subexpression_live_b": _cse_live_b,
+    "common_subexpression_live_c": _cse_live_c,
+    "algebraic_simplification_live_b": _algebraic_live_b,
+    "algebraic_simplification_live_c": _algebraic_live_c,
+    "dead_code_live_b": _dead_live_b,
+}
+
+
 # --- corpus assembly ---------------------------------------------------------
 
 
@@ -308,13 +461,17 @@ def build_programs() -> list[dict]:
     programs: list[dict] = []
     counter = 0
 
-    def add(category: str, tac: str, source: str, size: int, replicate: int):
+    def add(category: str, tac: str, source: str, size: int, replicate: int,
+            family: str | None = None):
         nonlocal counter
         counter += 1
         programs.append(
             {
                 "sample_id": f"sample-{counter:04d}",
                 "generation_category": category,
+                # One family = one program template.  The split moves whole
+                # families, so a template can never appear in two splits.
+                "family": family or category,
                 "source": source,
                 "requested_size": size,
                 "replicate": replicate,
@@ -323,6 +480,8 @@ def build_programs() -> list[dict]:
         )
 
     # 1. Existing corpus: seven opportunity classes, several sizes each.
+    #    Every size and replicate of a class shares the class's template, so
+    #    each class is one family.
     for category in [
         "constant_folding",
         "constant_propagation",
@@ -340,12 +499,21 @@ def build_programs() -> list[dict]:
                     "experiments/corpus.generate_program",
                     size,
                     replicate,
+                    family=f"corpus:{category}",
                 )
 
-    # 2. The repository's own example programs.
+    # 2. The repository's own example programs, grouped by their origin
+    #    (parser examples / frontend scenarios / the API default), because
+    #    those are the three template sources.
     for name, tac in REPOSITORY_PROGRAMS.items():
+        if name.startswith("repo/parser"):
+            family = "repo:parser"
+        elif name.startswith("repo/frontend"):
+            family = "repo:frontend"
+        else:
+            family = "repo:test-api"
         add("repository", tac, f"experiments/corpus.REPOSITORY_PROGRAMS[{name!r}]",
-            len(tac.splitlines()), 0)
+            len(tac.splitlines()), 0, family=family)
 
     # 3. Live opportunity builders: every value consumed, so exactly one kind
     #    of opportunity is present and the winner is decided by measurement.
@@ -356,7 +524,17 @@ def build_programs() -> list[dict]:
             add(category, builder(rng), f"experiments/generate_dataset.{category}",
                 0, replicate)
 
-    # 4. Categories the corpus does not provide.
+    # 4. Second-generation templates: extra FAMILIES for the same classes so
+    #    the grouped split can put an untouched family of each class in each
+    #    of train, validation and test.
+    for category in sorted(VARIANT_BUILDERS):
+        builder = VARIANT_BUILDERS[category]
+        for replicate in range(VARIANT_PER_CATEGORY):
+            rng = random.Random(f"{DATASET_SEED}:{category}:{replicate}")
+            add(category, builder(rng), f"experiments/generate_dataset.{category}",
+                0, replicate)
+
+    # 5. Categories the corpus does not provide.
     for category in EXTRA_CATEGORIES:
         builder = EXTRA_BUILDERS[category]
         for replicate in range(EXTRA_PER_CATEGORY[category]):
@@ -457,6 +635,7 @@ def validate(records: list[dict]) -> dict:
     errors: list[str] = []
     warnings: list[str] = []
     seen_tacs: dict[str, str] = {}
+    family_split_sets: dict[str, set] = {}
 
     valid_strategies = set(STRATEGIES)
 
@@ -494,6 +673,14 @@ def validate(records: list[dict]) -> dict:
             errors.append(f"{sid}: duplicate of {seen_tacs[key]}")
         else:
             seen_tacs[key] = sid
+
+        # --- grouped split integrity ---------------------------------------
+        # A generation family (one program template) must live in exactly one
+        # split; a family straddling two splits would leak the template from
+        # train into the held-out test set.
+        family = record.get("family")
+        if family:
+            family_split_sets.setdefault(family, set()).add(record.get("split"))
 
         # --- features ------------------------------------------------------
         features = record.get("features") or {}
@@ -569,6 +756,16 @@ def validate(records: list[dict]) -> dict:
             f"{len(records) - len(seen_tacs)} duplicate program(s) present"
         )
 
+    straddlers = sorted(
+        family
+        for family, split_names in family_split_sets.items()
+        if len(split_names - {None}) > 1
+    )
+    if straddlers:
+        errors.append(
+            "generation family spans multiple splits: " + ", ".join(straddlers)
+        )
+
     label_counts = Counter(r.get("best_strategy") for r in records)
     for strategy in STRATEGIES:
         if label_counts.get(strategy, 0) == 0:
@@ -581,6 +778,7 @@ def validate(records: list[dict]) -> dict:
         "passed": not errors,
         "records_checked": len(records),
         "distinct_programs": len(seen_tacs),
+        "family_count": len(family_split_sets),
         "errors": errors,
         "warnings": warnings,
         "label_counts": {k: label_counts.get(k, 0) for k in STRATEGIES},
@@ -589,26 +787,96 @@ def validate(records: list[dict]) -> dict:
 
 # --- split -------------------------------------------------------------------
 
+SPLIT_METHOD = (
+    "Grouped split by generation family: one family = one program template "
+    "(see the 'family' column), and a whole family is dealt to exactly one "
+    "split, so no template ever appears in two splits. Within each label "
+    "group (the family's dominant MEASURED best_strategy, ties broken by "
+    "STRATEGY_TIE_ORDER) the two families whose sizes sit closest to that "
+    "group's 15% share are dealt to validation and test; every remaining "
+    "family goes to train. Family sizes and measured labels are the only "
+    "inputs - never features, never model output - so this is label "
+    "stratification to hit the 70/15/15 target, not test-set tuning. "
+    "Ratios stay close to but not exactly 70/15/15 because families move as "
+    "blocks; the actual ratios are recorded alongside this method. "
+    "train.py reads the resulting partition as-is and never moves a sample."
+)
+
+
 def assign_splits(records: list[dict], seed: int = DATASET_SEED) -> dict:
-    """Deterministic 70/15/15 train/validation/test split by sample_id."""
-    ids = [r["sample_id"] for r in records]
-    random.Random(seed).shuffle(ids)
+    """Deterministic GROUPED split: whole generation families move together.
 
-    n = len(ids)
-    train_end = round(n * 0.70)
-    val_end = train_end + round(n * 0.15)
+    Method (fixed in advance, documented in dataset/METHOD.md):
 
-    splits = {
-        "train": ids[:train_end],
-        "validation": ids[train_end:val_end],
-        "test": ids[val_end:],
-    }
+    1. Group every record by ``family`` (one family = one program template).
+    2. A family's primary label is its most common *measured*
+       ``best_strategy``; ties break with ``STRATEGY_TIE_ORDER`` - the same
+       rule the labeller uses.
+    3. Within each label group, families are ordered by size (seed-shuffled
+       tie-break).  Validation and test each receive the family whose size is
+       closest to the group's 15% target share; every other family goes to
+       train.  That keeps each split at roughly its target ratio while giving
+       validation and test one whole untouched family per label.  Labels with
+       fewer than three families cannot cover all three splits - the
+       fallbacks are: 2 families -> train + test (validation uncovered),
+       1 family -> train only - and both cases are reported in splits.json
+       rather than hidden.
+    4. ``split`` is written to every record; nothing is moved afterwards.
 
-    by_id = {r["sample_id"]: r for r in records}
-    for name, split_ids in splits.items():
-        for sid in split_ids:
-            by_id[sid]["split"] = name
+    Returns ``{"train": [...ids], "validation": [...], "test": [...]}``
+    preserving record order inside each split.
+    """
+    families: dict[str, list[dict]] = {}
+    for record in records:
+        families.setdefault(record["family"], []).append(record)
 
+    def primary_label(members: list[dict]) -> str:
+        counts = Counter(member["best_strategy"] for member in members)
+        top = max(counts.values())
+        contenders = {name for name, count in counts.items() if count == top}
+        for name in STRATEGY_TIE_ORDER:  # deterministic tie-break
+            if name in contenders:
+                return name
+        return sorted(contenders)[0]
+
+    rng = random.Random(seed)
+    grouped: dict[str, list[tuple]] = {}
+    for family, members in families.items():
+        # (size, tie_rank, family): sorted by size, seed breaks size ties.
+        grouped.setdefault(primary_label(members), []).append(
+            (len(members), rng.random(), family)
+        )
+
+    assignment: dict[str, str] = {}
+    label_order = [name for name in STRATEGY_TIE_ORDER if name in grouped]
+    label_order += sorted(set(grouped) - set(STRATEGY_TIE_ORDER))
+    for label in label_order:
+        entries = sorted(grouped[label], key=lambda item: (item[0], item[1]))
+        target = 0.15 * sum(item[0] for item in entries)
+        remaining = list(entries)
+
+        def take_closest() -> tuple:
+            pick = min(remaining, key=lambda item: (abs(item[0] - target), item[1]))
+            remaining.remove(pick)
+            return pick
+
+        if len(entries) == 1:
+            assignment[entries[0][2]] = "train"
+        elif len(entries) == 2:
+            # Documented fallback: evaluation coverage beats validation
+            # coverage - the label reaches train and test, not validation.
+            assignment[take_closest()[2]] = "test"
+            assignment[remaining[0][2]] = "train"
+        else:
+            assignment[take_closest()[2]] = "validation"
+            assignment[take_closest()[2]] = "test"
+            for _, _, family in remaining:
+                assignment[family] = "train"
+
+    splits: dict[str, list[str]] = {"train": [], "validation": [], "test": []}
+    for record in records:  # input order: deterministic
+        record["split"] = assignment[record["family"]]
+        splits[record["split"]].append(record["sample_id"])
     return splits
 
 
@@ -618,6 +886,7 @@ CSV_COLUMNS = (
     [
         "sample_id",
         "generation_category",
+        "family",
         "source",
         "requested_size",
         "parsed_instruction_count",
@@ -643,6 +912,7 @@ def _flatten(record: dict) -> dict:
     row = {
         "sample_id": record["sample_id"],
         "generation_category": record["generation_category"],
+        "family": record.get("family", ""),
         "source": record["source"],
         "requested_size": record["requested_size"],
         "parsed_instruction_count": record["parsed_instruction_count"],
@@ -686,11 +956,20 @@ def build_summary(records: list[dict], duplicates_dropped: int) -> dict:
 
     statement_counts = [r["features"]["num_statements"] for r in records]
 
+    # Family integrity: one family (one program template) must live in one
+    # split. Reported so the grouped split's core guarantee is visible in the
+    # metadata, not just in the code.
+    family_splits: dict[str, set] = {}
+    for record in records:
+        family_splits.setdefault(record["family"], set()).add(record.get("split"))
+
     return {
         "generator": "experiments/generate_dataset.py",
         "dataset_seed": DATASET_SEED,
         "total_samples": n,
         "duplicates_dropped": duplicates_dropped,
+        "family_count": len(family_splits),
+        "families_intact": all(len(names) == 1 for names in family_splits.values()),
         "strategy_ids": STRATEGIES,
         "feature_keys": FEATURE_KEYS,
         "label_rule": (
@@ -767,8 +1046,28 @@ def generate(target_samples: int | None = None, out_root: Path | None = None) ->
         else:
             records.append(labelled)
 
-    # 3. split
+    # 3. split (grouped by family - see assign_splits)
     splits = assign_splits(records)
+
+    family_of = {record["sample_id"]: record["family"] for record in records}
+    split_of = {record["sample_id"]: record["split"] for record in records}
+    families_by_split: dict[str, dict[str, int]] = {
+        "train": {}, "validation": {}, "test": {}
+    }
+    family_split_names: dict[str, set] = {}
+    for sample_id, family in family_of.items():
+        split_name = split_of[sample_id]
+        families_by_split[split_name][family] = (
+            families_by_split[split_name].get(family, 0) + 1
+        )
+        family_split_names.setdefault(family, set()).add(split_name)
+    families_intact = all(len(names) == 1 for names in family_split_names.values())
+    total = len(records)
+
+    labels_by_split: dict[str, set] = {"train": set(), "validation": set(), "test": set()}
+    for record in records:
+        labels_by_split[record["split"]].add(record["best_strategy"])
+    all_labels = set().union(*labels_by_split.values())
 
     # 4. validate
     report = validate(records)
@@ -812,8 +1111,26 @@ def generate(target_samples: int | None = None, out_root: Path | None = None) ->
         json.dumps(
             {
                 "seed": DATASET_SEED,
-                "ratios": {"train": 0.70, "validation": 0.15, "test": 0.15},
+                "method": SPLIT_METHOD,
+                "grouped_by": "family",
+                "target_ratios": {"train": 0.70, "validation": 0.15, "test": 0.15},
+                "actual_ratios": {
+                    name: round(len(split_ids) / total, 4)
+                    for name, split_ids in splits.items()
+                },
                 "counts": {k: len(v) for k, v in splits.items()},
+                "family_count": len(family_split_names),
+                "families_intact": families_intact,
+                "families": families_by_split,
+                "label_coverage": {
+                    name: sorted(labels) for name, labels in labels_by_split.items()
+                },
+                "labels_missing_from_validation": sorted(
+                    all_labels - labels_by_split["validation"]
+                ),
+                "labels_missing_from_test": sorted(
+                    all_labels - labels_by_split["test"]
+                ),
                 "splits": splits,
             },
             indent=2,

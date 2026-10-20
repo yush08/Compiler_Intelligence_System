@@ -317,12 +317,27 @@ def _iteration_payload(item: dict) -> dict:
         "useful_improvement": item.get("useful_improvement"),
         "changed": item.get("changed"),
         "accepted": item.get("accepted"),
+        # Selection vs execution: the strategy the selector predicted for
+        # this program state, whether this attempt WAS the prediction or a
+        # controlled fallback, and what the pass actually did.
+        "predicted_strategy": item.get("predicted_strategy"),
+        "origin": item.get("origin"),
+        "outcome": item.get("outcome"),
+        "rejection_reason": item.get("rejection_reason"),
         "will_continue": item.get("will_continue"),
         "stop_reason": item.get("stop_reason"),
         "tac_before": tac_to_lines(item.get("tac_before")),
         "tac_after": tac_to_lines(item.get("tac_after")),
         "diff": item.get("diff"),
-        "status": "converged" if reduction == 0 else "applied",
+        # Outcome-aware status for the trace chip: a rejected or failed
+        # attempt must not read as "applied"; no-change attempts keep the
+        # historical "converged" label the workbench has always shown.
+        "status": (
+            "rejected" if item.get("outcome") == "rejected"
+            else "failed" if item.get("outcome") in ("failed", "unsupported")
+            else "converged" if reduction == 0
+            else "applied"
+        ),
     }
     # Optional ML/SHAP enrichment present only on ML-driven runs.
     for key in (

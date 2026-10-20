@@ -172,10 +172,25 @@ def test_simulate_with_ml_selector_predicts_at_every_iteration(client, ml_artifa
     for iteration in body["iterations"]:
         assert iteration["selector"] == "ml"
         assert iteration["ml_predicted_strategy"] in SIX_STRATEGIES
-        # The engine applied exactly what the forest predicted for that input.
-        assert iteration["strategy"] == iteration["ml_predicted_strategy"]
+        # The engine applied exactly what the forest predicted for that input
+        # whenever it executed the prediction; a controlled fallback is
+        # recorded as such — the model's pick is never silently replaced.
+        assert iteration["predicted_strategy"] == iteration["ml_predicted_strategy"]
+        if iteration.get("origin") == "predicted":
+            assert iteration["strategy"] == iteration["ml_predicted_strategy"]
+        else:
+            assert iteration.get("origin") == "fallback"
+            assert iteration["strategy"] != iteration["ml_predicted_strategy"]
+            assert iteration.get("outcome") in (
+                "applied_useful",
+                "applied_changed",
+                "executed_no_change",
+                "rejected",
+                "failed",
+            )
         assert set(iteration["ml_probabilities"]) == set(body["ml"]["classes"])
-        assert abs(sum(iteration["ml_probabilities"].values()) - 1.0) < 1e-6
+        # Rounded to 6 decimals each, so the sum can drift by up to ~5e-6.
+        assert abs(sum(iteration["ml_probabilities"].values()) - 1.0) < 1e-5
         # The rule-based view is still recorded alongside, for comparison.
         assert iteration["rule_selected_strategy"] in SIX_STRATEGIES
         assert iteration["strategies_agree"] == (
@@ -301,7 +316,9 @@ def test_predict_and_explain_endpoints(client, ml_artifacts):
     predict = client.post("/api/ml/predict", json={"tac": DEAD_CODE_TAC}).json()
     assert predict["available"] is True
     assert predict["predicted_strategy"] in SIX_STRATEGIES
-    assert abs(sum(predict["probabilities"].values()) - 1.0) < 1e-6
+    # Probabilities are rounded to 6 decimals each, so the sum can drift by up
+    # to ~5e-6 across the five classes. 1e-5 absorbs that display rounding.
+    assert abs(sum(predict["probabilities"].values()) - 1.0) < 1e-5
     assert predict["probabilities_calibrated"] is False
 
     explain = client.post("/api/ml/explain", json={"tac": DEAD_CODE_TAC, "top_k": 3}).json()
@@ -328,11 +345,11 @@ def test_compare_endpoint_separates_strategy_from_outcome(client, ml_artifacts):
     body = client.post("/api/compare", json={"tac": DEAD_CODE_TAC, "max_iterations": 10}).json()
 
     assert body["available"] is True
-    assert body["winner"] in {"rule_based", "ml", "tie"}
+    assert body["winner"] in {"rule_based", "ml", "feedback", "tie"}
     assert body["winner_note"]
     assert "measured useful_improvement" in body["decided_by"]
 
-    for side in ("rule_based", "ml"):
+    for side in ("rule_based", "ml", "feedback"):
         block = body[side]
         assert block["available"] is True
         assert block["iterations"] == len(block["history"])
@@ -342,13 +359,15 @@ def test_compare_endpoint_separates_strategy_from_outcome(client, ml_artifacts):
             + block["measurements"]["operation_reduction"]
         )
 
-    gain = {side: body[side]["useful_improvement"] for side in ("rule_based", "ml")}
-    if gain["rule_based"] > gain["ml"]:
-        assert body["winner"] == "rule_based"
-    elif gain["ml"] > gain["rule_based"]:
-        assert body["winner"] == "ml"
-    else:
-        assert body["winner"] == "tie"
+    # The winner is the unique highest measured gain across all three runs;
+    # whenever more than one run reaches it, the result is a tie.
+    gains = {
+        side: body[side]["useful_improvement"]
+        for side in ("rule_based", "ml", "feedback")
+    }
+    best = max(gains.values())
+    leaders = [side for side, gain in gains.items() if gain == best]
+    assert body["winner"] == (leaders[0] if len(leaders) == 1 else "tie")
 
 
 def test_compare_endpoint_reports_agreement_over_the_whole_run(client, ml_artifacts):
@@ -374,8 +393,8 @@ def test_compare_endpoint_reports_agreement_over_the_whole_run(client, ml_artifa
 def test_dataset_summary_endpoint(client, ml_artifacts):
     body = client.get("/api/dataset/summary").json()
     assert body["available"] is True
-    assert body["row_count"] == 177
-    assert body["column_count"] == 45
+    assert body["row_count"] == 241
+    assert body["column_count"] == 46
     assert body["model_input_columns"] == [
         "num_statements",
         "num_constants",
@@ -389,11 +408,14 @@ def test_dataset_summary_endpoint(client, ml_artifacts):
     assert len(body["features"]) == 8
     assert all(feature["description"] for feature in body["features"])
     assert body["target"]["class_count"] == 5
-    assert sum(body["target"]["distribution"].values()) == 177
-    assert sum(body["splits"]["distribution"].values()) == 177
+    assert sum(body["target"]["distribution"].values()) == 241
+    assert sum(body["splits"]["distribution"].values()) == 241
     assert body["missing_values"]["total"] == 0
     assert body["duplicates"]["duplicate_tac_programs"] == 0
-    assert len(body["categories"]) == 17
+    assert len(body["categories"]) == 25
+    # The split is grouped by generation family, surfaced on the summary.
+    assert body["splits"]["grouped_by"] == "family"
+    assert body["splits"]["family_count"] == 27
     assert set(body["strategies"]) == SIX_STRATEGIES
     assert all(len(histogram) > 0 for histogram in body["feature_histograms"].values())
     # No filesystem path crosses the API.
@@ -405,8 +427,8 @@ def test_dataset_samples_are_paginated_not_dumped(client, ml_artifacts):
     assert first["available"] is True
     assert first["page"] == 1
     assert first["size"] == 10
-    assert first["total"] == 177
-    assert first["pages"] == 18
+    assert first["total"] == 241
+    assert first["pages"] == 25
     assert len(first["items"]) == 10
     assert first["filtered_out"] == 0
 
@@ -430,7 +452,7 @@ def test_dataset_samples_search_and_split_filters(client, ml_artifacts):
         ).lower()
 
     test_split = client.get("/api/dataset/samples", params={"split": "test", "size": 200}).json()
-    assert test_split["total"] == 26
+    assert test_split["total"] == 45
     assert all(item["split"] == "test" for item in test_split["items"])
 
 
@@ -686,8 +708,62 @@ def test_successful_responses_never_expose_a_path(client, ml_artifacts):
         "/api/ml/comparison",
         "/api/dataset/summary",
         "/api/dataset/samples",
+        "/api/optimization-matrix",
     ):
         response = client.get(url)
         assert response.status_code == 200, url
         assert "artifacts\\ml" not in response.text, url
         assert "D:\\PROJECTS" not in response.text, url
+
+
+def test_ml_comparison_aggregate_is_recomputed_from_its_stored_rows(client):
+    """The aggregate block always matches the per-program measurements saved
+    in the same file - including the per-strategy breakdown - without
+    re-executing anything when the endpoint is read."""
+    payload = client.get("/api/ml/comparison").json()
+    if not payload.get("available"):
+        pytest.skip("comparison artifact unavailable in this environment")
+
+    per_program = payload["per_program"]
+    optimization = payload["optimization"]
+
+    for side in ("rule_based", "ml"):
+        block = optimization[side]
+        assert block["programs"] == len(per_program)
+        # Per-strategy outcomes exist and are internally consistent.
+        assert isinstance(block["per_strategy"], dict)
+        for entry in block["per_strategy"].values():
+            assert entry["programs"] >= 1
+            assert 0 <= entry["improved_programs"] <= entry["programs"]
+        assert block["failed_programs"] >= 0
+        assert "aggregate_outcome" in optimization["aggregation_note"]
+
+
+def test_ml_explain_states_output_scale_and_verifies_class_mapping(client, ml_artifacts):
+    """P5: the explanation names its scale (probability, not log-odds), shows
+    every class's probability with the predicted one as the actual argmax, and
+    carries all eight feature contributions plus the real base value."""
+    explain = client.post("/api/ml/explain", json={"tac": DEAD_CODE_TAC, "top_k": 8}).json()
+    if not explain.get("available"):
+        pytest.skip(f"SHAP unavailable: {explain.get('reason')}")
+
+    scale = explain.get("output_scale") or {}
+    assert scale.get("space") == "probability"
+    assert scale.get("range") == "0-1"
+    assert "log-odds" in scale.get("note", "")
+    assert "probability space" in scale.get("note", "")
+
+    probabilities = explain.get("probabilities") or {}
+    assert len(probabilities) >= 5, "every target class must be listed for the mapping"
+    predicted = explain.get("predicted_class")
+    assert predicted in probabilities
+    # The displayed mapping must be internally consistent: the reported
+    # prediction really is the argmax of the displayed probabilities.
+    assert max(probabilities, key=probabilities.get) == predicted
+
+    contributions = explain.get("contributions") or []
+    assert len(contributions) == 8, "all eight features, not just the top-k slice"
+    assert explain.get("base_value") is not None, "the actual SHAP base value"
+    assert explain.get("ranked_contributions") and len(explain["ranked_contributions"]) == 8
+    assert explain.get("summary"), "a concise value-based explanation sentence"
+    assert explain.get("disclaimer")

@@ -16,6 +16,7 @@ import pytest
 
 from backend.features.extractor import extract_features
 from backend.ml.compare import (
+    FEEDBACK_WINS,
     ML_WINS,
     RULE_WINS,
     TIE,
@@ -49,8 +50,22 @@ def test_default_engine_run_is_still_rule_based():
     assert result["selector"] == "rule_based"
     assert result["history"]
     for item in result["history"]:
-        assert item["selected_strategy"] == select_strategy(item["tac_before"])
         assert item["selector"] == "rule_based"
+        if item["origin"] == "predicted":
+            # The rule selector's own pick, executed verbatim.
+            assert item["selected_strategy"] == select_strategy(item["tac_before"])
+            assert item["predicted_strategy"] == item["selected_strategy"]
+        else:
+            # A controlled fallback: never the prediction, always a strategy
+            # that actually has an opportunity on the same program state.
+            assert item["origin"] == "fallback"
+            assert item["selected_strategy"] != item["predicted_strategy"]
+            assert item["selected_strategy"] in item["eligible_strategies"]
+            assert "Fallback" in item["rationale"]
+    # The first attempt is always the rule selector's own pick on the input.
+    first = result["history"][0]
+    assert first["origin"] == "predicted"
+    assert first["selected_strategy"] == select_strategy(tac)
 
 
 def test_selector_parameter_replaces_the_choice_without_touching_the_engine():
@@ -58,7 +73,27 @@ def test_selector_parameter_replaces_the_choice_without_touching_the_engine():
     always_fold = lambda t: "constant_folding"  # noqa: E731
     result = run_iterative_optimization(tac, selector=always_fold, selector_name="ml")
     assert result["selector"] == "ml"
-    assert {item["selected_strategy"] for item in result["history"]} == {"constant_folding"}
+    assert result["history"]
+    # Every attempt records the custom selector's prediction verbatim…
+    for item in result["history"]:
+        assert item["predicted_strategy"] == "constant_folding"
+        assert item["selector"] == "ml"
+    # The first executed pass IS that prediction on the input program.
+    assert result["history"][0]["selected_strategy"] == "constant_folding"
+    assert result["history"][0]["origin"] == "predicted"
+    # Every attempt stays internally consistent with the contract: when the
+    # executed strategy IS the prediction the origin says "predicted"; any
+    # other strategy ran as a labelled fallback, never as the selector's pick.
+    for item in result["history"][1:]:
+        if item["origin"] == "predicted":
+            # A new selection round after an accepted transformation: the
+            # selector was asked again on the changed program and its pick
+            # (still constant_folding) was executed verbatim.
+            assert item["selected_strategy"] == "constant_folding"
+        else:
+            assert item["origin"] == "fallback"
+            assert item["selected_strategy"] != "constant_folding"
+            assert item["predicted_strategy"] == "constant_folding"
 
 
 def test_iteration_context_is_attached_and_receives_the_input_tac():
@@ -464,16 +499,17 @@ def test_live_compare_runs_both_selectors_independently(source, ml_artifacts):
 
 def test_live_compare_winner_is_decided_by_measurement(ml_artifacts):
     result = compare_source(DEAD_CODE_TAC)
-    rule_gain = result["rule_based"]["useful_improvement"]
-    ml_gain = result["ml"]["useful_improvement"]
+    gains = {
+        RULE_WINS: result["rule_based"]["useful_improvement"],
+        ML_WINS: result["ml"]["useful_improvement"],
+        FEEDBACK_WINS: result["feedback"]["useful_improvement"],
+    }
+    best = max(gains.values())
+    leaders = [key for key, gain in gains.items() if gain == best]
 
-    assert result["winner"] in {RULE_WINS, ML_WINS, TIE}
-    if rule_gain > ml_gain:
-        assert result["winner"] == RULE_WINS
-    elif ml_gain > rule_gain:
-        assert result["winner"] == ML_WINS
-    else:
-        assert result["winner"] == TIE
+    assert result["winner"] in {RULE_WINS, ML_WINS, FEEDBACK_WINS, TIE}
+    # Unique highest measured gain wins; anything shared becomes a tie.
+    assert result["winner"] == (leaders[0] if len(leaders) == 1 else TIE)
     assert "measured useful_improvement" in result["decided_by"]
 
 
@@ -526,6 +562,61 @@ def test_live_compare_can_omit_shap(ml_artifacts):
     assert result["rule_based"]["history"][0]["ml_predicted_strategy"]
 
 
+def test_each_compare_block_returns_the_code_the_diff_panels_render(ml_artifacts):
+    """The Comparison screen draws one before/after diff per arm straight from
+    these fields, so each one must describe exactly that arm's own run against
+    the shared original - never the other arm's output."""
+    from backend.api.serialize import tac_to_lines, tac_to_source
+
+    result = compare_source(CSE_TAC)
+    original = parse_tac(CSE_TAC)
+
+    # One shared original, line for line, taken from THIS request.
+    assert result["original_lines"] == tac_to_lines(original)
+    assert result["original_instruction_count"] == len(original)
+
+    for side in ("rule_based", "ml"):
+        block = result[side]
+        assert block["available"] is True
+        final_lines = block["final_lines"]
+
+        # final_lines / final_text are that run's own final TAC.
+        assert "\n".join(final_lines) == block["final_text"]
+        # The diff is (shared original) -> (this arm's final TAC).
+        assert block["diff"]["before_text"] == tac_to_source(original)
+        assert block["diff"]["after_text"] == block["final_text"]
+        # The counts rendered next to the diff come from those same two TACs.
+        assert block["diff"]["before_instruction_count"] == len(original)
+        assert block["diff"]["after_instruction_count"] == len(final_lines)
+        assert block["original_instruction_count"] == len(original)
+        assert block["final_instruction_count"] == len(final_lines)
+        assert block["measurements"]["original_instruction_count"] == len(original)
+        assert block["measurements"]["optimized_instruction_count"] == len(final_lines)
+
+
+def test_compare_results_correspond_to_the_request_that_was_just_made(ml_artifacts):
+    """Back-to-back comparisons with different inputs must each return their
+    own original: no state, cache or stale output may leak between requests."""
+    from backend.api.serialize import tac_to_source
+
+    first_source = tac_to_source(parse_tac(DEAD_CODE_TAC))
+    second_source = tac_to_source(parse_tac(FOLDING_TAC))
+    assert first_source != second_source
+
+    first = compare_source(DEAD_CODE_TAC, include_shap=False)
+    second = compare_source(FOLDING_TAC, include_shap=False)
+
+    assert "\n".join(first["original_lines"]) == first_source
+    assert "\n".join(second["original_lines"]) == second_source
+
+    for side in ("rule_based", "ml"):
+        if not second[side]["available"] or not second[side]["history"]:
+            continue
+        # The diff and the first iteration both start from this request's TAC.
+        assert second[side]["diff"]["before_text"] == second_source
+        assert second[side]["history"][0]["tac_before"] == second["original_lines"]
+
+
 def test_live_compare_reports_unavailable_model_without_a_fake_winner(monkeypatch, ml_artifacts):
     from pathlib import Path
 
@@ -550,3 +641,253 @@ def test_live_compare_reports_unavailable_model_without_a_fake_winner(monkeypatc
     # The Rule-Based side still works.
     assert result["rule_based"]["available"] is True
     assert result["rule_based"]["history"]
+
+
+# ---------------------------------------------------------------------------
+# Before/after diff panels: the two states the faculty review flagged.
+# Every number the Comparison screen renders must be the backend's own
+# measurement of the same two TACs the panel draws.
+# ---------------------------------------------------------------------------
+
+# The Compare screen's default input: nine statements, every one of them dead
+# (no result is ever read), so all three runs genuinely end at an empty TAC.
+FACULTY9_TAC = """\
+t1 = 10
+t2 = 20
+t3 = t1 + t2
+t4 = t1 + t2
+t5 = t3 * 1
+t6 = 100
+t7 = t6 + 50
+unused = t7
+t8 = t3 * 2"""
+
+# Labels, jumps and a conditional over live variables: no pass can change this
+# program, so every run must end exactly where it started.
+IDENTICAL_TAC = """
+i = 0
+limit = n
+loop:
+i = i + 1
+if i < limit goto loop
+"""
+
+
+def _assert_side_accounting(block, original_lines):
+    """A diff's row counts must tile both sides exactly as rendered."""
+    diff = block["diff"]
+    final_lines = block["final_lines"]
+    assert diff["before_instruction_count"] == len(original_lines)
+    assert diff["after_instruction_count"] == len(final_lines)
+    # Before side: every original line is removed, modified or unchanged.
+    assert diff["removed"] + diff["modified"] + diff["unchanged"] == len(original_lines)
+    # After side: every final line is added, modified or unchanged.
+    assert diff["added"] + diff["modified"] + diff["unchanged"] == len(final_lines)
+
+
+def test_identical_final_tac_reports_zero_removed_and_zero_percent(ml_artifacts):
+    """When no pass changes the program, the panels must say 0 removed / 0.0% -
+    the state the faculty screenshot showed as 'nine removed, 100%'."""
+    result = compare_source(IDENTICAL_TAC, include_shap=False)
+    original_lines = result["original_lines"]
+    assert original_lines, "the loop program must parse to a non-empty TAC"
+
+    for side in ("rule_based", "ml", "feedback"):
+        block = result[side]
+        assert block["available"] is True, f"{side} did not run"
+        # Before and after are the same code, line for line.
+        assert block["final_lines"] == original_lines
+        assert block["original_instruction_count"] == len(original_lines)
+        assert block["final_instruction_count"] == len(original_lines)
+        assert block["total_reduction"] == 0
+        assert block["useful_improvement"] == 0
+        assert block["changed"] is False
+        # Nothing removed, added or modified - everything is context.
+        assert block["diff"]["removed"] == 0
+        assert block["diff"]["added"] == 0
+        assert block["diff"]["modified"] == 0
+        assert block["diff"]["unchanged"] == len(original_lines)
+        assert block["diff"]["changed"] is False
+        _assert_side_accounting(block, original_lines)
+        # The reduction the frontend computes: (original - final) / original.
+        original, final = block["original_instruction_count"], block["final_instruction_count"]
+        assert round((original - final) / original * 100, 1) == 0.0
+
+
+def test_all_dead_program_reports_a_genuinely_empty_final_tac(ml_artifacts):
+    """The other flagged state: nine statements highlighted as removed with
+    100% reduction. The measurement is real (every result is unused), and the
+    counts must match the rendered lines exactly - never a code panel that
+    claims removals the final TAC does not show."""
+    result = compare_source(FACULTY9_TAC, include_shap=False)
+    original_lines = result["original_lines"]
+    assert len(original_lines) == 9
+    assert result["original_instruction_count"] == 9
+
+    for side in ("rule_based", "ml", "feedback"):
+        block = result[side]
+        assert block["available"] is True, f"{side} did not run"
+        # The actual final TAC of an all-dead program is empty - and the panel
+        # receives exactly that, not the original lines recycled.
+        assert block["final_lines"] == []
+        assert block["final_text"] == ""
+        assert block["original_instruction_count"] == 9
+        assert block["final_instruction_count"] == 0
+        assert block["measurements"]["optimized_instruction_count"] == 0
+        assert block["total_reduction"] == 9
+        # All nine rows are removals; nothing is invented on the after side.
+        assert block["diff"]["removed"] == 9
+        assert block["diff"]["added"] == 0
+        assert block["diff"]["modified"] == 0
+        assert block["diff"]["unchanged"] == 0
+        _assert_side_accounting(block, original_lines)
+        original, final = block["original_instruction_count"], block["final_instruction_count"]
+        assert round((original - final) / original * 100, 1) == 100.0
+        # useful_improvement is the real measured value for this empty result.
+        assert block["useful_improvement"] == work_remaining(parse_tac(FACULTY9_TAC))
+
+
+@pytest.mark.parametrize(
+    "source",
+    [DEAD_CODE_TAC, FOLDING_TAC, CSE_TAC, NO_OPPORTUNITY_TAC, IDENTICAL_TAC, FACULTY9_TAC],
+)
+def test_diff_counts_always_match_the_rendered_lines(source, ml_artifacts):
+    """For identical AND genuinely optimized outputs alike: the counts beside
+    the diff come from the same pair of TACs the diff lines are drawn from,
+    on both sides of the comparison."""
+    result = compare_source(source, include_shap=False)
+    original_lines = result["original_lines"]
+
+    for side in ("rule_based", "ml", "feedback"):
+        block = result[side]
+        assert block["available"] is True, f"{side} did not run"
+        assert len(block["final_lines"]) == block["final_instruction_count"]
+        assert "\n".join(block["final_lines"]) == block["final_text"]
+        _assert_side_accounting(block, original_lines)
+
+
+def test_empty_tac_is_rejected_by_the_compare_endpoint(client):
+    """An empty program is answered with a clear 400, never a crash or a
+    fabricated diff."""
+    for bad in ("", "   ", "\n\t"):
+        response = client.post("/api/compare", json={"tac": bad})
+        assert response.status_code == 400, f"tac={bad!r} -> {response.status_code}"
+
+
+# ---------------------------------------------------------------------------
+# Optimization metrics on each run block (§7): pass accounting, measured
+# runtime and an explicit non-claim about semantic correctness.
+# ---------------------------------------------------------------------------
+
+
+def test_run_blocks_report_pass_counts_and_a_measured_runtime(ml_artifacts):
+    result = compare_source(FOLDING_TAC, include_shap=False)
+
+    for side in ("rule_based", "ml", "feedback"):
+        block = result[side]
+        assert block["available"] is True, f"{side} did not run"
+        history = block["history"]
+
+        # Every count is read from the same history the trace renders.
+        assert block["passes_attempted"] == len(history) == block["iterations"]
+        assert block["passes_changed"] == sum(1 for item in history if item["changed"])
+        assert block["passes_unchanged"] == (
+            block["passes_attempted"] - block["passes_changed"]
+        )
+        assert block["passes_accepted"] == sum(
+            1 for item in history if item.get("accepted")
+        )
+        assert (
+            block["passes_attempted"]
+            == block["passes_changed"] + block["passes_unchanged"]
+        )
+
+        # Wall-clock time actually measured around this run (single request).
+        assert isinstance(block["runtime_ms"], float)
+        assert block["runtime_ms"] >= 0.0
+
+        # A real semantic check ran: bounded equivalence of the final program
+        # against the original, with the observed variables named.
+        assert block["correctness_checked"] is True
+        correctness = block["correctness"]
+        assert correctness["status"] in {"equivalent", "not_equivalent", "inconclusive"}
+        assert correctness["note"]
+
+
+def test_never_executed_run_claims_no_time_and_no_passes(monkeypatch, ml_artifacts):
+    from pathlib import Path
+
+    from backend.ml import model as model_mod
+
+    monkeypatch.setattr(model_mod, "MODEL_FILE", Path("no", "such", "model.joblib"))
+    try:
+        model_mod.clear_cache()
+        result = compare_source(DEAD_CODE_TAC, include_shap=False)
+    finally:
+        model_mod.clear_cache()
+
+    block = result["ml"]
+    assert block["available"] is False
+    assert block["runtime_ms"] is None
+    assert block["passes_attempted"] == 0
+    assert block["passes_changed"] == 0
+    assert block["passes_unchanged"] == 0
+    assert block["passes_accepted"] == 0
+    assert block["correctness_checked"] is False
+    assert block["correctness"]["status"] == "not_run"
+
+
+def test_executed_run_reports_real_semantic_verdict(ml_artifacts):
+    """The folding demo converges to `t2 = 30`, and with a print line the
+    final program still observes that value — so the checker must confirm
+    equivalence on the real observable (t2, via its printed output) rather
+    than just asserting a flag."""
+    result = compare_source(FOLDING_TAC + "print t2\n", include_shap=False)
+    block = result["rule_based"]
+    assert block["correctness_checked"] is True
+    assert block["final_lines"] == ["t2 = 30", "print t2"]
+    assert block["converged"] is True
+    correctness = block["correctness"]
+    assert correctness["status"] == "equivalent", correctness["note"]
+    assert "t2" in correctness["observed_vars"]
+    assert correctness["outputs_compared"] is True
+
+
+def test_aggregate_outcome_breaks_results_down_per_strategy():
+    from backend.ml.evaluate import aggregate_outcome
+
+    rows = [
+        {
+            "strategy": "dead_code_elimination",
+            "useful_improvement": 2,
+            "instruction_reduction": 1,
+            "operation_reduction": 1,
+        },
+        {
+            "strategy": "dead_code_elimination",
+            "useful_improvement": 0,
+            "instruction_reduction": 0,
+            "operation_reduction": 0,
+        },
+        {
+            "strategy": "constant_folding",
+            "useful_improvement": 3,
+            "instruction_reduction": 1,
+            "operation_reduction": 2,
+        },
+    ]
+    aggregate = aggregate_outcome(rows)
+
+    assert aggregate["per_strategy"]["dead_code_elimination"] == {
+        "programs": 2,
+        "mean_useful_improvement": 1.0,
+        "improved_programs": 1,
+    }
+    assert aggregate["per_strategy"]["constant_folding"] == {
+        "programs": 1,
+        "mean_useful_improvement": 3.0,
+        "improved_programs": 1,
+    }
+    # A strategy the selector never executed is absent, not zero: "never
+    # used" must not read as "used and measured 0".
+    assert "strength_reduction" not in aggregate["per_strategy"]
