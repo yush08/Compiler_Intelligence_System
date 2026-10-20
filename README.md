@@ -24,8 +24,7 @@ An academic project that takes **Three-Address Code (TAC)**, inspects its struct
 14. [Dataset and ML setup](#14-dataset-and-ml-setup)
 15. [Testing and verification](#15-testing-and-verification)
 16. [Metrics and evaluation](#16-metrics-and-evaluation)
-17. [Troubleshooting](#17-troubleshooting)
-18. [References and project information](#20-references-and-project-information)
+17. [References and project information](#17-references-and-project-information)
 
 ---
 
@@ -848,34 +847,7 @@ Execution outcome on the test split (each selector's chosen pass applied once to
 
 ---
 
-## 17. Troubleshooting
-
-| Symptom | Cause & safe fix |
-|---|---|
-| `ModuleNotFoundError: No module named 'backend'` | Command run outside the repository root → `cd` to the repo root and rerun |
-| `ModuleNotFoundError: No module named 'joblib'` (or `sklearn`/`shap`) | ML packages not installed — `pip install scikit-learn joblib shap` in the active environment. Test collection fails in 9 modules without them |
-| `ModuleNotFoundError: No module named 'fastapi'` (or `streamlit`/`pytest`) | Dependencies not installed in the active interpreter → activate the intended environment, `pip install -r requirements.txt`, and confirm with `python -c "import fastapi, sklearn, joblib, shap"` |
-| Activated `.venv` but imports resolve elsewhere | Wrong activation for your shell: PowerShell `.\.venv\Scripts\Activate.ps1`, bash `source .venv/bin/activate`; verify `python -c "import sys; print(sys.executable)"` |
-| `Address already in use` on port8000 | A previous server is still running: `Get-NetTCPConnection -LocalPort 8000 -State Listen` (Windows) or `lsof -i :8000` (macOS/Linux) shows the PID; stop **that** process or start on another port with `--port 8001` — remember the Vite proxy targets `127.0.0.1:8000`, so update `vite.config.ts` if you move the backend |
-| Frontend won't start: `PORT environment variable is required but was not provided.` | Set both required vars: PowerShell `$env:PORT='5199'; $env:BASE_PATH='/'` · bash `PORT=5199 BASE_PATH=/ pnpm dev` |
-| Vite exits immediately with a strict-port error | Your `PORT` is taken — stop the holder or choose another port (same `PORT` value for dev and preview) |
-| `Use pnpm instead` during install | The workspace `preinstall` rejects npm/yarn by design → run `pnpm install` from the **workspace root** (`front/compiler`), not `npm install` |
-| UI loads but runs fail with network/502 | Backend down or on another port → check `http://127.0.0.1:8000/api/health`, then `http://127.0.0.1:<PORT>/api/health` (through the proxy). Both must answer |
-| CORS error in the browser | You are calling `8000` from a non-localhost origin, or using the built bundle without an `/api` proxy. Dev mode needs no CORS (Vite proxy). Allowed origins are `localhost`/`127.0.0.1` only |
-| ML run fails: `503 model_unavailable` / pages show `available:false` | Train once: `python -m backend.ml.train`. The `reason` field names the missing artifact and the command |
-| Dataset endpoints empty/`available:false` | `dataset/` missing or partially deleted → `python experiments/generate_dataset.py` (deterministic) |
-| `400 TAC source is empty` / `No valid TAC instructions…` | Nothing parsed — check syntax against [§4.A](#4a-tac-input-and-analysis). Unparsable lines among valid ones are silently dropped; if *all* lines are dropped you get this 400 |
-| `422` on run with the Feedback tab | The request schema accepts `selector: "rule"` or `"ml"` only. Use **Compare All** (`/api/compare`) to execute the Feedback-Guided arm — see [Limitations](#18-limitations) |
-| Correctness shows `NOT CHECKED` (`inconclusive`) | The bounded checker could not decide (fault on a test vector, step-limit termination, unsupported opcode). It is honest abstention — not a pass and not a failure of the optimizer |
-| Build fails or behaves oddly | Ensure `PORT` + `BASE_PATH` are set for `pnpm build`; `pnpm typecheck` for TS errors. Never delete `node_modules` as a first step — reinstall with `pnpm install` from the workspace root |
-| `verify-integration.mjs` reports path failures | It contains absolute paths for this machine's layout (`D:/PROJECTS/...`) — adjust them to your clone locations |
-| Server seems to ignore a retrained model | It shouldn't: artifacts are cached by mtime+size. If the model file was replaced with an identical timestamp, restart uvicorn |
-
-Never `git reset`, `git clean` or discard working-tree changes as a troubleshooting step.
-
----
-
-## 18. References and project information
+## 17. References and project information
 
 - **Repository:** `https://github.com/yush08/Compiler_Intelligence_System.git` (this working tree is based on commit `3b8b7b8`, with additional uncommitted work preserved as-is).
 - **In-repo documentation:** `dataset/METHOD.md` (dataset/split method), `frontend/README.md` (legacy UI), `COMPLETION_REPORT.md`, `PHASE1_SUMMARY.txt` (historical phase reports).
