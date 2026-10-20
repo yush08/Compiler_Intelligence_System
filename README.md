@@ -25,9 +25,7 @@ An academic project that takes **Three-Address Code (TAC)**, inspects its struct
 15. [Testing and verification](#15-testing-and-verification)
 16. [Metrics and evaluation](#16-metrics-and-evaluation)
 17. [Troubleshooting](#17-troubleshooting)
-18. [Limitations](#18-limitations)
-19. [Future improvements](#19-future-improvements)
-20. [References and project information](#20-references-and-project-information)
+18. [References and project information](#20-references-and-project-information)
 
 ---
 
@@ -877,30 +875,7 @@ Never `git reset`, `git clean` or discard working-tree changes as a troubleshoot
 
 ---
 
-## 18. Limitations
-
-- **TAC subset.** No function calls, arrays, pointers, procedures, or float-specific semantics. Unparsable lines are dropped when at least one line parses (only the all-invalid case errors), which can silently ignore typos.
-- **Semantic correctness is bounded evidence.** The checker executes **3 deterministic input vectors** with a **100 000-step limit** and compares printed outputs + observed variables. `equivalent` means "agreed on the tested inputs" — **not** a proof of semantic equivalence over all inputs. Nothing in the system should be read as formal verification.
-- **Strength Reduction is a no-op** by design (no loop-carrying information): it never rewrites, always measures 0, has 0 dataset labels, and is excluded from the model's classes.
-- **Algebraic Simplification** covers a fixed identity list only (`x+0`, `x*1`, `x-0`, `x/1`, `x*0`).
-- **Selection is rules + one Random Forest.** No deep learning, ensembles, or cross-validation. The model is preliminary: 151 training samples, evaluated once on 45 programs from 5 unseen families; test macro-F1 **0.4067** vs the rule selector's **0.6104** on the same programs (earlier random splits that shared templates with training were optimistic and are not reported). See `train.py`'s emitted `limitations`.
-- **SHAP scope:** explanations reconstruct the *predicted class* probability (TreeExplainer returns per-class contributions), values are in probability space (not log-odds), and `predict_proba` values are **not calibrated** — the payload says so.
-- **Runtime numbers are single-run, machine-dependent observations** (`runtime_ms`), not benchmarks; the complexity endpoint's repeated batches are in-request wall-clock observations on the serving machine, explicitly labelled as such.
-- **Optimization may not improve a program.** `useful_improvement` can be 0 (neutral rewrites) and operation reduction can be negative; convergence can legitimately be "nothing eligible".
-- **Feedback tab wiring gap:** the engine and `/api/compare` fully support the Feedback-Guided arm, but the Workbench tab posts `selector: "feedback"` to `/api/simulate`/`optimize`, whose Pydantic schema accepts only `rule|ml` — those requests return `422` (verified live). Compare All is the supported path today. Fixing it is a code change outside this document's scope.
-- **`/api/optimize` applies a single pass** and hard-codes `accepted: true` for that one-shot measurement path; the per-attempt semantic acceptance gate belongs to the iterative engine (`/api/simulate`, `/api/compare`).
-- **`requirements.txt` omits `scikit-learn`, `joblib`, `shap`** — they must be installed explicitly for ML features and the full test suite (documented gap; the manifest was intentionally not modified with this documentation update).
-- **The active UI workspace is not in this git repository** (separate local pnpm workspace); a fresh clone of the backend repo contains only the *legacy* `frontend/` UI.
-- **`verify-integration.mjs` hard-codes absolute paths** for this machine's layout.
-- **Dataset is a generated corpus**, not an externally recognised benchmark; labels are measured argmax outcomes on this project's metric.
-- **Storage is files only** (`artifacts/ml/`, `dataset/`): no database, queue, auth, or cloud services. Not production-ready by design.
-- **`/api/ml/complexity` is slow** (it benchmarks selectors inside the request; tens of seconds to minutes is normal on first call).
-- **`examples/` is empty**; `report/data/` contains output of `experiments/run_experiments.py`.
-- **Legacy artifacts:** `app.py` (Streamlit) and `frontend/` predate the current UI and are maintained only as runnable demos.
-
----
-
-## 19. References and project information
+## 18. References and project information
 
 - **Repository:** `https://github.com/yush08/Compiler_Intelligence_System.git` (this working tree is based on commit `3b8b7b8`, with additional uncommitted work preserved as-is).
 - **In-repo documentation:** `dataset/METHOD.md` (dataset/split method), `frontend/README.md` (legacy UI), `COMPLETION_REPORT.md`, `PHASE1_SUMMARY.txt` (historical phase reports).
