@@ -59,7 +59,7 @@ Compiler optimization is usually taught and implemented as a fixed pipeline: pas
 
 ### What is deliberately out of scope
 
-No deep learning, no external benchmark datasets, no production claims, no formal verification. See [Limitations](#18-limitations).
+No deep learning, no external benchmark datasets, no production claims, no formal verification..
 
 ---
 
