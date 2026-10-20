@@ -90,7 +90,7 @@ Each **iteration** is exactly one executed pass attempt. A *selection round* can
 |---|---|
 | TAC parser + IR, feature extraction, rule scorer | **Implemented and tested** |
 | Six passes (Constant Folding, Constant Propagation, CSE, Dead Code, Algebraic) | **Implemented and tested** |
-| Strength Reduction | **Implemented as a documented no-op** (never rewrites; see [Limitations](#18-limitations)) |
+| Strength Reduction | **Implemented as a documented no-op** (never rewrites ) |
 | Iterative engine, controlled fallback, cycle/iteration guards | **Implemented and tested** |
 | Bounded semantic checker (interpreter-based acceptance) | **Implemented and tested** — evidence over tested inputs, not a proof |
 | Diff, metrics, pass accounting, comparison payloads | **Implemented and tested** |
@@ -98,7 +98,7 @@ Each **iteration** is exactly one executed pass attempt. A *selection round* can
 | Generated dataset (241 programs), deterministic grouped split | **Implemented, reproducible** |
 | RandomForest selector + training/evaluation/SHAP pipeline | **Implemented** — model quality is preliminary (see [Metrics and evaluation](#16-metrics-and-evaluation)) |
 | React UI (7 screens) | **Implemented** |
-| Feedback-Guided selector | **Implemented engine-side and reachable through `/api/compare`**; the Workbench tab that posts `selector: "feedback"` to `/api/simulate` is rejected by the request schema (`422`) — see [Limitations](#18-limitations) |
+| Feedback-Guided selector | **Implemented engine-side and reachable through `/api/compare`**; the Workbench tab that posts `selector: "feedback"` to `/api/simulate` is rejected by the request schema (`422`) |
 | Evaluation matrix + complexity analysis pages | **Implemented** (matrix cells are single-pass executions on independent copies) |
 | Legacy React UI (`frontend/`), Streamlit demo (`app.py`) | **Present and runnable**, pre-dates the current UI |
 | `examples/` directory | **Empty** |
